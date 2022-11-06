@@ -1,0 +1,29 @@
+.header {
+    background-color: rgb(49, 41, 33);
+}
+.menu {
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 50px;
+}
+.ul {
+    display: flex;
+    list-style-type: none;
+    gap: 30px;
+    margin-right: 50px;
+}
+
+.li {
+    color: rgb(255, 255, 255);
+}
+
+.link {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.link:hover {
+    color: rgb(156, 156, 156);
+}
