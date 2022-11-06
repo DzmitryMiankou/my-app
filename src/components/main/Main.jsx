@@ -1,11 +1,23 @@
-import React from 'react';
-import styleMain from './Main.module.css';
-const Main = () =>  {
-    return ( 
-        <main className={styleMain.main}>
+import React from "react";
+import styleMain from "./Main.module.css";
 
-        </main>
-        );
-}
- 
+const Main = () => {
+  return (
+    <div className={styleMain.about}>
+      <h1>About</h1>
+      <details>
+        <summary>Details</summary>
+        <div className={styleMain.list}>
+          <a className={styleMain.list_link} href="#3">
+            education
+          </a>
+          <a className={styleMain.list_link} href="#3">
+            interests
+          </a>
+        </div>
+      </details>
+    </div>
+  );
+};
+
 export default Main;

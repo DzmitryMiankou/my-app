@@ -1,4 +1,13 @@
-.main {
-    background-color:rgb(29, 22, 17);
-    height: 400px;
+.about {
+  color: #c9d1d9;
+}
+.about h1 {
+  font-size: 4rem;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+}
+.list_link {
+  color: #58a6ff;
 }
