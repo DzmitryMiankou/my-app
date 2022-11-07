@@ -1,8 +1,8 @@
 .about {
   color: #c9d1d9;
 }
-.about h1 {
-  font-size: 4rem;
+.h1 {
+  font-size: 6rem;
 }
 .list {
   display: flex;

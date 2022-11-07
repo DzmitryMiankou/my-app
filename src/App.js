@@ -4,6 +4,7 @@ import React from "react";
 import "./App.css";
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
+import Works from "./components/main/myWorks/Works";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -13,8 +14,8 @@ function App() {
         <Header />
         <main>
           <Routes>
-            <Route index element={<Main />} />
-            <Route path="/" element={<Main />} />
+            <Route path="/about" element={<Main />} />
+            <Route path="/works" element={<Works />} />
           </Routes>
         </main>
       </div>

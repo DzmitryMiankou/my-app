@@ -7,10 +7,10 @@ const Header = () => {
     <header className={style.header}>
       <menu className={style.menu}>
         <ul className={style.ul}>
-          <Link text="About" />
-          <Link text="My works" />
-          <Link text="Prices" />
-          <Link text="Contacts" />
+          <Link text="About" to="/about" />
+          <Link text="My works" to="/works" />
+          <Link text="Prices" to="/prices" />
+          <Link text="Contacts" to="/contacts" />
         </ul>
       </menu>
     </header>
