@@ -5,12 +5,12 @@ import styleLinc from "./Link.module.css";
 const Link = (props) => {
   return (
     <nav>
-      <div className={styleLinc.container}>
+      <div className={styleLinc.link}>
         <NavLink
           to={props.to}
-          style={({ isActive }) => ({
-            color: isActive ? "#b7410e" : "#c9d1d9",
-          })}
+          className={({ isActive }) =>
+            isActive ? `${styleLinc.active}` : `${styleLinc.link}`
+          }
         >
           {props.text}
         </NavLink>

@@ -1,7 +1,9 @@
-.container a {
+.link {
+  color: #c9d1d9;
   text-decoration: none;
 }
-
-.container a:hover {
-  color: rgb(83, 15, 15);
+.active,
+.link:hover {
+  text-decoration: none;
+  color: #dc5b24;
 }

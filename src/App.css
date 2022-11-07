@@ -13,8 +13,16 @@ div * {
   gap: 60px;
 }
 main {
-  background-color: #070707;
-  height: 400px;
+  background-color: #1c1c1c;
+  height: 200px;
   width: calc(100% - 160px);
   margin: auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
 }
