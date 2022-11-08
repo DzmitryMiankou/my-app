@@ -7,8 +7,8 @@ const Learning = (props) => {
     <div className={styleLearning.about}>
       <h1 className={styleLearning.h1}>Learning</h1>
       <div>
-        <LearningLink text="Adobe Pshotoshop" />
-        <LearningLink text="Adobe Illustrator" />
+        <LearningLink text="HTML" />
+        <LearningLink text="CSS" />
         <LearningLink text="Figma" />
       </div>
     </div>

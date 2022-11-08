@@ -3,8 +3,8 @@ import styleWorks from "./Works.module.css";
 
 const Works = () => {
   return (
-    <div className={styleWorks.h2}>
-      <h2>My works</h2>
+    <div className={styleWorks.container}>
+      <h2 className={styleWorks.text}>My works</h2>
     </div>
   );
 };
