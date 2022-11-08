@@ -1,10 +1,10 @@
 import React from "react";
-
 //import logo from './logo.svg';
 import "./App.css";
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import Works from "./components/main/myWorks/Works";
+import Learning from "./components/main/learning/Learning";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -12,12 +12,13 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <main>
+        <section>
           <Routes>
             <Route path="/about" element={<Main />} />
             <Route path="/works" element={<Works />} />
+            <Route path="/learning" element={<Learning />} />
           </Routes>
-        </main>
+        </section>
       </div>
     </BrowserRouter>
   );

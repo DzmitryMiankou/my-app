@@ -1,0 +1,10 @@
+.list {
+  list-style: none;
+}
+.link {
+  text-decoration: none;
+  color: rgb(0, 136, 255);
+}
+.link:hover {
+  text-decoration: underline;
+}
