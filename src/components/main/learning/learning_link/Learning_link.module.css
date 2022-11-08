@@ -3,8 +3,9 @@
 }
 .link {
   text-decoration: none;
-  color: rgb(0, 136, 255);
+  color: #3788ce;
 }
 .link:hover {
   text-decoration: underline;
+  color: #d75924;
 }
