@@ -1,0 +1,33 @@
+import React from "react";
+import styleContacts from "./Contacts.module.css";
+import Messeg from "./messeges/Messeg";
+
+const Contacts = (props) => {
+  const messegElem = props.messege.map((m) => <Messeg text={m.messege} />);
+  const newPostElem = React.createRef();
+
+  const addPost = () => {
+    let text = newPostElem.current.value;
+    alert(text);
+  };
+
+  return (
+    <div className={styleContacts.container}>
+      <div className={styleContacts.container__comment}>
+        <textarea
+          ref={newPostElem}
+          className={styleContacts.container__comment_text}
+        ></textarea>
+        <button
+          onClick={addPost}
+          className={styleContacts.container__comment_but}
+        >
+          comment
+        </button>
+      </div>
+      <div>{messegElem}</div>
+    </div>
+  );
+};
+
+export default Contacts;

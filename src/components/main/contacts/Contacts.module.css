@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  gap: 20%;
+}
+.container__comment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 130px;
+}
+.container__comment_text {
+  width: 400px;
+  height: 100px;
+  resize: none;
+  background-color: #343434;
+  color: #c9d1d9;
+  border: #c9d1d9 solid 1px;
+  outline: none;
+}
+.container__comment_text:focus {
+  border: #a24d29 solid 1px;
+}
+.container__comment_but {
+  width: 100px;
+  height: 50px;
+  background-color: #1d6e70;
+  border: none;
+  color: #c9d1d9;
+  cursor: pointer;
+  font-size: 14px;
+}
+.container__comment_but:hover {
+  background-color: #a24d29;
+}

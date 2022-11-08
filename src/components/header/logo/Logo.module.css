@@ -1,4 +1,21 @@
 svg {
   width: 30px;
   margin-left: 80px;
+  cursor: pointer;
+}
+.v1 {
+  fill: none;
+  stroke: #c9d1d9;
+  stroke-miterlimit: 10;
+  stroke-width: 11px;
+}
+.v2 {
+  fill: #c9d1d9;
+}
+
+svg:hover .v1 {
+  stroke: #c85625;
+}
+svg:hover .v2 {
+  fill: #c85625;
 }

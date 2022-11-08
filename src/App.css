@@ -13,7 +13,7 @@ div * {
   gap: 60px;
 }
 section {
-  width: calc(100% - 160px);
+  width: calc(100% - 280px);
   margin: auto;
 }
 h1,

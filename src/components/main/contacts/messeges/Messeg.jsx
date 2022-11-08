@@ -1,0 +1,14 @@
+import React from "react";
+import styleMesseg from "./Messeg.module.css";
+
+const Messeg = (props) => {
+  return (
+    <div className={styleMesseg.container}>
+      <ul className={styleMesseg.container__list}>
+        <li className={styleMesseg.container__list_messeg}>{props.text}</li>
+      </ul>
+    </div>
+  );
+};
+
+export default Messeg;
