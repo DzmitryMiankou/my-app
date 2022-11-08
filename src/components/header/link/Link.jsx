@@ -4,7 +4,7 @@ import styleLinc from "./Link.module.css";
 
 const Link = (props) => {
   return (
-    <li className={styleLinc.link}>
+    <div className={styleLinc.link}>
       <NavLink
         to={props.to}
         className={({ isActive }) =>
@@ -13,7 +13,7 @@ const Link = (props) => {
       >
         {props.text}
       </NavLink>
-    </li>
+    </div>
   );
 };
 

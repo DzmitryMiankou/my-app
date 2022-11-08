@@ -2,9 +2,6 @@
   color: #c9d1d9;
   margin-left: 40px;
 }
-.h1 {
-  font-size: 40pt;
-}
 .list {
   display: flex;
   flex-direction: column;
