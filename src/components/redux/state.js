@@ -5,14 +5,17 @@ let state = {
   newChanges: "",
 };
 
-export let addPost = (newMessege) => {
+export let addPost = () => {
+  let a = state.newChanges;
   let newPost = {
     id: 5,
-    messege: newMessege,
+    messege: a,
     like: 23,
   };
   state.messegData.push(newPost);
+  state.newChanges = "";
   renderRoot(state);
+  console.log(state);
 };
 
 export let upDateChange = (newChange) => {

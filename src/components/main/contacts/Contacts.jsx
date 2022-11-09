@@ -7,8 +7,7 @@ const Contacts = (props) => {
   const newPostElem = React.createRef();
 
   const addPost = () => {
-    let text = newPostElem.current.value;
-    props.toRedux(text);
+    props.toRedux();
     newPostElem.current.value = "";
   };
 
