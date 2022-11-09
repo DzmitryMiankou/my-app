@@ -12,14 +12,20 @@ const Contacts = (props) => {
     newPostElem.current.value = "";
   };
 
+  const onPostChange = (e) => {
+    props.upDate(e);
+  };
+
   return (
     <div className={styleContacts.container}>
       <div className={styleContacts.container__comment}>
         <textarea
-          placeholder="enter your message"
           ref={newPostElem}
+          onChange={(event) => onPostChange(event.target.value)}
+          placeholder="enter your message"
           className={styleContacts.container__comment_text}
-        ></textarea>
+          value={props.newMessege}
+        />
         <button
           onClick={addPost}
           className={styleContacts.container__comment_but}

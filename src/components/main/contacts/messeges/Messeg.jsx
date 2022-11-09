@@ -5,7 +5,9 @@ const Messeg = (props) => {
   return (
     <div className={styleMesseg.container}>
       <ul className={styleMesseg.container__list}>
-        <li className={styleMesseg.container__list_messeg}>{props.text}</li>
+        <li className={styleMesseg.container__list_messeg}>
+          <p>{props.text}</p>
+        </li>
       </ul>
     </div>
   );

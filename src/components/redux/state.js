@@ -2,6 +2,7 @@ import { renderRoot } from "../../render";
 
 let state = {
   messegData: [],
+  newChanges: "",
 };
 
 export let addPost = (newMessege) => {
@@ -11,6 +12,11 @@ export let addPost = (newMessege) => {
     like: 23,
   };
   state.messegData.push(newPost);
+  renderRoot(state);
+};
+
+export let upDateChange = (newChange) => {
+  state.newChanges = newChange;
   renderRoot(state);
 };
 

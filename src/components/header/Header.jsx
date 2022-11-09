@@ -11,7 +11,7 @@ const Header = () => {
       </div>
       <menu className={style.menu}>
         <ul className={style.ul}>
-          <Link text="About" to="/about" />
+          <Link text="About" to="/" />
           <Link text="Learning" to="/learning" />
           <Link text="My works" to="/works" />
           <Link text="Contacts" to="/contacts" />

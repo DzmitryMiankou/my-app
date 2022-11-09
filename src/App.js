@@ -15,7 +15,7 @@ function App(props) {
         <Header />
         <section>
           <Routes>
-            <Route path="/about" element={<Main />} />
+            <Route path="/" element={<Main />} />
             <Route path="/works" element={<Works />} />
             <Route path="/learning" element={<Learning />} />
             <Route
@@ -23,7 +23,9 @@ function App(props) {
               element={
                 <Contacts
                   messege={props.appState.messegData}
+                  newMessege={props.appState.newChange}
                   toRedux={props.toRedux}
+                  upDate={props.upDate}
                 />
               }
             />
