@@ -16,6 +16,7 @@ const Contacts = (props) => {
     <div className={styleContacts.container}>
       <div className={styleContacts.container__comment}>
         <textarea
+          placeholder="enter your message"
           ref={newPostElem}
           className={styleContacts.container__comment_text}
         ></textarea>

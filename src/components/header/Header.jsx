@@ -6,13 +6,14 @@ import Logo from "./logo/Logo";
 const Header = () => {
   return (
     <header className={style.header}>
-      <Logo />
+      <div>
+        <Logo />
+      </div>
       <menu className={style.menu}>
         <ul className={style.ul}>
           <Link text="About" to="/about" />
           <Link text="Learning" to="/learning" />
           <Link text="My works" to="/works" />
-          <Link text="Prices" to="/prices" />
           <Link text="Contacts" to="/contacts" />
         </ul>
       </menu>
