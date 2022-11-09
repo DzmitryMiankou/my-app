@@ -8,7 +8,8 @@ const Contacts = (props) => {
 
   const addPost = () => {
     let text = newPostElem.current.value;
-    alert(text);
+    props.toRedux(text);
+    newPostElem.current.value = "";
   };
 
   return (
@@ -25,7 +26,7 @@ const Contacts = (props) => {
           comment
         </button>
       </div>
-      <div>{messegElem}</div>
+      <div className={styleContacts.container__messege}>{messegElem}</div>
     </div>
   );
 };

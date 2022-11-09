@@ -25,6 +25,7 @@ export const addPost = (newMessege) => {
     like: 23,
   };
   state.messegData.push(newPost);
+  console.log(state);
 };
 
 export default state;

@@ -4,3 +4,11 @@
 .container__list {
   list-style: none;
 }
+.container__list_messeg {
+  background-color: #343434;
+  padding: 10px;
+  border-radius: 10px;
+}
+.container__list_messeg:hover {
+  background-color: #5d5d5d;
+}

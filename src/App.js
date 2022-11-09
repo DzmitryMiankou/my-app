@@ -20,7 +20,12 @@ function App(props) {
             <Route path="/learning" element={<Learning />} />
             <Route
               path="/contacts"
-              element={<Contacts messege={props.appState.messegData} />}
+              element={
+                <Contacts
+                  messege={props.appState.messegData}
+                  toRedux={props.toRedux}
+                />
+              }
             />
           </Routes>
         </section>

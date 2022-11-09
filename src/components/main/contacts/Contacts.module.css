@@ -1,12 +1,13 @@
 .container {
   display: flex;
-  gap: 20%;
+  width: 400px;
+  flex-direction: column-reverse;
+  gap: 50px;
 }
 .container__comment {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 130px;
 }
 .container__comment_text {
   width: 400px;
@@ -31,4 +32,14 @@
 }
 .container__comment_but:hover {
   background-color: #a24d29;
+}
+.container__messege {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #181818;
+  padding: 5%;
+  border: #b9c0c7 solid 1px;
+  overflow-x: scroll;
+  height: 40vh;
 }
