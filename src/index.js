@@ -16,4 +16,5 @@ let renderRoot = (state) => {
 
 renderRoot(store.getState());
 store.subscribe(renderRoot);
+
 reportWebVitals();
