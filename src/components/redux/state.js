@@ -31,17 +31,11 @@ let store = {
   },
 };
 
-export const addPostcreateActin = () => {
-  return {
-    type: "ADDPOST",
-  };
-};
+export const addPostcreateActin = () => ({ type: "ADDPOST" });
 
-export const onPostChangecreateActin = (text) => {
-  return {
-    type: "NEWPOST",
-    newChange: text,
-  };
-};
+export const onPostChangecreateActin = (text) => ({
+  type: "NEWPOST",
+  newChange: text,
+});
 
 export default store;
