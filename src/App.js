@@ -19,7 +19,7 @@ function App(props) {
             <Route path="/works" element={<Works />} />
             <Route path="/learning" element={<Learning />} />
             <Route
-              path="/contacts"
+              path="/chat"
               element={
                 <Contacts
                   messege={props.appState.messegData}
