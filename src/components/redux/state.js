@@ -7,13 +7,16 @@ let state = {
 
 export let addPost = () => {
   let a = state.newChanges;
+  if (a === "") {
+    return;
+  }
   let newPost = {
     id: 5,
     messege: a,
     like: 23,
   };
   state.messegData.push(newPost);
-  state.newChanges = "";
+  upDateChange("");
   renderRoot(state);
   console.log(state);
 };
