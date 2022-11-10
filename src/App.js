@@ -24,8 +24,7 @@ function App(props) {
                 <Contacts
                   messege={props.appState.messegData}
                   newMessege={props.appState.newChange}
-                  toRedux={props.toRedux}
-                  upDate={props.upDate}
+                  disPatch={props.disPatch}
                 />
               }
             />

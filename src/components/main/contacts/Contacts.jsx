@@ -7,12 +7,14 @@ const Contacts = (props) => {
   const newPostElem = React.createRef();
 
   const addPost = () => {
-    props.toRedux();
+    props.disPatch({ type: "addPost" });
     newPostElem.current.value = "";
   };
 
-  const onPostChange = (e) => {
-    props.upDate(e);
+  const onPostChange = () => {
+    let text = newPostElem.current.value;
+    let disPa = { type: "newPost", newChange: text };
+    props.disPatch(disPa);
   };
 
   return (
@@ -20,7 +22,7 @@ const Contacts = (props) => {
       <div className={styleContacts.container__comment}>
         <textarea
           ref={newPostElem}
-          onChange={(event) => onPostChange(event.target.value)}
+          onChange={onPostChange}
           placeholder="enter your message"
           className={styleContacts.container__comment_text}
           value={props.newMessege}
