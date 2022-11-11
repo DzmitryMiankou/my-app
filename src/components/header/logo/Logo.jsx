@@ -8,7 +8,7 @@ const styles = createUseStyles({
     gap: "10px",
     color: "#c9d1d9",
     fontSize: "25px",
-    textDecoration: "underline #dc5b24 2px",
+    textDecoration: "underline #dc5b24",
   },
 });
 

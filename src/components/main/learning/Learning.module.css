@@ -1,7 +1,9 @@
 .container {
   color: #c9d1d9;
   display: flex;
+  flex-direction: column;
   gap: 40px;
+  width: max-content;
 }
 .list {
   display: flex;
@@ -9,4 +11,15 @@
 }
 .list_link {
   color: #58a6ff;
+}
+.list__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: decimal inside;
+  background-color: #181818;
+  padding: 2%;
+  overflow-y: scroll;
+  height: 250px;
+  border: #b9c0c7 solid 1px;
 }
