@@ -1,0 +1,21 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.list__string {
+  list-style: none;
+  font-size: 20px;
+}
+.list__string_elem {
+  color: #afb6bc;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.list__string_elem:hover {
+  color: #c75626;
+}
+.elem_img {
+  width: 50px;
+}

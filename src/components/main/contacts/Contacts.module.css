@@ -1,6 +1,12 @@
+.messeges {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 50px;
+}
 .container {
   display: flex;
-  width: 400px;
+  width: 50%;
+  min-width: 400px;
   flex-direction: column-reverse;
   gap: 50px;
 }
@@ -10,7 +16,6 @@
   gap: 10px;
 }
 .container__comment_text {
-  width: 400px;
   height: 100px;
   resize: none;
   background-color: #343434;
