@@ -1,8 +1,11 @@
+import messegDataReducer from "./messegData-reducer";
+
 let store = {
   _state: {
-    messegData: [],
-    newChanges: "",
-    id: null,
+    messeges: { messegData: [], newChanges: "" },
+    learningLink: ["Figma", "HTML", "CSS"],
+    newCommitChanges: "",
+    commitData: [],
   },
   getState() {
     return this._state;
@@ -12,30 +15,33 @@ let store = {
     this._callSubscriber = observer;
   },
   disPatch(action) {
-    if (action.type === "ADDPOST") {
-      if (this._state.newChanges === "") {
+    this._state.messeges = messegDataReducer(this._state.messeges, action);
+    this._callSubscriber(this._state);
+
+    if (action.type === "COMMIT") {
+      this._state.newCommitChanges = action.newCommit;
+      this._callSubscriber(this._state);
+      console.log(this._state.newCommitChanges);
+    } else if (action.type === "ADDCOMMIT") {
+      if (this._state.newCommit === "") {
         return;
       }
-      let newPost = {
+      let newCommit = {
         id: 5,
-        messege: this._state.newChanges,
+        messege: this._state.newCommitChanges,
         like: 23,
       };
-      this._state.messegData.push(newPost);
-      this._state.newChanges = "";
+      this._state.commitData.push(newCommit);
+      this._state.newCommitChanges = "";
       this._callSubscriber(this._state);
-    } else if (action.type === "NEWPOST") {
-      this._state.newChanges = action.newChange;
-      this._callSubscriber(this._state);
+      console.log(this._state.commitData);
     }
   },
 };
 
-export const addPostcreateActin = () => ({ type: "ADDPOST" });
-
-export const onPostChangecreateActin = (text) => ({
-  type: "NEWPOST",
-  newChange: text,
+export const commitActin = (text) => ({
+  type: "COMMIT",
+  newCommit: text,
 });
-
+export const addCommitActin = () => ({ type: "ADDCOMMIT" });
 export default store;

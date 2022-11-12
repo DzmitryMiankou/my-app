@@ -17,13 +17,22 @@ function App(props) {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/works" element={<Works />} />
-            <Route path="/learning" element={<Learning />} />
+            <Route
+              path="/learning"
+              element={
+                <Learning
+                  linkText={props.appState.learningLink}
+                  disPatch={props.disPatch}
+                  newCommit={props.appState.newCommitChanges}
+                />
+              }
+            />
             <Route
               path="/chat"
               element={
                 <Contacts
-                  messege={props.appState.messegData}
-                  newMessege={props.appState.newChange}
+                  messege={props.appState.messeges.messegData}
+                  newMessege={props.appState.messeges.newChange}
                   disPatch={props.disPatch}
                 />
               }

@@ -2,7 +2,10 @@ import React from "react";
 import styleContacts from "./Contacts.module.css";
 import Messeg from "./messeges/Messeg";
 import Users from "./users/Users";
-import { onPostChangecreateActin, addPostcreateActin } from "../../redux/state";
+import {
+  onPostChangecreateActin,
+  addPostcreateActin,
+} from "../../redux/messegData-reducer";
 
 const Contacts = (props) => {
   const messegElem = props.messege.map((m) => <Messeg text={m.messege} />);
@@ -13,8 +16,8 @@ const Contacts = (props) => {
     newPostElem.current.value = "";
   };
 
-  const onPostChange = () => {
-    let text = newPostElem.current.value;
+  const onPostChange = (e) => {
+    let text = e.target.value;
     props.disPatch(onPostChangecreateActin(text));
   };
 

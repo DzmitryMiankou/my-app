@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styleLearningLink from "./Learning_link.module.css";
 
 const Learning_link = (props) => {
