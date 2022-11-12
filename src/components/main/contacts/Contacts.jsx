@@ -8,7 +8,9 @@ import {
 } from "../../redux/messegData-reducer";
 
 const Contacts = (props) => {
-  const messegElem = props.messege.map((m) => <Messeg text={m.messege} />);
+  const messegElem = props.messege.map((m, i) => (
+    <Messeg key={i} text={m.messege} />
+  ));
   const newPostElem = React.createRef();
 
   const addPost = () => {
