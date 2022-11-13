@@ -4,7 +4,9 @@ export const commitActin = (text) => ({
 });
 export const addCommitActin = () => ({ type: "ADDCOMMIT" });
 
-const commitDataReducer = (state, action) => {
+let initialState = { newCommitChanges: "", commitData: [] };
+
+const commitDataReducer = (state = initialState, action) => {
   if (action.type === "COMMIT") {
     state.newCommitChanges = action.newCommit;
   } else if (action.type === "ADDCOMMIT") {

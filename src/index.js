@@ -1,20 +1,20 @@
-import store from "./components/redux/state.js";
+import store from "./components/redux/store";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let renderRoot = (state) => {
   root.render(
     <React.StrictMode>
-      <App appState={state} disPatch={store.disPatch.bind(store)} />
+      <App appState={state} dispatch={store.dispatch.bind(store)} />
     </React.StrictMode>
   );
 };
 
 renderRoot(store.getState());
-store.subscribe(renderRoot);
-
-reportWebVitals();
+store.subscribe(() => {
+  let state = store.getState();
+  renderRoot(state);
+});

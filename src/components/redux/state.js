@@ -14,7 +14,7 @@ let store = {
   subscribe(observer) {
     this._callSubscriber = observer;
   },
-  disPatch(action) {
+  dispatch(action) {
     this._state.messeges = messegDataReducer(this._state.messeges, action);
     this._state.commit = commitDataReducer(this._state.commit, action);
     this._callSubscriber(this._state);

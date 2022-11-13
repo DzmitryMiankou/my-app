@@ -1,13 +1,13 @@
-export const addPostcreateActin = () => ({ type: "ADDPOST" });
+const ADD_POST = "ADDPOST";
+const NEW_POST = "NEWPOST";
+let initialState = {
+  messegData: [],
+  newChanges: "",
+};
 
-export const onPostChangecreateActin = (text) => ({
-  type: "NEWPOST",
-  newChange: text,
-});
-
-const messegDataReducer = (state, action) => {
+const messegDataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADDPOST":
+    case ADD_POST:
       let newPost = {
         id: 5,
         messege: state.newChanges,
@@ -16,7 +16,7 @@ const messegDataReducer = (state, action) => {
       state.messegData.push(newPost);
       state.newChanges = "";
       return state;
-    case "NEWPOST":
+    case NEW_POST:
       state.newChanges = action.newChange;
       return state;
     default:
@@ -24,4 +24,10 @@ const messegDataReducer = (state, action) => {
   }
 };
 
+export const addPostcreateActin = () => ({ type: ADD_POST });
+
+export const onPostChangecreateActin = (text) => ({
+  type: NEW_POST,
+  newChange: text,
+});
 export default messegDataReducer;

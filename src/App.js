@@ -22,7 +22,7 @@ function App(props) {
               element={
                 <Learning
                   linkText={props.appState.learningLink}
-                  disPatch={props.disPatch}
+                  disPatch={props.dispatch}
                   newCommit={props.appState.commit.newCommitChanges}
                 />
               }
@@ -33,7 +33,7 @@ function App(props) {
                 <Contacts
                   messege={props.appState.messeges.messegData}
                   newMessege={props.appState.messeges.newChange}
-                  disPatch={props.disPatch}
+                  disPatch={props.dispatch}
                 />
               }
             />
