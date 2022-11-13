@@ -21,7 +21,6 @@ function App(props) {
               path="/learning"
               element={
                 <Learning
-                  linkText={props.appState.learningLink}
                   disPatch={props.dispatch}
                   newCommit={props.appState.commit.newCommitChanges}
                 />
