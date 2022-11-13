@@ -1,7 +1,7 @@
 import React from "react";
 import styleLearning from "./Learning.module.css";
 import LearningLink from "./learning_link/Learning_link";
-import { commitActin, addCommitActin } from "../../redux/state";
+import { commitActin, addCommitActin } from "../../redux/commitData-reducer";
 
 const Learning = (props) => {
   const linkText = props.linkText.map((m) => <LearningLink text={m} />);
@@ -14,7 +14,6 @@ const Learning = (props) => {
     let text = e.target.value;
     props.disPatch(commitActin(text));
   };
-
   return (
     <div className={styleLearning.blok}>
       <div className={styleLearning.container}>

@@ -23,7 +23,7 @@ function App(props) {
                 <Learning
                   linkText={props.appState.learningLink}
                   disPatch={props.disPatch}
-                  newCommit={props.appState.newCommitChanges}
+                  newCommit={props.appState.commit.newCommitChanges}
                 />
               }
             />
