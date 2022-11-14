@@ -59,7 +59,7 @@ const Learning = (props) => {
             value={props.newCommit}
           />
           <button className={styleLearning.button} onClick={add}>
-            Comments
+            Comment
           </button>
         </div>
       </div>

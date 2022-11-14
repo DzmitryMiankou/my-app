@@ -30,7 +30,9 @@
 }
 .comment {
   display: flex;
-  height: 100px;
+  flex-direction: column;
+  height: 200px;
+  gap: 5px;
 }
 .comment_text {
   width: 100%;
@@ -47,6 +49,12 @@
   color: #c9d1d9;
   cursor: pointer;
   font-size: 14px;
+  height: 50px;
+  width: 80px;
+  margin-left: auto;
+}
+.button:hover {
+  background-color: #b75226;
 }
 .section__text {
   margin-top: 25px;
