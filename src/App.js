@@ -5,7 +5,7 @@ import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import Works from "./components/main/myWorks/Works";
 import Learning from "./components/main/learning/Learning";
-import Contacts from "./components/main/contacts/Contacts";
+import ContactsContainer from "./components/main/contacts/ContactsContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App(props) {
@@ -29,10 +29,9 @@ function App(props) {
             <Route
               path="/chat"
               element={
-                <Contacts
-                  messege={props.appState.messeges.messegData}
-                  newMessege={props.appState.messeges.newChanges}
-                  disPatch={props.dispatch}
+                <ContactsContainer
+                  store={props.appState}
+                  dispatch={props.dispatch}
                 />
               }
             />

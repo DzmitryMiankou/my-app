@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   onPostChangecreateActin,
   addPostcreateActin,
@@ -8,14 +7,22 @@ import Contacts from "./Contacts";
 
 const ContactsContainer = (props) => {
   const addPost = () => {
-    props.disPatch(addPostcreateActin());
+    props.dispatch(addPostcreateActin());
   };
 
   const onPostChange = (e) => {
-    let text = e.target.value;
-    props.disPatch(onPostChangecreateActin(text));
+    let action = onPostChangecreateActin(e);
+    props.dispatch(action);
   };
-  return <Contacts onPost={onPostChange} />;
+
+  return (
+    <Contacts
+      onPost={onPostChange}
+      addPost={addPost}
+      messege={props.store.messeges.messegData}
+      newMessege={props.store.messeges.newChanges}
+    />
+  );
 };
 
 export default ContactsContainer;
