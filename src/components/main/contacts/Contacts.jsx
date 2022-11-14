@@ -11,11 +11,9 @@ const Contacts = (props) => {
   const messegElem = props.messege.map((m, i) => (
     <Messeg key={i} text={m.messege} />
   ));
-  const newPostElem = React.createRef();
 
   const addPost = () => {
     props.disPatch(addPostcreateActin());
-    newPostElem.current.value = "";
   };
 
   const onPostChange = (e) => {
@@ -28,7 +26,6 @@ const Contacts = (props) => {
       <div className={styleContacts.container}>
         <div className={styleContacts.container__comment}>
           <textarea
-            ref={newPostElem}
             onChange={onPostChange}
             placeholder="enter your message"
             className={styleContacts.container__comment_text}

@@ -31,7 +31,7 @@ function App(props) {
               element={
                 <Contacts
                   messege={props.appState.messeges.messegData}
-                  newMessege={props.appState.messeges.newChange}
+                  newMessege={props.appState.messeges.newChanges}
                   disPatch={props.dispatch}
                 />
               }

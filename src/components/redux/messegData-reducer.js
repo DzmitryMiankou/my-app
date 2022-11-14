@@ -7,6 +7,9 @@ let initialState = {
 
 const messegDataReducer = (state = initialState, action) => {
   switch (action.type) {
+    case NEW_POST:
+      state.newChanges = action.newChange;
+      return state;
     case ADD_POST:
       let newPost = {
         id: 5,
@@ -15,9 +18,6 @@ const messegDataReducer = (state = initialState, action) => {
       };
       state.messegData.push(newPost);
       state.newChanges = "";
-      return state;
-    case NEW_POST:
-      state.newChanges = action.newChange;
       return state;
     default:
       return state;
