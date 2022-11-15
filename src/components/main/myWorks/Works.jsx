@@ -4,7 +4,8 @@ import styleWorks from "./Works.module.css";
 const Works = () => {
   return (
     <div className={styleWorks.container}>
-      <h2 className={styleWorks.text}>My works</h2>
+      <h2 className={styleWorks.text}>Мои работы</h2>
+      <h2 className={styleWorks.text}>Работы учеников</h2>
     </div>
   );
 };

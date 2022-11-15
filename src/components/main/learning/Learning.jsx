@@ -21,7 +21,7 @@ const Learning = (props) => {
       <div className={styleLearning.container}>
         <div className="container__list">
           <div className="container__text">
-            <h1 className={styleLearning.h1}>Learning</h1>
+            <h1 className={styleLearning.h1}>Обучение для детей</h1>
           </div>
           <div>{linkText}</div>
         </div>
@@ -30,6 +30,9 @@ const Learning = (props) => {
             <li>What is CSS?</li>
             <li>How CSS is structured</li>
             <li>How CSS works</li>
+            <li>CSS styling text</li>
+            <li>Styling lists</li>
+            <li>Web fonts</li>
             <li>CSS styling text</li>
             <li>Styling lists</li>
             <li>Web fonts</li>

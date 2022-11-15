@@ -4,7 +4,7 @@ import styleMain from "./Main.module.css";
 const Main = () => {
   return (
     <div className={styleMain.about}>
-      <h1 className={styleMain.h1}>About the project</h1>
+      <h1 className={styleMain.h1}>Привет, меня зовут Дмитрий</h1>
       <details>
         <summary>Details</summary>
         <div className={styleMain.list}>

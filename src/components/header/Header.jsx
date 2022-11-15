@@ -11,10 +11,10 @@ const Header = () => {
       </div>
       <menu className={style.menu}>
         <ul className={style.ul}>
-          <Link text="About" to="/" />
-          <Link text="Learning" to="/learning" />
-          <Link text="My works" to="/works" />
-          <Link text="Message" to="/chat" />
+          <Link text="Обо мне" to="/" />
+          <Link text="Портфолио" to="/works" />
+          <Link text="Обучение" to="/learning" />
+          <Link text="Общение" to="/chat" />
         </ul>
       </menu>
     </header>

@@ -23,7 +23,7 @@ const Contacts = (props) => {
         <div className={styleContacts.container__comment}>
           <textarea
             onChange={onPostChange}
-            placeholder="enter your message"
+            placeholder="напишите сообщение"
             className={styleContacts.container__comment_text}
             value={props.newMessege}
           />
@@ -31,7 +31,7 @@ const Contacts = (props) => {
             onClick={addPost}
             className={styleContacts.container__comment_but}
           >
-            comment
+            отправить
           </button>
         </div>
 
