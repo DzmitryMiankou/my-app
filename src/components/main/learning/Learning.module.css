@@ -49,8 +49,8 @@
   color: #c9d1d9;
   cursor: pointer;
   font-size: 14px;
+  width: 100px;
   height: 50px;
-  width: 80px;
   margin-left: auto;
 }
 .button:hover {

@@ -4,21 +4,27 @@ let initialState = {
   messegData: [],
   newChanges: "",
 };
-
 const messegDataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case NEW_POST:
-      state.newChanges = action.newChange;
-      return state;
+    case NEW_POST: {
+      let newState = { ...state };
+      newState.newChanges = action.newChange;
+      return newState;
+    }
     case ADD_POST:
+      if (state.newChanges === "") {
+        return state;
+      }
       let newPost = {
         id: 5,
         messege: state.newChanges,
         like: 23,
       };
-      state.messegData.push(newPost);
-      state.newChanges = "";
-      return state;
+      let newState = { ...state };
+      newState.messegData = [...state.messegData];
+      newState.messegData.push(newPost);
+      newState.newChanges = "";
+      return newState;
     default:
       return state;
   }

@@ -57,12 +57,12 @@ const Learning = (props) => {
         <div className={styleLearning.comment}>
           <textarea
             onChange={ch}
-            placeholder="enter your commit"
+            placeholder="напишите комментарий"
             className={styleLearning.comment_text}
             value={props.newCommit}
           />
           <button className={styleLearning.button} onClick={add}>
-            Comment
+            отправить
           </button>
         </div>
       </div>

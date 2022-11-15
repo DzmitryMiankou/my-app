@@ -4,7 +4,7 @@ import Messeg from "./messeges/Messeg";
 import Users from "./users/Users";
 
 const Contacts = (props) => {
-  const messegElem = props.messege.map((m, i) => (
+  const messegElem = props.messege.messegData.map((m, i) => (
     <Messeg key={i} text={m.messege} />
   ));
 
@@ -25,7 +25,7 @@ const Contacts = (props) => {
             onChange={onPostChange}
             placeholder="напишите сообщение"
             className={styleContacts.container__comment_text}
-            value={props.newMessege}
+            value={props.messege.newChanges}
           />
           <button
             onClick={addPost}

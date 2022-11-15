@@ -1,28 +1,29 @@
-import React from "react";
+import { connect } from "react-redux";
 import {
   onPostChangecreateActin,
   addPostcreateActin,
 } from "../../redux/messegData-reducer";
 import Contacts from "./Contacts";
 
-const ContactsContainer = (props) => {
-  const addPost = () => {
-    props.dispatch(addPostcreateActin());
+let mapStateToProps = (state) => {
+  return {
+    messege: state.messeges,
   };
-
-  const onPostChange = (e) => {
-    let action = onPostChangecreateActin(e);
-    props.dispatch(action);
-  };
-
-  return (
-    <Contacts
-      onPost={onPostChange}
-      addPost={addPost}
-      messege={props.store.messeges.messegData}
-      newMessege={props.store.messeges.newChanges}
-    />
-  );
 };
+let mapDispatchToProps = (dispatch) => {
+  return {
+    onPost: (text) => {
+      dispatch(onPostChangecreateActin(text));
+    },
+    addPost: () => {
+      dispatch(addPostcreateActin());
+    },
+  };
+};
+
+const ContactsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Contacts);
 
 export default ContactsContainer;
