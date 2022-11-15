@@ -1,6 +1,7 @@
 .about {
   color: #c9d1d9;
-  width: 40%;
+
+  max-width: 600px;
 }
 .list {
   display: flex;
