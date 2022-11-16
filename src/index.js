@@ -15,20 +15,3 @@ root.render(
     </Provider>
   </BrowserRouter>
 );
-
-let a = {
-  name: "David",
-  age: 23,
-  messeges: {
-    id: 1,
-    date: "Hi, my name is GGK",
-  },
-};
-
-let clone = Object.assign({}, a);
-
-let b = clone.messeges;
-let c = a.messeges;
-b.id = 233532;
-
-console.log(c);
