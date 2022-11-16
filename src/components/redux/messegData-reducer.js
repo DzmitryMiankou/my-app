@@ -7,9 +7,9 @@ let initialState = {
 const messegDataReducer = (state = initialState, action) => {
   switch (action.type) {
     case NEW_POST: {
-      let clone = Object.assign({}, state);
-      clone.newChanges = action.newChange;
-      return clone;
+      let newState = { ...state };
+      newState.newChanges = action.newChange;
+      return newState;
     }
     case ADD_POST:
       if (state.newChanges === "") {
@@ -20,10 +20,11 @@ const messegDataReducer = (state = initialState, action) => {
         messege: state.newChanges,
         like: 23,
       };
-      let clone = Object.assign({}, state);
-      clone.messegData.push(newPost);
-      clone.newChanges = "";
-      return clone;
+      let newState = { ...state };
+      newState.messegData = [...state.messegData];
+      newState.messegData.push(newPost);
+      newState.newChanges = "";
+      return newState;
     default:
       return state;
   }
