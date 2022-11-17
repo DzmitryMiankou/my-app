@@ -5,26 +5,29 @@ let initialState = {
   newChanges: "",
 };
 const messegDataReducer = (state = initialState, action) => {
+  let copy;
   switch (action.type) {
     case NEW_POST: {
-      let newState = { ...state };
-      newState.newChanges = action.newChange;
-      return newState;
+      copy = { ...state, newChanges: action.newChange };
+      return copy;
     }
     case ADD_POST:
+      console.log(state);
       if (state.newChanges === "") {
         return state;
       }
-      let newPost = {
-        id: 5,
-        messege: state.newChanges,
-        like: 23,
+      copy = {
+        ...state,
+        messegData: [
+          ...state.messegData,
+          {
+            id: 5,
+            messege: state.newChanges,
+          },
+        ],
+        newChanges: "",
       };
-      let newState = { ...state };
-      newState.messegData = [...state.messegData];
-      newState.messegData.push(newPost);
-      newState.newChanges = "";
-      return newState;
+      return copy;
     default:
       return state;
   }
