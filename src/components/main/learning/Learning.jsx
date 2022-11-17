@@ -19,7 +19,7 @@ const Learning = (props) => {
   return (
     <div className={styleLearning.blok}>
       <div className={styleLearning.container}>
-        <div className="container__list">
+        <div className={styleLearning.container__list}>
           <div className="container__text">
             <h1 className={styleLearning.h1}>Обучение для детей</h1>
           </div>
