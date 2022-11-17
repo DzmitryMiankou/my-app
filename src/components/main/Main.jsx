@@ -1,5 +1,6 @@
 import React from "react";
 import styleMain from "./Main.module.css";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   return (
@@ -7,9 +8,9 @@ const Main = () => {
       <h1 className={styleMain.h1}>
         Проект преподавателя истории не об истории
       </h1>
-      <a className={styleMain.link} href="/learning">
+      <Link className={styleMain.link} to="/learning">
         Обучаться
-      </a>
+      </Link>
     </div>
   );
 };
