@@ -1,6 +1,6 @@
-import React from "react";
 import styleMain from "./Main.module.css";
 import { Link } from "react-router-dom";
+import React from "react";
 
 const Main = () => {
   return (
