@@ -1,5 +1,6 @@
 .container {
   color: #c9d1d9;
+  width: max-content;
 }
 .container__list {
   list-style: none;

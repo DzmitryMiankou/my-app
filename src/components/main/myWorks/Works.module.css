@@ -1,1 +1,6 @@
-
+.stars {
+  display: flex;
+}
+.jpg {
+  width: 500px;
+}

@@ -11,6 +11,11 @@ const styles = createUseStyles({
     fontSize: "25px",
     textDecoration: "underline #dc5b24",
   },
+  svg: {
+    width: "30px",
+    marginLeft: "80px",
+    cursor: "pointer",
+  },
 });
 
 const Logo = () => {
@@ -19,7 +24,7 @@ const Logo = () => {
     <div className={classes.container}>
       <div className={styleLogo.container}>
         <Link to="/">
-          <svg id="Слой_1" viewBox="0 0 174.43 174.43">
+          <svg className={classes.svg} id="Слой_1" viewBox="0 0 174.43 174.43">
             <rect
               className={styleLogo.v1}
               x="5.5"

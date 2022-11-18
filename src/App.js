@@ -16,7 +16,7 @@ function App(props) {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/works" element={<Works />} />
-          <Route path="/learning" element={<Learning />} />
+          <Route path="/learning" element={<Learning />}></Route>
           <Route path="/chat" element={<Contacts />} />
         </Routes>
       </section>
