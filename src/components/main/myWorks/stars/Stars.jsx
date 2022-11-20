@@ -4,19 +4,20 @@ import { createUseStyles } from "react-jss";
 
 const styles = createUseStyles({
   star: {
-    color: "#c9d1d9",
     cursor: "pointer",
-    "&:hover": {
-      color: "#dc5b24",
-    },
   },
 });
 
-const Stars = () => {
+const Stars = ({ selected = false, onSelect = (f) => f }) => {
   const classes = styles();
   return (
     <div>
-      <AiFillStar className={classes.star} size={"30px"} />
+      <AiFillStar
+        onClick={onSelect}
+        className={classes.star}
+        color={selected ? "#dc5b24" : "#3788ce"}
+        size={"30px"}
+      />
     </div>
   );
 };
