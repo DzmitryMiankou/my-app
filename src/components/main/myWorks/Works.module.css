@@ -1,5 +1,6 @@
 .stars {
   display: flex;
+  width: min-content;
 }
 .jpg {
   width: 500px;
