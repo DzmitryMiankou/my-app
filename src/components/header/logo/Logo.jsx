@@ -10,10 +10,10 @@ const styles = createUseStyles({
     color: "#c9d1d9",
     fontSize: "25px",
     textDecoration: "underline #dc5b24",
+    marginLeft: "80px",
   },
   svg: {
     width: "30px",
-    marginLeft: "80px",
     cursor: "pointer",
   },
 });

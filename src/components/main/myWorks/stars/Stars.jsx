@@ -1,5 +1,5 @@
 import React from "react";
-import { AiFillStar } from "@react-icons/all-files/ai/AiFillStar";
+import { GrStar } from "@react-icons/all-files/gr/GrStar";
 import { createUseStyles } from "react-jss";
 
 const styles = createUseStyles({
@@ -8,15 +8,15 @@ const styles = createUseStyles({
   },
 });
 
-const Stars = ({ selected = false, onSelect = (f) => f }) => {
+const Stars = ({ selected, onSelect = (f) => f }) => {
   const classes = styles();
   return (
     <div>
-      <AiFillStar
+      <GrStar
         onClick={onSelect}
         className={classes.star}
-        color={selected ? "#dc5b24" : "#3788ce"}
-        size={"30px"}
+        color={selected ? "#dc5b24" : "#235178"}
+        size={"20px"}
       />
     </div>
   );

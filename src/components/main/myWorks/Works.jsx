@@ -8,7 +8,7 @@ const Works = () => {
   stars.length = 5;
   const createStars = [...stars];
 
-  const [selectedStars, setSelectedStars] = useState(0);
+  const [selectedStars = 0, setSelectedStars] = useState();
 
   const copyStar = createStars.map((e, i) => (
     <Stars
