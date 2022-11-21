@@ -16,12 +16,12 @@
 }
 .lang svg,
 path {
-  stroke: #dc5b24;
+  stroke: #c9d1d9;
 }
 .lang {
   cursor: pointer;
 }
-.lang_list {
+.list {
   top: 50px;
   position: absolute;
   color: aliceblue;
@@ -29,14 +29,15 @@ path {
   background-color: #464646;
   font-size: 12pt;
   list-style: none;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: none;
 }
-.lang_list li {
+.list li {
+  margin: 20px;
+}
+.list li:hover {
+  color: #dc5b24;
   cursor: pointer;
 }
-.lang_list li:hover {
-  color: #dc5b24;
+.active {
+  display: block;
 }

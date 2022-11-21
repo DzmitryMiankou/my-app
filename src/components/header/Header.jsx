@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./Header.module.css";
 import Link from "./link/Link.jsx";
 import Logo from "./logo/Logo";
 import { GrLanguage } from "@react-icons/all-files/gr/GrLanguage";
 
 const Header = () => {
-  const styleLang = () => {
-    alert("hi");
-  };
+  const [lang, setLang] = useState(false);
   return (
     <header className={style.header}>
       <div>
@@ -20,11 +18,14 @@ const Header = () => {
           <Link text="Обучение" to="/learning" />
           <Link text="Общение" to="/chat" />
           <GrLanguage
-            onClick={styleLang}
+            onClick={() => setLang(!lang)}
             size={"25px"}
             className={style.lang}
           />
-          <ul className={style.lang_list} style={{ display: "none" }}>
+          <ul
+            className={style.list}
+            style={lang ? { display: "block" } : { display: "none" }}
+          >
             <li>Беларуская</li>
             <li>Русский</li>
           </ul>
