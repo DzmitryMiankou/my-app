@@ -14,8 +14,8 @@
   list-style-type: none;
   gap: 30px;
 }
-.lang svg,
-path {
+.lang path,
+svg {
   stroke: #c9d1d9;
 }
 .lang {
@@ -25,11 +25,10 @@ path {
   top: 50px;
   position: absolute;
   color: aliceblue;
-  right: 30px;
+  right: 80px;
   background-color: #464646;
   font-size: 12pt;
   list-style: none;
-  display: none;
 }
 .list li {
   margin: 20px;
@@ -38,6 +37,10 @@ path {
   color: #dc5b24;
   cursor: pointer;
 }
-.active {
-  display: block;
+.reg {
+  color: #dc5b24;
+  cursor: pointer;
+}
+.reg:hover {
+  color: #3177b4;
 }

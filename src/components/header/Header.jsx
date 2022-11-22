@@ -3,9 +3,11 @@ import style from "./Header.module.css";
 import Link from "./link/Link.jsx";
 import Logo from "./logo/Logo";
 import { GrLanguage } from "@react-icons/all-files/gr/GrLanguage";
+import { GoSignIn } from "@react-icons/all-files/go/GoSignIn";
 
 const Header = () => {
   const [lang, setLang] = useState(false);
+
   return (
     <header className={style.header}>
       <div>
@@ -29,6 +31,7 @@ const Header = () => {
             <li>Беларуская</li>
             <li>Русский</li>
           </ul>
+          <GoSignIn className={style.reg} size={"25px"} />
         </ul>
       </menu>
     </header>
