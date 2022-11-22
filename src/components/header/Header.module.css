@@ -14,17 +14,14 @@
   list-style-type: none;
   gap: 30px;
 }
-.lang path,
-svg {
-  stroke: #c9d1d9;
-}
+
 .lang {
   cursor: pointer;
 }
 .list {
   top: 50px;
   position: absolute;
-  color: aliceblue;
+  color: #c9d1d9;
   right: 80px;
   background-color: #464646;
   font-size: 12pt;
@@ -37,10 +34,10 @@ svg {
   color: #dc5b24;
   cursor: pointer;
 }
-.reg {
-  color: #dc5b24;
+.menu svg {
   cursor: pointer;
+  fill: #c9d1d9;
 }
-.reg:hover {
-  color: #3177b4;
+.menu svg:hover {
+  fill: #dc5b24;
 }
