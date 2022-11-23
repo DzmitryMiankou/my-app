@@ -7,6 +7,7 @@ import Works from "./components/main/myWorks/Works";
 import Learning from "./components/main/learning/Learning";
 import { Routes, Route } from "react-router-dom";
 import Contacts from "./components/main/contacts/Contacts";
+import Footer from "./components/footer/Footer";
 
 function App(props) {
   return (
@@ -20,6 +21,7 @@ function App(props) {
           <Route path="/chat" element={<Contacts />} />
         </Routes>
       </section>
+      <Footer />
     </div>
   );
 }

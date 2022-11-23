@@ -26,6 +26,7 @@
   background-color: #464646;
   font-size: 12pt;
   list-style: none;
+  border-top: #c75626 3px solid;
 }
 .list li {
   margin: 20px;

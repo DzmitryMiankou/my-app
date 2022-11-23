@@ -1,0 +1,17 @@
+.footer {
+  background-color: #343434;
+  height: 120px;
+}
+.iconContainer {
+  display: flex;
+  gap: 20px;
+  width: calc(100% - 160px);
+  margin: auto;
+}
+.footer svg {
+  color: #c4ccd4;
+  cursor: pointer;
+}
+.footer svg:hover {
+  color: #c65525;
+}
