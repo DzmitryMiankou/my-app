@@ -1,17 +1,16 @@
 .footer {
   background-color: #343434;
   height: 120px;
-}
-.iconContainer {
   display: flex;
-  gap: 20px;
+}
+.footer_container {
   width: calc(100% - 160px);
   margin: auto;
+  display: flex;
+  align-items: center;
 }
-.footer svg {
+.footer_container__copiraite {
   color: #c4ccd4;
-  cursor: pointer;
-}
-.footer svg:hover {
-  color: #c65525;
+  font-size: 12px;
+  align-self: flex-end;
 }

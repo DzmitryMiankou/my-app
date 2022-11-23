@@ -1,0 +1,27 @@
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min-content;
+  margin-left: auto;
+}
+
+.container_bihance a,
+.container_inst a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #c4ccd4;
+  font-size: 14px;
+}
+
+.container_bihance :hover,
+.container_inst :hover {
+  color: #c65525;
+  text-decoration: underline;
+}
+.iconContainer_p {
+  color: #c4ccd4;
+  font-weight: 700;
+}

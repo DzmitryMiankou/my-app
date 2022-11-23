@@ -21,7 +21,7 @@ function App(props) {
           <Route path="/chat" element={<Contacts />} />
         </Routes>
       </section>
-      <Footer />
+      <Footer className="sdf" />
     </div>
   );
 }

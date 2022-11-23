@@ -4,6 +4,9 @@
   align-items: center;
   justify-content: flex-start;
   height: 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 }
 .menu {
   margin-right: 80px;

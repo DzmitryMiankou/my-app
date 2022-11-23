@@ -1,6 +1,5 @@
 :root {
   font-size: 12pt;
-  font-family: "Tahoma", Geneva, Verdana, sans-serif;
   background-color: rgb(9, 5, 1);
 }
 div * {
@@ -12,9 +11,11 @@ div * {
   flex-direction: column;
   gap: 60px;
 }
+
 section {
   width: calc(100% - 280px);
   margin: auto;
+  margin-top: 120px;
 }
 h1,
 h2,
