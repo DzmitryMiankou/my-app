@@ -1,7 +1,6 @@
 import styleMain from "./Main.module.css";
 import { Link } from "react-router-dom";
 import React from "react";
-import mainBackGraund from "../../img/mainBackGraund.svg";
 
 const Main = () => {
   return (
@@ -14,13 +13,7 @@ const Main = () => {
           Обучаться
         </Link>
       </div>
-      <div>
-        <img
-          className={styleMain.mainBackGraund}
-          src={mainBackGraund}
-          alt="svg"
-        />
-      </div>
+      <div className={styleMain.mainBackGraund}></div>
     </div>
   );
 };

@@ -3,7 +3,7 @@
   max-width: 550px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   position: relative;
   height: 500px;
   overflow-x: hidden;
@@ -23,9 +23,12 @@
 }
 
 .mainBackGraund {
-  position: absolute;
   top: 60px;
-  z-index: -5;
+  position: absolute;
+  z-index: -1;
   right: 0%;
-  min-width: 1500px;
+  height: 500px;
+  width: 100%;
+  background: no-repeat url("../../img/mainBackGraund.svg");
+  background-size: cover;
 }
