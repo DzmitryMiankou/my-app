@@ -6,7 +6,7 @@ import { commitActin, addCommitActin } from "../../redux/commitData-reducer";
 const a = { learningLink: ["Figma", "HTML", "CSS"] };
 
 const Learning = (props) => {
-  const linkText = a.learningLink.map((m) => <p text={m} />);
+  const linkText = a.learningLink.map((m) => <h1>{m}</h1>);
 
   const add = () => {
     props.disPatch(addCommitActin());
