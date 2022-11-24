@@ -1,12 +1,12 @@
 import React from "react";
 import styleLearning from "./Learning.module.css";
-import LearningLink from "./learning_link/Learning_link";
+//import LearningLink from "./learning_link/Learning_link";
 import { commitActin, addCommitActin } from "../../redux/commitData-reducer";
 
 const a = { learningLink: ["Figma", "HTML", "CSS"] };
 
 const Learning = (props) => {
-  const linkText = a.learningLink.map((m) => <LearningLink text={m} />);
+  const linkText = a.learningLink.map((m) => <p text={m} />);
 
   const add = () => {
     props.disPatch(addCommitActin());
