@@ -3,11 +3,7 @@ import styleLearning from "./Learning.module.css";
 //import LearningLink from "./learning_link/Learning_link";
 import { commitActin, addCommitActin } from "../../redux/commitData-reducer";
 
-const a = { learningLink: ["Figma", "HTML", "CSS"] };
-
 const Learning = (props) => {
-  const linkText = a.learningLink.map((m) => <h1>{m}</h1>);
-
   const add = () => {
     props.disPatch(addCommitActin());
   };
@@ -23,20 +19,6 @@ const Learning = (props) => {
           <div className="container__text">
             <h1 className={styleLearning.h1}>Обучение для детей</h1>
           </div>
-          <div>{linkText}</div>
-        </div>
-        <div>
-          <ul className={styleLearning.list__container}>
-            <li>What is CSS?</li>
-            <li>How CSS is structured</li>
-            <li>How CSS works</li>
-            <li>CSS styling text</li>
-            <li>Styling lists</li>
-            <li>Web fonts</li>
-            <li>CSS styling text</li>
-            <li>Styling lists</li>
-            <li>Web fonts</li>
-          </ul>
         </div>
       </div>
       <div className={styleLearning.section}>
