@@ -6,9 +6,9 @@ const styles = createUseStyles({
   container: {
     display: "flex",
     justifyContent: "flex-end",
-    fontSize: "20px",
+    fontSize: "12pt",
     listStyle: "none",
-    gap: "10px",
+    gap: "30px",
   },
   li: {
     textDecoration: "none",
@@ -20,18 +20,15 @@ const styles = createUseStyles({
   },
   cont: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "end",
     justifyContent: "space-between",
     gap: "20px",
-  },
-  svg: {
-    fill: "#b65227",
+    borderBottom: "#b65227 solid 1px",
+    paddingBottom: "10px",
   },
   arrov: {
     display: "flex",
     alignItems: "center",
-    width: "100%",
-    gap: "5%",
   },
   h: {
     color: "#b65227",
@@ -44,10 +41,7 @@ const Layout = () => {
     <>
       <div className={classes.cont}>
         <div className={classes.arrov}>
-          <h3 className={classes.h}>Пройди путь</h3>
-          <svg width="800px" className={classes.svg} viewBox="0 28 300 40">
-            <polygon points="271.51 45.12 263.06 40.23 263.96 41.27 273.88 49.19 20.02 49.19 20.02 50.81 273.91 50.81 263.06 59.77 271.51 54.88 279.98 50 271.51 45.12" />
-          </svg>
+          <h3 className={classes.h}>Пойми просто</h3>
         </div>
         <ul className={classes.container}>
           <li>
