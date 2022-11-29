@@ -10,7 +10,7 @@ import Contacts from "./components/main/contacts/Contacts";
 import Footer from "./components/footer/Footer";
 import Layout from "./components/main/learning/layout";
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <Header />
