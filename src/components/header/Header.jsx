@@ -6,8 +6,7 @@ import Logo from "./logo/Logo";
 const Header = () => {
   const [lang, setLang] = useState(false);
   const clouseList = (e) => {
-    const target = e.target;
-    if (!target.closest(".act")) {
+    if (!e.target.closest(".act")) {
       setLang(false);
     }
   };
