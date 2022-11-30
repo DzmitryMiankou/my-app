@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Header.module.css";
 import Link from "./link/Link.jsx";
 import Logo from "./logo/Logo";
 
 const Header = () => {
   const [lang, setLang] = useState(false);
+
+  useEffect(
+    (e) => {
+      function ev(e) {
+        if (e.target) {
+          setLang(false);
+          console.log(e);
+        }
+      }
+      document.querySelector("section").addEventListener("click", ev);
+    },
+    [setLang]
+  );
 
   return (
     <header className={style.header}>
