@@ -24,24 +24,24 @@
 .list {
   top: 50px;
   position: absolute;
-  color: #c9d1d9;
+  color: var(--white);
   right: 80px;
   background-color: #464646;
   font-size: 12pt;
   list-style: none;
-  border-top: #c75626 3px solid;
+  border-top: var(--red) 3px solid;
 }
 .list li {
   margin: 20px;
 }
 .list li:hover {
-  color: #dc5b24;
+  color: var(--red);
   cursor: pointer;
 }
 .menu svg {
   cursor: pointer;
-  fill: #c9d1d9;
+  fill: var(--white);
 }
 .menu svg:hover {
-  fill: #dc5b24;
+  fill: var(--red);
 }

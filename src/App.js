@@ -15,19 +15,17 @@ function App() {
     <div className="App">
       <Header />
       <section>
-        <div className="section">
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/works" element={<Works />} />
-            <Route path="/learning" element={<Layout />}>
-              <Route index element={<Learning />} />
-              <Route path="html" element={<h1>efvre</h1>} />
-              <Route path="css" element={<Works />} />
-              <Route path="figma" element={<Learning />} />
-            </Route>
-            <Route path="/chat" element={<Contacts />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/works" element={<Works />} />
+          <Route path="/learning" element={<Layout />}>
+            <Route index element={<Learning />} />
+            <Route path="html" element={<h1>efvre</h1>} />
+            <Route path="css" element={<Works />} />
+            <Route path="figma" element={<Learning />} />
+          </Route>
+          <Route path="/chat" element={<Contacts />} />
+        </Routes>
       </section>
       <Footer className="sdf" />
     </div>

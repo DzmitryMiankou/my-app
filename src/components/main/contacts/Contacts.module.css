@@ -19,8 +19,8 @@
   height: 100px;
   resize: none;
   background-color: #343434;
-  color: #c9d1d9;
-  border: #c9d1d9 solid 1px;
+  color: var(--white);
+  border: var(--white) solid 1px;
   outline: none;
 }
 .container__comment_text:focus {
@@ -31,7 +31,7 @@
   height: 50px;
   background-color: #1d6e70;
   border: none;
-  color: #c9d1d9;
+  color: var(--white);
   cursor: pointer;
   font-size: 14px;
   margin-left: auto;
@@ -45,7 +45,7 @@
   gap: 30px;
   background-color: #181818;
   padding: 5%;
-  border: #b9c0c7 solid 1px;
+  border: var(--white) solid 1px;
   overflow-x: scroll;
   height: 40vh;
 }

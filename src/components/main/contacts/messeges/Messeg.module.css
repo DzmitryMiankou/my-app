@@ -1,5 +1,5 @@
 .container {
-  color: #c9d1d9;
+  color: var(--white);
   width: max-content;
 }
 .container__list {

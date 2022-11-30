@@ -1,5 +1,5 @@
 .about {
-  color: #c9d1d9;
+  color: var(--white);
   max-width: 550px;
   display: flex;
   flex-direction: column;
@@ -12,14 +12,14 @@
 .link {
   font-size: 18px;
   text-decoration: none;
-  color: #3788ce;
-  border: solid 1px #3788ce;
+  color: var(--blue);
+  border: solid 1px var(--blue);
   padding: 10px;
   width: fit-content;
 }
 .link:hover {
-  color: #d75924;
-  border: solid 1px #d75924;
+  color: var(--red);
+  border: solid 1px var(--red);
 }
 
 .mainBackGraund {

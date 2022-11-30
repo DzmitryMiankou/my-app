@@ -1,5 +1,5 @@
 .container {
-  color: #c9d1d9;
+  color: var(--white);
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -16,14 +16,14 @@
   height: 100px;
   resize: none;
   background-color: #343434;
-  color: #c9d1d9;
-  border: #c9d1d9 solid 1px;
+  color: var(--white);
+  border: var(--white) solid 1px;
   outline: none;
 }
 .button {
   background-color: #1d6e70;
   border: none;
-  color: #c9d1d9;
+  color: var(--white);
   cursor: pointer;
   font-size: 14px;
   width: 100px;
@@ -32,13 +32,13 @@
   margin-top: 5px;
 }
 .button:hover {
-  background-color: #b75226;
+  background-color: var(--red);
 }
 .section__text {
   margin-top: 25px;
   text-align: justify;
   overflow-wrap: break-word;
-  color: #b9c0c7;
+  color: var(--white);
   font-size: 19px;
 }
 .section {
