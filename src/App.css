@@ -11,11 +11,10 @@ div * {
   flex-direction: column;
   gap: 60px;
 }
-
-section {
+.section {
+  padding-top: 120px;
   width: calc(100% - 280px);
   margin: auto;
-  padding-top: 120px;
 }
 h1,
 h2,

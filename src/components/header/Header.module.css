@@ -16,8 +16,8 @@
   display: flex;
   list-style-type: none;
   gap: 30px;
+  align-items: center;
 }
-
 .lang {
   cursor: pointer;
 }
