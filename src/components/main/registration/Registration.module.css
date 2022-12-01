@@ -19,10 +19,24 @@ input[type="text"]:focus {
   border: var(--border-text);
 }
 .container {
-  width: min-content;
+  width: 400px;
   margin-left: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 200px;
+  height: 400px;
+}
+.button {
+  background-color: var(--azure-button);
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 14px;
+  width: 100px;
+  height: 50px;
+  margin-left: auto;
+  margin-top: 5px;
+}
+.button:hover {
+  background-color: var(--red);
 }
