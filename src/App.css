@@ -25,5 +25,5 @@ h6 {
 }
 
 ::selection {
-  background: #1d6e70;
+  background: var(--azure-button);
 }

@@ -18,7 +18,7 @@
 
 .container_bihance :hover,
 .container_inst :hover {
-  color: #c65525;
+  color: var(--red);
   text-decoration: underline;
 }
 .iconContainer_p {

@@ -6,10 +6,10 @@
   list-style: none;
 }
 .container__list_messeg {
-  background-color: #343434;
+  background-color: var(--grey-text-BG);
   padding: 5px;
   overflow-wrap: break-word;
 }
 .container__list_messeg:hover {
-  background-color: #5d5d5d;
+  background-color: var(--black-grey-BG);
 }

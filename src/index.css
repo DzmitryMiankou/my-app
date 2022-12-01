@@ -2,8 +2,12 @@
   --red: #b75226;
   --white: #c9d1d9;
   --blue: #3788ce;
+  --azure-button: #1d6e70;
+  --black-grey-BG: #343434;
+  --grey-text-BG: #181818;
+  --border-text: 1px solid var(--red);
   font-size: 16px;
-  background-color: rgb(9, 5, 1);
+  background-color: rgb(0, 0, 0);
 }
 
 body {

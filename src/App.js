@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import Contacts from "./components/main/contacts/Contacts";
 import Footer from "./components/footer/Footer";
 import Layout from "./components/main/learning/layout";
+import Registration from "./components/main/registration/Registration";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="figma" element={<Learning />} />
           </Route>
           <Route path="/chat" element={<Contacts />} />
+          <Route path="/regist" element={<Registration />} />
         </Routes>
       </section>
       <Footer className="sdf" />
