@@ -13,12 +13,10 @@ const Registration = () => {
     <InputText key={id} value={value} placehold={placeholder} id={id} />
   ));
   return (
-    <div>
-      <form className={styleRegistration.container}>
-        <div>{formElem}</div>
-        <button className={styleRegistration.button}>Регистрация</button>
-      </form>
-    </div>
+    <form className={styleRegistration.container}>
+      <div>{formElem}</div>
+      <button className={styleRegistration.button}>Регистрация</button>
+    </form>
   );
 };
 
