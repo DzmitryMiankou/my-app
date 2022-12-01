@@ -20,8 +20,8 @@
   resize: none;
   background-color: var(--black-grey-BG);
   color: var(--white);
-  border: var(--white) solid 1px;
   outline: none;
+  border: 1px solid black;
 }
 .container__comment_text:focus {
   border: var(--red) solid 1px;
@@ -35,6 +35,7 @@
   cursor: pointer;
   font-size: 14px;
   margin-left: auto;
+  outline: none;
 }
 .container__comment_but:hover {
   background-color: var(--red);
@@ -45,7 +46,6 @@
   gap: 30px;
   background-color: var(--grey-text-BG);
   padding: 5%;
-  border: var(--white) solid 1px;
   overflow-x: scroll;
   height: 40vh;
 }
