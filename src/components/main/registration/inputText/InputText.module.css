@@ -5,6 +5,7 @@
 }
 .label {
   color: var(--white);
+  width: min-content;
 }
 input[type="text"] {
   background-color: var(--black-grey-BG);

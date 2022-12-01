@@ -11,11 +11,15 @@ const Header = () => {
       setLang(false);
     }
   };
-
+  const clousesc = (e) => {
+    setLang(false);
+  };
   useEffect(() => {
     window.addEventListener("click", clouseList);
+    window.addEventListener("scroll", clousesc);
     return () => {
       window.removeEventListener("click", clouseList);
+      window.removeEventListener("scroll", clousesc);
     };
   }, []);
 

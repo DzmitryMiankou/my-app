@@ -26,7 +26,7 @@
   position: absolute;
   color: var(--white);
   right: 80px;
-  background-color: var(--black-grey-BG);
+  background-color: #4f4f4f;
   font-size: 12pt;
   list-style: none;
   border-top: var(--red) 3px solid;
