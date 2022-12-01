@@ -1,42 +1,22 @@
 import styleRegistration from "./Registration.module.css";
 import React from "react";
+import InputText from "./inputText/InputText";
 
 const Registration = () => {
+  const arr = [
+    { id: "nickNam", value: "Nickname", placeholder: "Например: Explore23" },
+    { id: "email", value: "Email", placeholder: "Например: explore@gmail.com" },
+    { id: "password", value: "Password", placeholder: "Например: 230cd_3rD" },
+  ];
+
+  const formElem = arr.map(({ value, placeholder, id }) => (
+    <InputText key={id} value={value} placehold={placeholder} id={id} />
+  ));
   return (
     <div>
       <form className={styleRegistration.container}>
-        <div className={styleRegistration.elem__container}>
-          <label className={styleRegistration.label} htmlFor="nickName">
-            Nickname
-          </label>
-          <input placeholder="Например: Explore23" id="nickName" type="text" />
-        </div>
-        <div className={styleRegistration.elem__container}>
-          <label className={styleRegistration.label} htmlFor="email">
-            Email
-          </label>
-          <input
-            placeholder="Например: explore@gmail.com"
-            id="email"
-            type="text"
-          />
-        </div>
-        <div className={styleRegistration.elem__container}>
-          <label
-            placeholder="Например: explore@gmail.com"
-            className={styleRegistration.label}
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input placeholder="Например: 230cd_3rD" id="password" type="text" />
-        </div>
-        <div
-          placeholder="Например: explore@gmail.com"
-          className={styleRegistration.elem__container}
-        >
-          <button className={styleRegistration.button}>Регистрация</button>
-        </div>
+        <div>{formElem}</div>
+        <button className={styleRegistration.button}>Регистрация</button>
       </form>
     </div>
   );

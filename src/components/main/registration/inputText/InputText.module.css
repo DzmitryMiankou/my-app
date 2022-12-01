@@ -1,0 +1,20 @@
+.elem__container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.label {
+  color: var(--white);
+}
+input[type="text"] {
+  background-color: var(--black-grey-BG);
+  outline: none;
+  border: none;
+  color: var(--white);
+  padding: 10px;
+  border: 1px solid black;
+}
+input[type="text"]:hover,
+input[type="text"]:focus {
+  border: var(--border-text);
+}
