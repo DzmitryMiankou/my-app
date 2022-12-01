@@ -1,4 +1,4 @@
-import styleInputText from "./InputText.module.css";
+import styleInputText from "./InputText.module.scss";
 import React from "react";
 
 const InputText = (props) => {
