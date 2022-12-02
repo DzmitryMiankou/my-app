@@ -11,7 +11,7 @@
   width: min-content;
 }
 
-input[type=text] {
+input[type="text"] {
   background-color: var(--black-grey-BG);
   outline: none;
   border: none;
@@ -21,7 +21,7 @@ input[type=text] {
   margin-bottom: 20px;
 }
 
-input[type=text]:hover,
-input[type=text]:focus {
+input[type="text"]:hover,
+input[type="text"]:focus {
   border: var(--border-text);
-}/*# sourceMappingURL=InputText.module.css.map */
+} /*# sourceMappingURL=InputText.module.css.map */

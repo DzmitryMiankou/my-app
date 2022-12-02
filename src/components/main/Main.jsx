@@ -1,10 +1,10 @@
-import styleMain from "./Main.module.css";
+import styleMain from "./Main.module.scss";
 import { Link } from "react-router-dom";
 import React from "react";
 
 const Main = () => {
   return (
-    <div className={styleMain.vo}>
+    <div className={styleMain.container}>
       <div className={styleMain.about}>
         <h1 className={styleMain.h1}>
           Проект преподавателя истории не об истории
