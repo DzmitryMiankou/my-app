@@ -46,6 +46,6 @@
   gap: 30px;
   background-color: var(--grey-text-BG);
   padding: 5%;
-  overflow-x: scroll;
+  overflow-x: hidden;
   height: 40vh;
 }
