@@ -1,5 +1,5 @@
 import React from "react";
-import styleUsers from "./Users.module.css";
+import styleUsers from "./Users.module.scss";
 import imgUsers from "./icon_users.png";
 
 /*import { createUseStyles } from "react-jss";

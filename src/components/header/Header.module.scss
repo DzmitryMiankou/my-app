@@ -7,36 +7,28 @@
   position: fixed;
   width: 100%;
   z-index: 100;
-  .menu {
-  margin-right: 80px;
-  margin-left: auto;
-  .ul {
-      display: flex;
-      list-style-type: none;
-      gap: 30px;
-      align-items: center;
-      .act {
-                .list {
-                  top: 50px;
-                  position: absolute;
-                  color: var(--white);
-                  right: 80px;
-                  background-color: #4f4f4f;
-                  font-size: 12pt;
-                  list-style: none;
-                  border-top: var(--red) 3px solid;
-                  li {
-                      margin: 20px;
-                      cursor: pointer;
-                      &:hover {
-                          color: var(--red);
-                        }
-                    }
-                }
-      }
-    }
-        svg {
-          cursor: pointer;
+    .menu {margin-right: 80px; margin-left: auto;
+      .ul {
+        display: flex;
+        list-style-type: none;
+        gap: 30px;
+        align-items: center;
+        .act {
+          .list {
+            top: 50px;
+            position: absolute;
+            color: var(--white);
+            right: 80px;
+            background-color: #4f4f4f;
+            font-size: 12pt;
+            list-style: none;
+            border-top: var(--red) 3px solid;
+              li {margin: 20px; cursor: pointer;
+                &:hover {color: var(--red);}
+              }
+          }
         }
+      }
+    svg {cursor: pointer;}
   }
 }

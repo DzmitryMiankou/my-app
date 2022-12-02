@@ -1,6 +1,6 @@
 import React from "react";
 //import logo from './logo.svg';
-import "./App.css";
+import "./App.scss";
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import Works from "./components/main/myWorks/Works";

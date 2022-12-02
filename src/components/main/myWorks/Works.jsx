@@ -1,5 +1,5 @@
 import React from "react";
-import styleWorks from "./Works.module.css";
+import styleWorks from "./Works.module.scss";
 import Stars from "./stars/Stars";
 import Jpg from "../../../img/20zs01.jpg";
 import { useState } from "react";

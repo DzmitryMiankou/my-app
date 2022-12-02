@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import styleContacts from "./Contacts.module.css";
+import styleContacts from "./Contacts.module.scss";
 import Messeg from "./messeges/Messeg";
 import Users from "./users/Users";
 import { useSelector, useDispatch } from "react-redux";

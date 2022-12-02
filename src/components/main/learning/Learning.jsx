@@ -1,5 +1,5 @@
 import React from "react";
-import styleLearning from "./Learning.module.css";
+import styleLearning from "./Learning.module.scss";
 //import LearningLink from "./learning_link/Learning_link";
 import { commitActin, addCommitActin } from "../../redux/commitData-reducer";
 
