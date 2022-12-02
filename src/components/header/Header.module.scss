@@ -10,39 +10,40 @@
   .menu {
   margin-right: 80px;
   margin-left: auto;
-}
-.ul {
-  display: flex;
-  list-style-type: none;
-  gap: 30px;
-  align-items: center;
-}
-.lang {
-  cursor: pointer;
-}
-.list {
-  top: 50px;
-  position: absolute;
-  color: var(--white);
-  right: 80px;
-  background-color: #4f4f4f;
-  font-size: 12pt;
-  list-style: none;
-  border-top: var(--red) 3px solid;
-}
-.list li {
-  margin: 20px;
-}
-.list li:hover {
-  color: var(--red);
-  cursor: pointer;
-}
-.menu svg {
-  cursor: pointer;
-  fill: var(--white);
-}
-.menu svg:hover {
-  fill: var(--red);
-}
-
+  .ul {
+      display: flex;
+      list-style-type: none;
+      gap: 30px;
+      align-items: center;
+      .act {
+        .lang {
+            cursor: pointer;
+          }
+                .list {
+                  top: 50px;
+                  position: absolute;
+                  color: var(--white);
+                  right: 80px;
+                  background-color: #4f4f4f;
+                  font-size: 12pt;
+                  list-style: none;
+                  border-top: var(--red) 3px solid;
+                  li {
+                      margin: 20px;
+                      &:hover {
+                          color: var(--red);
+                          cursor: pointer;
+                        }
+                    }
+                }
+      }
+    }
+        svg {
+          cursor: pointer;
+          fill: var(--white);
+          &:hover {
+              fill: var(--red);
+            }
+        }
+  }
 }

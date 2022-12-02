@@ -34,7 +34,7 @@ const Header = () => {
           <Link text="Портфолио" to="/works" />
           <Link text="Обучение" to="/learning" />
           <Link text="Общение" to="/chat" />
-          <div className="act">
+          <div className={`${style.act} ${"act"}`}>
             <svg
               onClick={() => setLang(!lang)}
               className={style.lang}
