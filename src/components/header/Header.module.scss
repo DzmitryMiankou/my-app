@@ -16,9 +16,6 @@
       gap: 30px;
       align-items: center;
       .act {
-        .lang {
-            cursor: pointer;
-          }
                 .list {
                   top: 50px;
                   position: absolute;
@@ -32,7 +29,6 @@
                       margin: 20px;
                       &:hover {
                           color: var(--red);
-                          cursor: pointer;
                         }
                     }
                 }
@@ -40,10 +36,6 @@
     }
         svg {
           cursor: pointer;
-          fill: var(--white);
-          &:hover {
-              fill: var(--red);
-            }
         }
   }
 }

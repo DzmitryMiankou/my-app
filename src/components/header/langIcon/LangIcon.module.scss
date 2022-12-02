@@ -1,0 +1,8 @@
+.lang {
+    cursor: pointer;
+    fill: var(--white);
+
+    &:hover {
+        fill: var(--red);
+    }
+}

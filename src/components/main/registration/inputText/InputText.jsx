@@ -11,7 +11,7 @@ const InputText = (props) => {
       >
         {props.value}
       </label>
-      <input placeholder={props.placehold} id={props.id} type="text" />
+      <input placeholder={props.placehold} id={props.id} type={props.type} />
     </div>
   );
 };
