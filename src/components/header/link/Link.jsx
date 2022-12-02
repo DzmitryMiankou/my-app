@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styleLinc from "./Link.module.css";
+import styleLinc from "./Link.module.scss";
 
 const Link = (props) => {
   return (

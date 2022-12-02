@@ -1,5 +1,5 @@
 import React from "react";
-import styleIconSocial from "./IconSocial.module.css";
+import styleIconSocial from "./IconSocial.module.scss";
 
 const IconSocial = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import styleLogo from "./Logo.module.css";
+import styleLogo from "./Logo.module.scss";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
 
