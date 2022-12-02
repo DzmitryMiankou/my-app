@@ -23,14 +23,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-@mixin buttonGreen() {
-  background-color: var(--azure-button);
-  border: none;
-  color: var(--white);
-  cursor: pointer;
-  font-size: 14px;
-  width: 100px;
-  height: 50px;
-  margin-left: auto;
-  margin-top: 5px;
-}

@@ -1,3 +1,5 @@
+@import "scss/button.scss";
+@import "scss/formStyle.scss";
 .messeges {
   display: flex;
   flex-direction: row-reverse;
@@ -16,30 +18,12 @@
   gap: 10px;
 }
 .container__comment_text {
-  height: 100px;
-  resize: none;
-  background-color: var(--black-grey-BG);
-  color: var(--white);
-  outline: none;
-  border: 1px solid black;
-}
-.container__comment_text:focus {
-  border: var(--red) solid 1px;
+  @include textarea;
 }
 .container__comment_but {
-  width: 100px;
-  height: 50px;
-  background-color: var(--azure-button);
-  border: none;
-  color: var(--white);
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: auto;
-  outline: none;
+  @include buttonGreen;
 }
-.container__comment_but:hover {
-  background-color: var(--red);
-}
+
 .container__messege {
   display: flex;
   flex-direction: column;

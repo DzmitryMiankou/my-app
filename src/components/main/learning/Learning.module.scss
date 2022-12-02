@@ -1,3 +1,6 @@
+@import "scss/button.scss";
+@import "scss/formStyle.scss";
+
 .container {
   color: var(--white);
   display: flex;
@@ -12,27 +15,10 @@
   gap: 5px;
 }
 .comment_text {
-  width: 100%;
-  height: 100px;
-  resize: none;
-  background-color: var(--black-grey-BG);
-  color: var(--white);
-  border: none;
-  outline: none;
+@include textarea;
 }
 .button {
-  background-color: var(--azure-button);
-  border: none;
-  color: var(--white);
-  cursor: pointer;
-  font-size: 14px;
-  width: 100px;
-  height: 50px;
-  margin-left: auto;
-  margin-top: 5px;
-}
-.button:hover {
-  background-color: var(--red);
+@include buttonGreen;
 }
 .section__text {
   margin-top: 25px;

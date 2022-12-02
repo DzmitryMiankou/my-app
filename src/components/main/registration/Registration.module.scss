@@ -1,3 +1,4 @@
+@import "scss/button.scss";
 .container {
   width: 400px;
   margin-left: auto;
@@ -6,18 +7,7 @@
   gap: 10px;
   height: 400px;
     .button {
-        background-color: var(--azure-button);
-        border: none;
-        color: var(--white);
-        cursor: pointer;
-          font-size: 14px;
-          width: 100px;
-          height: 50px;
-          margin-left: auto;
-          margin-top: 5px;
-          &:hover {
-            background-color: var(--red);
-          }
-        }
+      @include buttonGreen;
+    }
 }
 

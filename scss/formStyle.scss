@@ -1,0 +1,11 @@
+@mixin textarea() {
+    height: 100px;
+    resize: none;
+    background-color: var(--black-grey-BG);
+    color: var(--white);
+    outline: none;
+    border: 1px solid black;
+    &:focus, &:hover{
+        border: 1px solid var(--red);
+    }
+}
