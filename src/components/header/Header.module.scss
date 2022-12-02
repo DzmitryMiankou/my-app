@@ -27,6 +27,7 @@
                   border-top: var(--red) 3px solid;
                   li {
                       margin: 20px;
+                      cursor: pointer;
                       &:hover {
                           color: var(--red);
                         }
