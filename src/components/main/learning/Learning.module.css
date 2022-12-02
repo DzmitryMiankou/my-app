@@ -17,7 +17,7 @@
   resize: none;
   background-color: var(--black-grey-BG);
   color: var(--white);
-  border: var(--white) solid 1px;
+  border: none;
   outline: none;
 }
 .button {
