@@ -7,8 +7,7 @@
   position: fixed;
   width: 100%;
   z-index: 100;
-}
-.menu {
+  .menu {
   margin-right: 80px;
   margin-left: auto;
 }
@@ -44,4 +43,6 @@
 }
 .menu svg:hover {
   fill: var(--red);
+}
+
 }

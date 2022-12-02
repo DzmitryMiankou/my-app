@@ -1,3 +1,7 @@
+@mixin border($props) {
+  border:solid 1px $props;
+}
+
 .container {
   .about {
       color: var(--white);
@@ -13,13 +17,13 @@
         font-size: 18px;
         text-decoration: none;
         color: var(--blue);
-        border: solid 1px var(--blue);
+        @include border(var(--blue));
         padding: 10px;
         width: fit-content;
   
         &:hover {
           color: var(--red);
-          border: solid 1px var(--red);
+          @include border(var(--red));
         }
       }
     }

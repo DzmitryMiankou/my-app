@@ -1,5 +1,5 @@
 import React from "react";
-import styleMesseg from "./Messeg.module.css";
+import styleMesseg from "./Messeg.module.scss";
 
 const Messeg = (props) => {
   const hi = () => alert("hi");

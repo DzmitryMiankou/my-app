@@ -1,4 +1,4 @@
-import styleRegistration from "./Registration.module.css";
+import styleRegistration from "./Registration.module.scss";
 import React from "react";
 import InputText from "./inputText/InputText";
 
