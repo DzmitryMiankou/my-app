@@ -12,6 +12,22 @@ import Layout from "./components/main/learning/layout";
 import Registration from "./components/main/registration/Registration";
 
 function App() {
+  let a = [];
+  async function http(params) {
+    try {
+      await fetch("http://localhost:5000", {
+        method: "get",
+      })
+        .then((response) => response.json())
+        .then((result) => a.push(result));
+      return a;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  http();
+  console.log(a);
+
   return (
     <div className="App">
       <Header />
@@ -33,5 +49,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
