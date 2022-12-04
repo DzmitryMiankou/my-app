@@ -12,6 +12,19 @@ import Layout from "./components/main/learning/layout";
 import Registration from "./components/main/registration/Registration";
 
 function App() {
+  async function http(params) {
+    try {
+      await fetch("http://localhost:5000/users", {
+        method: "get",
+      })
+        .then((response) => response.json())
+        .then((result) => console.log(result));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  http();
+
   return (
     <div className="App">
       <Header />
@@ -21,7 +34,7 @@ function App() {
           <Route path="/works" element={<Works />} />
           <Route path="/learning" element={<Layout />}>
             <Route index element={<Learning />} />
-            <Route path="html" element={<h1>efvre</h1>} />
+            <Route path="html" element={<p color="red">4eg</p>} />
             <Route path="css" element={<Works />} />
             <Route path="figma" element={<Learning />} />
           </Route>
