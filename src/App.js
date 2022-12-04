@@ -14,16 +14,16 @@ import Registration from "./components/main/registration/Registration";
 function App() {
   async function http(params) {
     try {
-      await fetch("http://localhost:5000/users", {
+      const response = await fetch("http://localhost:5000/users/3", {
         method: "get",
-      })
-        .then((response) => response.json())
-        .then((result) => console.log(result));
+      });
+      const json = await response.json();
+      return json;
     } catch (error) {
       console.log(error);
     }
   }
-  http();
+  http().then((e) => console.log(e));
 
   return (
     <div className="App">
@@ -34,7 +34,7 @@ function App() {
           <Route path="/works" element={<Works />} />
           <Route path="/learning" element={<Layout />}>
             <Route index element={<Learning />} />
-            <Route path="html" element={<p color="red">4eg</p>} />
+            <Route path="html" element={<p color="red">yejtkr</p>} />
             <Route path="css" element={<Works />} />
             <Route path="figma" element={<Learning />} />
           </Route>
