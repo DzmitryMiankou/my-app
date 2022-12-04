@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import messegDataReducer from "./messegData-reducer";
+import messegDataReducer from "./messegData-reducer.ts";
 import commitDataReducer from "./commitData-reducer";
 import { legacy_createStore as createStore } from "redux";
 

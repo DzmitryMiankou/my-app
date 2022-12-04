@@ -1,10 +1,15 @@
 const ADD_POST = "ADDPOST";
 const NEW_POST = "NEWPOST";
-let initialState = {
+
+type InitialStateType = {
+  messegData: (string | { id: number; messege: string; })[],
+  newChanges: string,
+}
+const initialState: InitialStateType = {
   messegData: [],
   newChanges: "",
 };
-const messegDataReducer = (state = initialState, action) => {
+const messegDataReducer = (state = initialState, action: any): InitialStateType => {
   let copy;
   switch (action.type) {
     case NEW_POST: {
@@ -12,7 +17,6 @@ const messegDataReducer = (state = initialState, action) => {
       return copy;
     }
     case ADD_POST:
-      console.log(state);
       if (state.newChanges === "") {
         return state;
       }
@@ -32,10 +36,16 @@ const messegDataReducer = (state = initialState, action) => {
       return state;
   }
 };
+type addPostcreateActinType = {
+  type: typeof ADD_POST
+};
+type onPostChangecreateActinType = {
+  type: typeof NEW_POST,
+  newChange: string
+};
+export const addPostcreateActin = (): addPostcreateActinType => ({ type: ADD_POST });
 
-export const addPostcreateActin = () => ({ type: ADD_POST });
-
-export const onPostChangecreateActin = (text) => ({
+export const onPostChangecreateActin = (text: string): onPostChangecreateActinType => ({
   type: NEW_POST,
   newChange: text,
 });

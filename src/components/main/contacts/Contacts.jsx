@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   onPostChangecreateActin,
   addPostcreateActin,
-} from "../../redux/messegData-reducer";
+} from "../../redux/messegData-reducer.ts";
 
 const Contacts = () => {
   const state = useSelector((state) => state);
