@@ -12,9 +12,9 @@ import Layout from "./components/main/learning/layout";
 import Registration from "./components/main/registration/Registration";
 
 function App() {
-  async function http(params) {
+  /*async function http(params) {
     try {
-      const response = await fetch("http://localhost:5000/users/3", {
+      const response = await fetch("http://localhost:5000/users/", {
         method: "get",
       });
       const json = await response.json();
@@ -23,8 +23,35 @@ function App() {
       console.log(error);
     }
   }
-  http().then((e) => console.log(e));
+  http().then((e) => add(e));
+  function add(e) {
+    e.forEach((element) => {
+      arr.push(element);
+    });
+  }*/
+  let arr = [
+    {
+      id: "nickNam",
+      value: "Nickname",
+      placeholder: "Например: Explore23",
+      type: "text",
+    },
+    {
+      id: "email",
+      value: "Email",
+      placeholder: "Например: explore@gmail.com",
+      type: "email",
+    },
+    {
+      id: "password",
+      value: "Password",
+      placeholder: "Например: 230cd_3rD",
+      type: "password",
+    },
+  ];
+  console.log(arr);
 
+  const formElem = arr.map(({ id, value }) => <h1 key={id}>{value}</h1>);
   return (
     <div className="App">
       <Header />
@@ -34,7 +61,7 @@ function App() {
           <Route path="/works" element={<Works />} />
           <Route path="/learning" element={<Layout />}>
             <Route index element={<Learning />} />
-            <Route path="html" element={<p color="red">yejtkr</p>} />
+            <Route path="html" element={formElem} />
             <Route path="css" element={<Works />} />
             <Route path="figma" element={<Learning />} />
           </Route>
