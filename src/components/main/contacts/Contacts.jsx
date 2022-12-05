@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import styleContacts from "./Contacts.module.scss";
 import Messeg from "./messeges/Messeg";
 import Users from "./users/Users";
@@ -7,8 +7,23 @@ import {
   onPostChangecreateActin,
   addPostcreateActin,
 } from "../../redux/messegData-reducer.ts";
+import { useHTTP } from "../../../hook/http";
 
 const Contacts = () => {
+  const [data, setdata] = useState();
+  const { request } = useHTTP();
+  const requestHandler = async () => {
+    try {
+      const data = await request("http://localhost:5000/users");
+      return setdata(data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    requestHandler();
+  }, []);
+  const formElem =
+    data && data.map(({ id, nickName }) => <p key={id}>{nickName}</p>);
+
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const increaseCounter = useCallback(
@@ -46,6 +61,7 @@ const Contacts = () => {
       <div className={styleContacts.users}>
         <Users />
       </div>
+      <div className={styleContacts.messeges_list}>{formElem}</div>
     </div>
   );
 };

@@ -4,6 +4,13 @@
   display: flex;
   flex-direction: row-reverse;
   gap: 50px;
+  .messeges_list p{
+    color: var(--white);
+    cursor: pointer;
+    &:hover {
+color: var(--red);
+    }
+  }
 }
 .container {
   display: flex;

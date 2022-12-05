@@ -15,15 +15,10 @@ export const useAddList = (bool, elem) => {
       setValue(false);
     }
   };
-  const clouseScroll = (e) => {
-    setValue(false);
-  };
   useEffect(() => {
     window.addEventListener("click", clouseList);
-    window.addEventListener("scroll", clouseScroll);
     return () => {
       window.removeEventListener("click", clouseList);
-      window.removeEventListener("scroll", clouseScroll);
     };
   });
   return [value, add];
