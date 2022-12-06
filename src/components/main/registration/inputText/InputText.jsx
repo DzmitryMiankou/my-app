@@ -11,7 +11,13 @@ const InputText = (props) => {
       >
         {props.value}
       </label>
-      <input placeholder={props.placehold} id={props.id} type={props.type} />
+      <input
+        onChange={props.createText}
+        placeholder={props.placehold}
+        id={props.id}
+        type={props.type}
+        value={props.valPol}
+      />
     </div>
   );
 };

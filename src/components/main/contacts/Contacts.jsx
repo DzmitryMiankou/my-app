@@ -12,15 +12,17 @@ import { useHTTP } from "../../../hook/http";
 const Contacts = () => {
   const [data, setdata] = useState();
   const { request } = useHTTP();
-  const requestHandler = async () => {
-    try {
-      const data = await request("http://localhost:5000/users");
-      return setdata(data);
-    } catch (error) {}
-  };
+
   useEffect(() => {
+    const requestHandler = async () => {
+      try {
+        const data = await request("http://localhost:5000/users");
+        return setdata(data);
+      } catch (error) {}
+    };
     requestHandler();
-  }, []);
+  }, [request]);
+
   const formElem =
     data && data.map(({ id, nickName }) => <p key={id}>{nickName}</p>);
 
