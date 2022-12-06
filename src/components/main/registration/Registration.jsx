@@ -22,7 +22,7 @@ const Registration = () => {
   console.log(state.register);
   const arr = [
     {
-      id: "nickNam",
+      id: "nickName",
       value: "Nickname",
       placeholder: "Например: Explore23",
       type: "text",
