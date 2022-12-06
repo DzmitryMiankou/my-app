@@ -1,5 +1,9 @@
+
 const NAME = "NAME";
+const EMAIL = "EMAIL";
+const PASSWORD = "PASSWORD";
 const REGISTER = "REGISTER";
+
 
 type InitialStateType = {
     id:number | null,
@@ -21,8 +25,17 @@ const registerReducer = (state=initialState, action: any) => {
       copy = { ...state, nickName: action.nickName };
       return copy;
     }
-    case REGISTER:
+    case EMAIL: {
+      copy = { ...state, email: action.email };
       return copy;
+    }
+    case PASSWORD: {
+      copy = { ...state, password: action.password };
+      return copy;
+    }
+    case REGISTER:{
+      return copy;
+    }
     default:
       return state;
   }
@@ -30,14 +43,30 @@ const registerReducer = (state=initialState, action: any) => {
 type registerActionType = {
   type: typeof REGISTER
 };
-type inputActinType = {
+type nickNameActinType = {
   type: typeof NAME,
   nickName: string
 };
+type emailActinType = {
+  type: typeof EMAIL,
+  email: string
+};
+type passwordActinType = {
+  type: typeof PASSWORD,
+  password: string
+};
 export const registerActin = (): registerActionType => ({ type: REGISTER });
 
-export const inputActin = (text: string): inputActinType => ({
+export const nickNameActin = (text: string): nickNameActinType => ({
   type: NAME,
   nickName: text,
+});
+export const emailActin = (text: string): emailActinType => ({
+  type: EMAIL,
+  email: text,
+});
+export const passwordActin = (text: string): passwordActinType => ({
+  type: PASSWORD,
+  password: text,
 });
 export default registerReducer;
