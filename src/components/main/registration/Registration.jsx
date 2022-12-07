@@ -19,7 +19,6 @@ const Registration = () => {
     },
     [dispatch]
   );
-  console.log(state.register);
   const arr = [
     {
       id: "nickName",
@@ -61,7 +60,12 @@ const Registration = () => {
   return (
     <form className={styleRegistration.container}>
       <>{formElem}</>
-      <button className={styleRegistration.button}>Регистрация</button>
+      <button
+        onClick={() => dispatch(registerActin())}
+        className={styleRegistration.button}
+      >
+        Регистрация
+      </button>
     </form>
   );
 };

@@ -1,15 +1,13 @@
-
 const NAME = "NAME";
 const EMAIL = "EMAIL";
 const PASSWORD = "PASSWORD";
 const REGISTER = "REGISTER";
 
-
 type InitialStateType = {
-    id:number | null,
-    nickName: string,
-    email: string,
-    password: string,
+  id: number | null,
+  nickName: string,
+  email: string,
+  password: string,
 }
 
 const initialState: InitialStateType = {
@@ -18,7 +16,7 @@ const initialState: InitialStateType = {
   email: "",
   password: "",
 }
-const registerReducer = (state=initialState, action: any) => {
+const registerReducer = (state = initialState, action: any) => {
   let copy;
   switch (action.type) {
     case NAME: {
@@ -33,7 +31,27 @@ const registerReducer = (state=initialState, action: any) => {
       copy = { ...state, password: action.password };
       return copy;
     }
-    case REGISTER:{
+    case REGISTER: {
+      if (state.nickName === "") {
+        return state;
+      } else if (state.email === "") {
+        return state;
+      } else if (state.password === "") {
+        return state;
+      }
+      const data = {
+        "nickName": state.nickName,
+        "email": state.email,
+        "password": state.password
+      };
+      fetch('http://localhost:5000/post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }).catch((error) => {
+        console.error('Error:', error);
+      });
+      copy = initialState;
       return copy;
     }
     default:
