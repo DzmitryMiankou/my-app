@@ -61,6 +61,7 @@ const Registration = () => {
     <form className={styleRegistration.container}>
       <>{formElem}</>
       <button
+        type="reset"
         onClick={() => dispatch(registerActin())}
         className={styleRegistration.button}
       >
