@@ -21,11 +21,12 @@ const Registration = () => {
   );
   const toButton = () => {
     const { nickName, email, password } = state;
-    if (nickName === "") {
-      return;
-    } else if (email === "") {
-      return;
-    } else if (password === "" || password.length < 6) {
+    if (
+      nickName === "" ||
+      email === "" ||
+      password === "" ||
+      password.length < 6
+    ) {
       return;
     }
     dispatch(registerActin());
