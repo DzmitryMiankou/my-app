@@ -10,7 +10,7 @@ import {
 } from "../../redux/register-reducer.ts";
 
 const Registration = () => {
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
   const increaseCounter = useCallback(
     (e, a) => {
@@ -19,6 +19,17 @@ const Registration = () => {
     },
     [dispatch]
   );
+  const toButton = () => {
+    const { nickName, email, password } = state;
+    if (nickName === "") {
+      return;
+    } else if (email === "") {
+      return;
+    } else if (password === "" || password.length < 6) {
+      return;
+    }
+    dispatch(registerActin());
+  };
   const arr = [
     {
       id: "nickName",
@@ -26,7 +37,7 @@ const Registration = () => {
       placeholder: "Например: Explore23",
       type: "text",
       cr: (e) => increaseCounter(e, nickNameActin),
-      valPol: state.register.nickName,
+      valPol: state.nickName,
     },
     {
       id: "email",
@@ -34,7 +45,7 @@ const Registration = () => {
       placeholder: "Например: explore@gmail.com",
       type: "email",
       cr: (e) => increaseCounter(e, emailActin),
-      valPol: state.register.email,
+      valPol: state.email,
     },
     {
       id: "password",
@@ -42,7 +53,7 @@ const Registration = () => {
       placeholder: "Например: 230cd_3rD",
       type: "password",
       cr: (e) => increaseCounter(e, passwordActin),
-      valPol: state.register.password,
+      valPol: state.password,
     },
   ];
 
@@ -62,7 +73,7 @@ const Registration = () => {
       <>{formElem}</>
       <button
         type="reset"
-        onClick={() => dispatch(registerActin())}
+        onClick={toButton}
         className={styleRegistration.button}
       >
         Регистрация

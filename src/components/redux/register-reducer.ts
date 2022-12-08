@@ -32,19 +32,13 @@ const registerReducer = (state = initialState, action: any) => {
       return copy;
     }
     case REGISTER: {
-      if (state.nickName === "") {
-        return state;
-      } else if (state.email === "") {
-        return state;
-      } else if (state.password === "") {
-        return state;
-      }
+
       const data = {
         "nickName": state.nickName,
         "email": state.email,
         "password": state.password
       };
-      fetch('http://localhost:5000/api/auth', {
+      fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
