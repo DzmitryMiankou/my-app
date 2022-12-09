@@ -16,7 +16,7 @@ const Contacts = () => {
   useEffect(() => {
     const requestHandler = async () => {
       try {
-        const data = await request("http://localhost:5000/users");
+        const data = await request("http://localhost:5000/api/users");
         return setdata(data);
       } catch (error) {}
     };
