@@ -38,7 +38,7 @@ const registerReducer = (state = initialState, action: any) => {
         "email": state.email,
         "password": state.password
       };
-      fetch('http://localhost:5000/api/auth/register', {
+      fetch('http://localhost:5000/api/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
