@@ -16,7 +16,7 @@
   .button_container{
     display: flex;
     gap: 20px;
-    justify-content: end;
+    justify-content: flex-end;
     .button {
         @include buttonGreen;
         margin-left: 0%;
