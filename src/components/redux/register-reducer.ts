@@ -33,7 +33,7 @@ const registerReducer = (state = initialState, action: any) => {
     }
     case REGISTER: {
 
-      const data = {
+      /*const data = {
         "nickName": state.nickName,
         "email": state.email,
         "password": state.password
@@ -42,10 +42,14 @@ const registerReducer = (state = initialState, action: any) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-      }).catch((error) => {
-        console.error('Error:', error);
-      });
-      copy = initialState;
+      }).then((response) => response.json())
+        .then((res) => {
+          console.log(res);
+          // Handle data
+        }).catch((error) => {
+          console.error('Error:', error);
+        });*/
+      copy = { ...initialState };
       return copy;
     }
     default:

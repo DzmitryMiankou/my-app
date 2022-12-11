@@ -1,5 +1,5 @@
 import styleRegistration from "./Registration.module.scss";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import InputText from "./inputText/InputText";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -8,26 +8,42 @@ import {
   passwordActin,
   registerActin,
 } from "../../redux/register-reducer.ts";
+import { useHTTP } from "./../../../hook/http.js";
 
-const Registration = () => {
+const Registration = (props) => {
+  const { request } = useHTTP();
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
+  const [get, set] = useState();
   const increaseCounter = useCallback(
     (e, a) => {
       let text = e.target.value;
       dispatch(a(text));
+      set("");
     },
     [dispatch]
   );
-  const toButton = () => {
+
+  const toButton = async () => {
     const { nickName, email, password } = state;
-    if (
-      nickName === "" ||
-      email === "" ||
-      password === "" ||
-      password.length < 6
-    ) {
-      return;
+    if (nickName === "" || email === "" || password === "") {
+      return set("Все поля должны быть заполнены");
+    }
+    const data = {
+      nickName: nickName,
+      email: email,
+      password: password,
+    };
+    try {
+      const response = await request(
+        "http://localhost:5000/api/auth",
+        "POST",
+        JSON.stringify(data),
+        { "Content-Type": "application/json" }
+      );
+      set(response.message.errors[0]["msg"]);
+    } catch (error) {
+      console.log(error);
     }
     dispatch(registerActin());
   };
@@ -71,14 +87,30 @@ const Registration = () => {
   ));
   return (
     <form className={styleRegistration.container}>
+      <p className={styleRegistration.error}>{get}</p>
       <>{formElem}</>
-      <button
-        type="reset"
-        onClick={toButton}
-        className={styleRegistration.button}
-      >
-        Регистрация
-      </button>
+      <div className={styleRegistration.button_container}>
+        <button className={styleRegistration.button_signIn}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+            <path d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+          </svg>
+          <p>войти</p>
+        </button>
+        <button
+          type="reset"
+          onClick={toButton}
+          className={styleRegistration.button}
+        >
+          Регистрация
+        </button>
+      </div>
     </form>
   );
 };

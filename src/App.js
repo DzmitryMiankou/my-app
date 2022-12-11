@@ -16,7 +16,7 @@ function App() {
       <Header />
       <section>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route exact path="/" element={<Main />} />
           <Route path="/works" element={<Works />} />
           <Route path="/learning" element={<Layout />}>
             <Route index element={<Learning />} />

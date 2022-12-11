@@ -8,9 +8,6 @@ export const useHTTP = () => {
       try {
         const response = await fetch(url, { method, body, headers });
         const data = response.json();
-        if (!response.ok) {
-          throw new Error(data.message || `Ошибка`);
-        }
         setLoading(false);
         return data;
       } catch (error) {
