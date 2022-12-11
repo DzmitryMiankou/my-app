@@ -27,8 +27,9 @@ const Registration = (props) => {
   const toButton = async () => {
     const { nickName, email, password } = state;
     if (nickName === "" || email === "" || password === "") {
-      return set("Все поля должны быть заполнены");
+      return set("Поля должны быть заполнены");
     }
+
     const data = {
       nickName: nickName,
       email: email,
@@ -47,6 +48,32 @@ const Registration = (props) => {
     }
     dispatch(registerActin());
   };
+
+  const toLogin = async () => {
+    const { nickName, email, password } = state;
+    if (email === "" || password === "") {
+      return set("email и password обязательны для заполнения");
+    }
+
+    const data = {
+      nickName: nickName,
+      email: email,
+      password: password,
+    };
+    try {
+      const response = await request(
+        "http://localhost:5000/api/login",
+        "POST",
+        JSON.stringify(data),
+        { "Content-Type": "application/json" }
+      );
+      set(response.message.errors[0]["msg"]);
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(registerActin());
+  };
+
   const arr = [
     {
       id: "nickName",
@@ -90,11 +117,15 @@ const Registration = (props) => {
       <p className={styleRegistration.error}>{get}</p>
       <>{formElem}</>
       <div className={styleRegistration.button_container}>
-        <button className={styleRegistration.button_signIn}>
+        <button
+          type="reset"
+          onClick={toLogin}
+          className={styleRegistration.button_signIn}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
+            width="20"
+            height="20"
             fill="currentColor"
             viewBox="0 0 16 16"
           >

@@ -32,23 +32,6 @@ const registerReducer = (state = initialState, action: any) => {
       return copy;
     }
     case REGISTER: {
-
-      /*const data = {
-        "nickName": state.nickName,
-        "email": state.email,
-        "password": state.password
-      };
-      fetch('http://localhost:5000/api/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      }).then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-          // Handle data
-        }).catch((error) => {
-          console.error('Error:', error);
-        });*/
       copy = { ...initialState };
       return copy;
     }
@@ -86,3 +69,20 @@ export const passwordActin = (text: string): passwordActinType => ({
   password: text,
 });
 export default registerReducer;
+
+/*const data = {
+      "nickName": state.nickName,
+      "email": state.email,
+      "password": state.password
+    };
+    fetch('http://localhost:5000/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).then((response) => response.json())
+      .then((res) => {
+        console.log(res);
+        // Handle data
+      }).catch((error) => {
+        console.error('Error:', error);
+      });*/

@@ -6,8 +6,12 @@
   flex-direction: column;
   gap: 5px;
   height: 400px;
+  position: relative;
   .error {
     color: var(--red);
+    right: 0px;
+    bottom:  50px;
+    position: absolute;
   }
   .button_container{
     display: flex;
