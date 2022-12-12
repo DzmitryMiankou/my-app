@@ -2,14 +2,14 @@ import React from "react";
 import styleMesseg from "./Messeg.module.scss";
 
 const Messeg = (props) => {
-  const hi = () => alert("hi");
+  const hi = () => alert(props.text);
   return (
     <div onClick={hi} className={styleMesseg.container}>
-      <ul className={styleMesseg.container__list}>
+      <div className={styleMesseg.container__list}>
         <li className={styleMesseg.container__list_messeg}>
           <p>{props.text}</p>
         </li>
-      </ul>
+      </div>
     </div>
   );
 };

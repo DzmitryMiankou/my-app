@@ -8,6 +8,7 @@ import {
   addPostcreateActin,
 } from "../../redux/messegData-reducer.ts";
 import { useHTTP } from "../../../hook/http";
+import UsersList from "./users-list/Users-list";
 
 const Contacts = () => {
   const [data, setdata] = useState();
@@ -24,7 +25,10 @@ const Contacts = () => {
   }, [request]);
 
   const formElem =
-    data && data.map(({ id, nickName }) => <p key={id}>{nickName}</p>);
+    data &&
+    data.map(({ id, nickName }) => (
+      <UsersList key={id} nickName={nickName} id={id} />
+    ));
 
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -44,6 +48,7 @@ const Contacts = () => {
     <div className={styleContacts.messeges}>
       <div className={styleContacts.container}>
         <div className={styleContacts.container__comment}>
+          <ul className={styleContacts.container__messege}>{messegElem}</ul>
           <textarea
             onChange={increaseCounter}
             placeholder="напишите сообщение"
@@ -57,13 +62,19 @@ const Contacts = () => {
             отправить
           </button>
         </div>
-
-        <div className={styleContacts.container__messege}>{messegElem}</div>
       </div>
-      <div className={styleContacts.users}>
-        <Users />
+      <div className={styleContacts.dialogs}>
+        <p>DIALOGUES</p>
+        <div className={styleContacts.users}>
+          <Users />
+        </div>
       </div>
-      <div className={styleContacts.messeges_list}>{formElem}</div>
+      <div className={styleContacts.users_container}>
+        <p>USERS</p>
+        <div className={styleContacts.users_list}>
+          <ul className={styleContacts.messeges_list}>{formElem}</ul>
+        </div>
+      </div>
     </div>
   );
 };
