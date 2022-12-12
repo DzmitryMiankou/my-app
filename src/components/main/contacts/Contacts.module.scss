@@ -1,41 +1,14 @@
 @import "src/scss/button.scss";
 @import "src/scss/formStyle.scss";
 .messeges {
-  display: flex;
-  flex-direction: row-reverse;
+  display: grid;
+  grid-template-columns: 2fr auto 4fr;
   gap: 15px;
-  justify-content: space-between;
-  .container {
-    width: 60%;
-      .container__comment {
-        display: flex;
-        flex-direction: column;
-        
-        gap: 20px;
-        .container__comment_text {
-          @include textarea;
-        }
-        .container__comment_but {
-          @include buttonGreen;
-        }
-      }
-      .container__messege {
-        display: flex;
-        
-        flex-direction: column;
-        gap: 30px;
-        background-color: var(--grey-text-BG);
-        padding: 5%;
-        overflow-x: hidden;
-        height: 40vh;
-      }
-    }
   .dialogs {
     background-color: var(--grey-text-BG);
     color: var(--red);
     font-size: 20px;
     padding: 10px;
-    
   }
   .users {
     background-color: var(--grey-text-BG);

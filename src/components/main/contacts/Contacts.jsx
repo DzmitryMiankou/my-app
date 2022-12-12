@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
 import styleContacts from "./Contacts.module.scss";
-import Messeg from "./messeges/Messeg";
 import Users from "./users/Users";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -9,6 +8,7 @@ import {
 } from "../../redux/messegData-reducer.ts";
 import { useHTTP } from "../../../hook/http";
 import UserdBlocks from "././users-block/UsersBlock";
+import MessagesBlock from "././messages-block/MessagesBlock";
 
 const Contacts = () => {
   const [data, setdata] = useState();
@@ -34,36 +34,21 @@ const Contacts = () => {
     [dispatch]
   );
 
-  const messegElem = state.messeges.messegData.map((m, i) => (
-    <Messeg key={i} text={m.messege} />
-  ));
-
   return (
     <div className={styleContacts.messeges}>
-      <div className={styleContacts.container}>
-        <div className={styleContacts.container__comment}>
-          <ul className={styleContacts.container__messege}>{messegElem}</ul>
-          <textarea
-            onChange={increaseCounter}
-            placeholder="напишите сообщение"
-            className={styleContacts.container__comment_text}
-            value={state.messeges.newChanges}
-          />
-          <button
-            onClick={() => dispatch(addPostcreateActin())}
-            className={styleContacts.container__comment_but}
-          >
-            отправить
-          </button>
-        </div>
-      </div>
+      <UserdBlocks data={data} />
       <div className={styleContacts.dialogs}>
         <p>DIALOGUES</p>
         <div className={styleContacts.users}>
           <Users />
         </div>
       </div>
-      <UserdBlocks data={data} />
+      <MessagesBlock
+        state={state}
+        increaseCounter={increaseCounter}
+        dispatch={dispatch}
+        addPostcreateActin={addPostcreateActin}
+      />
     </div>
   );
 };

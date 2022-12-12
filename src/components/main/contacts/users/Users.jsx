@@ -16,13 +16,13 @@ const Users = (props) => {
       <li className={styleUsers.list__string}>
         <a className={styleUsers.list__string_elem} href="#3">
           <img className={styleUsers.elem_img} src={imgUsers} alt="png" />
-          <p>Сергей</p>
+          <p>Norman</p>
         </a>
       </li>
       <li className={styleUsers.list__string}>
         <a className={styleUsers.list__string_elem} href="#3">
           <img className={styleUsers.elem_img} src={imgUsers} alt="png" />
-          <p>Дарья</p>
+          <p>Otton</p>
         </a>
       </li>
     </ul>
