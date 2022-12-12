@@ -8,6 +8,7 @@ type InitialStateType = {
   nickName: string,
   email: string,
   password: string,
+  isAoth: boolean,
 }
 
 const initialState: InitialStateType = {
@@ -15,6 +16,7 @@ const initialState: InitialStateType = {
   nickName: "",
   email: "",
   password: "",
+  isAoth: false,
 }
 const registerReducer = (state = initialState, action: any) => {
   let copy;

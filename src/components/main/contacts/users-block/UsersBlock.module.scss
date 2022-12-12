@@ -1,0 +1,34 @@
+  .users_container {
+    display: flexbox;
+    width: 30%;
+    min-width: 100px;
+
+    p {
+      background-color: var(--grey-text-BG);
+      color: var(--red);
+      font-size: 20px;
+      padding: 10px;
+    }
+
+    .messeges_list {
+      display: flex;
+      padding: 10px;
+      flex-direction: column;
+      height: 80vh;
+      gap: 10px;
+      background-color: var(--grey-text-BG);
+
+      p {
+        padding: 5px;
+        background-color: var(--black-grey-BG);
+        color: var(--white);
+        font-size: 18px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--red);
+          transition: 0.1s;
+        }
+      }
+    }
+  }

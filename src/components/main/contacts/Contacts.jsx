@@ -8,7 +8,7 @@ import {
   addPostcreateActin,
 } from "../../redux/messegData-reducer.ts";
 import { useHTTP } from "../../../hook/http";
-import UsersList from "./users-list/Users-list";
+import UserdBlocks from "././users-block/UsersBlock";
 
 const Contacts = () => {
   const [data, setdata] = useState();
@@ -23,12 +23,6 @@ const Contacts = () => {
     };
     requestHandler();
   }, [request]);
-
-  const formElem =
-    data &&
-    data.map(({ id, nickName }) => (
-      <UsersList key={id} nickName={nickName} id={id} />
-    ));
 
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -69,12 +63,7 @@ const Contacts = () => {
           <Users />
         </div>
       </div>
-      <div className={styleContacts.users_container}>
-        <p>USERS</p>
-        <div className={styleContacts.users_list}>
-          <ul className={styleContacts.messeges_list}>{formElem}</ul>
-        </div>
-      </div>
+      <UserdBlocks data={data} />
     </div>
   );
 };

@@ -6,9 +6,7 @@ const UsersList = (props) => {
   };
   return (
     <li>
-      <p onClick={on} id={props.id}>
-        {props.nickName}
-      </p>
+      <p onClick={on}>{props.nickName}</p>
     </li>
   );
 };

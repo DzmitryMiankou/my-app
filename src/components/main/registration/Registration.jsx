@@ -67,6 +67,11 @@ const Registration = (props) => {
         JSON.stringify(data),
         { "Content-Type": "application/json" }
       );
+      if (response.message === undefined) {
+        set("Операция прошла успешно");
+        dispatch(registerActin());
+        return;
+      }
       set(response.message.errors[0]["msg"]);
     } catch (error) {
       console.log(error);
