@@ -14,12 +14,24 @@
     position: absolute;
   }
   .button_container{
+    
     display: flex;
-    gap: 20px;
+  
     justify-content: flex-end;
+    align-items: flex-end;
+    .p {
+        color: var(--blue);
+        cursor: pointer;
+        text-decoration: underline;
+        font-size: 14px;
+        &:hover {
+          color: var(--red);
+        }
+      }
     .button {
         @include buttonGreen;
-        margin-left: 0%;
+       
+        margin-left: 20px;
       }
     .button_signIn {
       @include buttonGreen;
@@ -27,7 +39,7 @@
       justify-content: center;
       align-items: center;
       gap: 5px;
-      margin-left: 0%;
+      margin-left: 20px;
       background-color: #245b8a;
     }
   }   

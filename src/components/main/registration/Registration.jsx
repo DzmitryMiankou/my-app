@@ -11,6 +11,7 @@ import {
 import { useHTTP } from "./../../../hook/http.js";
 
 const Registration = (props) => {
+  const [add, setAdd] = useState(true);
   const { request } = useHTTP();
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
@@ -106,6 +107,11 @@ const Registration = (props) => {
     },
   ];
 
+  const reg = () => {
+    setAdd(!add);
+    set("");
+  };
+
   const formElem = arr.map(({ value, placeholder, id, type, cr, valPol }) => (
     <InputText
       key={id}
@@ -122,30 +128,39 @@ const Registration = (props) => {
       <p className={styleRegistration.error}>{get}</p>
       <>{formElem}</>
       <div className={styleRegistration.button_container}>
-        <button
-          type="reset"
-          onClick={toLogin}
-          className={styleRegistration.button_signIn}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
-            <path d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-          </svg>
-          <p>войти</p>
-        </button>
-        <button
-          type="reset"
-          onClick={toButton}
-          className={styleRegistration.button}
-        >
-          Регистрация
-        </button>
+        <p onClick={reg} className={styleRegistration.p}>
+          {add ? "Зарегистрироваться" : "Войти"}
+        </p>
+
+        <div>
+          {!add ? (
+            <button
+              type="reset"
+              onClick={toButton}
+              className={styleRegistration.button}
+            >
+              регистрация
+            </button>
+          ) : (
+            <button
+              type="reset"
+              onClick={toLogin}
+              className={styleRegistration.button_signIn}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                <path d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+              </svg>
+              <p>войти</p>
+            </button>
+          )}
+        </div>
       </div>
     </form>
   );

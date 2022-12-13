@@ -1,8 +1,15 @@
   .users_container {
-    height: 100%;
     background-color: var(--grey-text-BG);
+    
+   
+  
    .users_list {
      padding: 10px;
+      height: calc(100vh - 350px);
+      overflow-y: scroll;
+      overflow-anchor: auto;
+        
+    
      }
     p {
       background-color: var(--grey-text-BG);
@@ -13,9 +20,9 @@
     .messeges_list {
       list-style: none;
       display: flex;
-     
       flex-direction: column;
       gap: 10px;
+      
       
       p {
         padding: 5px;
