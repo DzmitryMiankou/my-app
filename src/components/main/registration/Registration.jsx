@@ -11,7 +11,6 @@ import {
 import { useHTTP } from "./../../../hook/http.js";
 
 const Registration = (props) => {
-  console.log("Registration");
   const [add, setAdd] = useState(true);
   const { request } = useHTTP();
   const state = useSelector((state) => state.register);
@@ -81,52 +80,41 @@ const Registration = (props) => {
     dispatch(registerActin());
   };
 
-  const arr = [
-    {
-      id: "nickName",
-      value: "Nickname",
-      placeholder: "Например: Explore23",
-      type: "text",
-      cr: (e) => increaseCounter(e, nickNameActin),
-      valPol: state.nickName,
-    },
-    {
-      id: "email",
-      value: "Email",
-      placeholder: "Например: explore@gmail.com",
-      type: "email",
-      cr: (e) => increaseCounter(e, emailActin),
-      valPol: state.email,
-    },
-    {
-      id: "password",
-      value: "Password",
-      placeholder: "Например: 230cd_3rD",
-      type: "password",
-      cr: (e) => increaseCounter(e, passwordActin),
-      valPol: state.password,
-    },
-  ];
   const reg = () => {
     setAdd(!add);
     set("");
   };
 
-  const formElem = arr.map(({ value, placeholder, id, type, cr, valPol }) => (
-    <InputText
-      key={id}
-      value={value}
-      placehold={placeholder}
-      id={id}
-      type={type}
-      createText={cr}
-      valPol={valPol}
-    />
-  ));
   return (
     <form className={styleRegistration.container}>
       <p className={styleRegistration.error}>{get}</p>
-      <>{formElem}</>
+      <div>
+        <div>
+          {!add && (
+            <InputText
+              type={"text"}
+              placehold={"Например: Explore23"}
+              value={"Nickname"}
+              createText={(e) => increaseCounter(e, nickNameActin)}
+              valPol={state.nickName}
+            />
+          )}
+        </div>
+        <InputText
+          type={"email"}
+          placehold={"Например: explore@gmail.com"}
+          value={"Email"}
+          createText={(e) => increaseCounter(e, emailActin)}
+          valPol={state.email}
+        />
+        <InputText
+          type={"password"}
+          placehold={"Например: 230cd_3rD"}
+          value={"Password"}
+          createText={(e) => increaseCounter(e, passwordActin)}
+          valPol={state.password}
+        />
+      </div>
       <div className={styleRegistration.button_container}>
         <p onClick={reg} className={styleRegistration.p}>
           {add ? "Зарегистрироваться" : "Войти"}
