@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
 import styleContacts from "./Contacts.module.scss";
-import Users from "./users/Users";
 import { useSelector, useDispatch } from "react-redux";
 import {
   onPostChangecreateActin,
@@ -9,6 +8,7 @@ import {
 import { useHTTP } from "../../../hook/http";
 import UserdBlocks from "././users-block/UsersBlock";
 import MessagesBlock from "././messages-block/MessagesBlock";
+import Dialogues from "././dialogues/Dialogues";
 
 const Contacts = () => {
   const [data, setdata] = useState();
@@ -33,16 +33,10 @@ const Contacts = () => {
     },
     [dispatch]
   );
-
   return (
     <div className={styleContacts.messeges}>
       <UserdBlocks data={data} />
-      <div className={styleContacts.dialogs}>
-        <p>DIALOGUES</p>
-        <div className={styleContacts.users}>
-          <Users />
-        </div>
-      </div>
+      <Dialogues />
       <MessagesBlock
         state={state}
         increaseCounter={increaseCounter}

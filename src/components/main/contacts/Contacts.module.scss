@@ -5,19 +5,6 @@
   grid-template-columns: 2fr auto 4fr;
   gap: 15px;
   height: calc(100vh - 300px);
-  .dialogs {
-    background-color: var(--grey-text-BG);
-    color: var(--red);
-    font-size: 20px;
-    padding: 10px;
-  }
-  .users {
-    background-color: var(--grey-text-BG);
-    padding: 10px;
-    }
-    .users_list {
-      overflow-y: scroll;
-        }
 }
 
 
