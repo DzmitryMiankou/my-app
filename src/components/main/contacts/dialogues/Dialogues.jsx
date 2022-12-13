@@ -1,6 +1,6 @@
 import React from "react";
 import styleContacts from "./Dialogues.module.scss";
-import Users from "./../users/Users";
+import Users from "./users/Users";
 
 const Dialogues = () => {
   return (
