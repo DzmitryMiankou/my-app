@@ -106,7 +106,6 @@ const Registration = (props) => {
       valPol: state.password,
     },
   ];
-
   const reg = () => {
     setAdd(!add);
     set("");
@@ -131,7 +130,6 @@ const Registration = (props) => {
         <p onClick={reg} className={styleRegistration.p}>
           {add ? "Зарегистрироваться" : "Войти"}
         </p>
-
         <div>
           {!add ? (
             <button
