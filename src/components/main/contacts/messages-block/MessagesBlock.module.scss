@@ -1,5 +1,5 @@
 @import "src/scss/button.scss";
-@import "src/scss/formStyle.scss";
+
 
   .container {
     display: flex;   
@@ -20,10 +20,7 @@
            gap:15px;
            
            }
-        .container__comment_text {
-          @include textarea;
-          width: 100%
-        }
+        
         .container__comment_but {
           @include buttonGreen;
           height: 100%;

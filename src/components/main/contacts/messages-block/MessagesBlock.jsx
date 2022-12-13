@@ -1,6 +1,7 @@
 import React from "react";
 import styleContacts from "./MessagesBlock.module.scss";
 import Messeg from "./messeges/Messeg";
+import Input from "./input/Input";
 
 const MessagesBlock = (props) => {
   const messegElem = props.state.messeges.messegData.map((m, i) => (
@@ -11,12 +12,7 @@ const MessagesBlock = (props) => {
     <div className={styleContacts.container}>
       <ul className={styleContacts.container__messege}>{messegElem}</ul>
       <div className={styleContacts.container__textarea}>
-        <textarea
-          onChange={props.increaseCounter}
-          placeholder="напишите сообщение"
-          className={styleContacts.container__comment_text}
-          value={props.state.messeges.newChanges}
-        />
+        <Input increaseCounter={props.increaseCounter} state={props.state} />
         <button
           onClick={() => props.dispatch(props.addPostcreateActin())}
           className={styleContacts.container__comment_but}

@@ -13,6 +13,8 @@ import Dialogues from "././dialogues/Dialogues";
 const Contacts = () => {
   const [data, setdata] = useState();
   const { request } = useHTTP();
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const requestHandler = async () => {
@@ -24,8 +26,6 @@ const Contacts = () => {
     requestHandler();
   }, [request]);
 
-  const state = useSelector((state) => state);
-  const dispatch = useDispatch();
   const increaseCounter = useCallback(
     (e) => {
       let text = e.target.value;
@@ -33,6 +33,7 @@ const Contacts = () => {
     },
     [dispatch]
   );
+
   return (
     <div className={styleContacts.messeges}>
       <UserdBlocks data={data} />
@@ -46,5 +47,4 @@ const Contacts = () => {
     </div>
   );
 };
-
 export default Contacts;
