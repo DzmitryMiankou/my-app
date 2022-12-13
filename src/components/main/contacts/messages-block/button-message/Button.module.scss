@@ -1,0 +1,6 @@
+@import "src/scss/button.scss";
+.container__comment_but { 
+  @include buttonGreen; 
+  height: 100px; 
+  margin: 0%; 
+}

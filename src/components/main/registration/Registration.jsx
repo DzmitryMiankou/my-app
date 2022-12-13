@@ -11,6 +11,7 @@ import {
 import { useHTTP } from "./../../../hook/http.js";
 
 const Registration = (props) => {
+  console.log("Registration");
   const [add, setAdd] = useState(true);
   const { request } = useHTTP();
   const state = useSelector((state) => state.register);

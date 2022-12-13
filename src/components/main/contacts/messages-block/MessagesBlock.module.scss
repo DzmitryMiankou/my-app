@@ -1,32 +1,22 @@
-@import "src/scss/button.scss";
-
-
-  .container {
-    display: flex;   
+.container {
+  display: flex;   
+  flex-direction: column;
+  gap: 15px;
+  .container__messege {
+    display: flex;
     flex-direction: column;
-    gap: 15px;
-      .container__messege {
-          display: flex;
-          flex-direction: column;
-          gap: 30px;
-          background-color: var(--grey-text-BG);
-          padding: 5%;
-          overflow-x: hidden;
-          overflow-y: scroll;
-          height: calc(100vh - 450px);          
-        }
-         .container__textarea {
-           display: flex;
-           gap:15px;
-           
-           }
-        
-        .container__comment_but {
-          @include buttonGreen;
-          height: 100%;
-          margin: 0%;
-        }
-      }
+    gap: 20px;
+    background-color: var(--grey-text-BG);
+    padding: 5%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: calc(100vh - 450px);          
+  }
+  .container__textarea {
+    display: flex;
+    align-items: center;
+  }
+}
     
     
 
