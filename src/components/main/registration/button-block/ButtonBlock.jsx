@@ -2,8 +2,9 @@ import styleButtonBlock from "./ButtonBlock.module.scss";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHTTP } from "./../../../.././hook/http";
-import InText from "./inText/inText";
 import Choose from "./choose/Choose";
+import InSign from "./in-Sign/InSign";
+import RegButton from "./reg-button/RegButton";
 
 const ButtonBlock = (props) => {
   const { request } = useHTTP();
@@ -73,21 +74,9 @@ const ButtonBlock = (props) => {
       <Choose add={props.add} reg={reg} />
       <div>
         {!props.add ? (
-          <button
-            type="reset"
-            onClick={toButton}
-            className={styleButtonBlock.button}
-          >
-            регистрация
-          </button>
+          <RegButton toButton={toButton} />
         ) : (
-          <button
-            type="reset"
-            onClick={toLogin}
-            className={styleButtonBlock.button_signIn}
-          >
-            <InText />
-          </button>
+          <InSign toLogin={toLogin} />
         )}
       </div>
       <p className={styleButtonBlock.error}>{props.get}</p>

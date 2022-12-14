@@ -1,32 +1,13 @@
 @import "src/scss/button.scss";
-
-  .button_container {
-    position:relative;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-
-    .button {
-        @include buttonGreen;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        margin-left: 20px;
-      }
-    .button_signIn {
-      @include buttonGreen;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      margin-left: 20px;
-      background-color: #245b8a;
-    }
-  }  
-    .error {
-      color: var(--red);
-      right: 0px;
-      bottom: -30px;
-      position: absolute;
-    }
+.button_container {
+  position:relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}  
+.error {
+  color: var(--red);
+  right: 0px;
+  bottom: -30px;
+  position: absolute;
+}

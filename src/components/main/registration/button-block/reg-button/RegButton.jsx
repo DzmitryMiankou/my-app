@@ -1,0 +1,16 @@
+import styleButtonBlock from "./RegButton.module.scss";
+import React from "react";
+
+const RegButton = (props) => {
+  return (
+    <button
+      type="reset"
+      onClick={props.toButton}
+      className={styleButtonBlock.button}
+    >
+      регистрация
+    </button>
+  );
+};
+
+export default RegButton;

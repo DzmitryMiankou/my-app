@@ -1,0 +1,9 @@
+@import "src/scss/button.scss";
+.button {
+  @include buttonGreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-left: 20px;
+}

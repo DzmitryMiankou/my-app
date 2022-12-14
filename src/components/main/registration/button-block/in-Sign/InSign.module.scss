@@ -1,0 +1,11 @@
+@import "src/scss/button.scss";
+.button_signIn {
+  @include buttonGreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-left: 20px;
+  background-color: #245b8a;
+}
+ 
