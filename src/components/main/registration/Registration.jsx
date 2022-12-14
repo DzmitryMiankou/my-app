@@ -40,7 +40,7 @@ const Registration = (props) => {
         <InputText
           type={"email"}
           placehold={"Например: explore@gmail.com"}
-          value={"Email"}
+          value={"Email address"}
           createText={(e) => increaseCounter(e, emailActin)}
           valPol={state.email}
         />
