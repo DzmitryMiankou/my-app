@@ -25,8 +25,8 @@ const Registration = (props) => {
   );
   return (
     <form className={styleRegistration.container}>
-      <div>
-        <div>
+      <>
+        <>
           {!add && (
             <InputText
               type={"text"}
@@ -36,7 +36,7 @@ const Registration = (props) => {
               valPol={state.nickName}
             />
           )}
-        </div>
+        </>
         <InputText
           type={"email"}
           placehold={"Например: explore@gmail.com"}
@@ -51,7 +51,7 @@ const Registration = (props) => {
           createText={(e) => increaseCounter(e, passwordActin)}
           valPol={state.password}
         />
-      </div>
+      </>
 
       <ButtonBlock
         add={add}
