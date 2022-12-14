@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHTTP } from "./../../../.././hook/http";
 import InText from "./inText/inText";
+import Choose from "./choose/Choose";
 
 const ButtonBlock = (props) => {
   const { request } = useHTTP();
@@ -69,9 +70,7 @@ const ButtonBlock = (props) => {
   };
   return (
     <div className={styleButtonBlock.button_container}>
-      <p onClick={reg} className={styleButtonBlock.p}>
-        {props.add ? "Зарегистрироваться" : "Войти"}
-      </p>
+      <Choose add={props.add} reg={reg} />
       <div>
         {!props.add ? (
           <button

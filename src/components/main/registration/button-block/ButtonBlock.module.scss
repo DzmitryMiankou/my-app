@@ -1,19 +1,11 @@
 @import "src/scss/button.scss";
 
-  .button_container{
+  .button_container {
     position:relative;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    .p {
-        color: var(--blue);
-        cursor: pointer;
-        text-decoration: underline;
-        font-size: 14px;
-        &:hover {
-          color: var(--red);
-        }
-      }
+
     .button {
         @include buttonGreen;
         display: flex;
