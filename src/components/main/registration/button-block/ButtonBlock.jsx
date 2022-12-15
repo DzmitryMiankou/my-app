@@ -29,7 +29,7 @@ const ButtonBlock = (props) => {
         JSON.stringify(data),
         { "Content-Type": "application/json" }
       );
-      props.set(response.message.errors[0]["msg"]);
+      await props.set(response.message.errors[0]["msg"]);
     } catch (error) {
       console.log(error);
     }
