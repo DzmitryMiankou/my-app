@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import "./App.scss";
 import Header from "./components/header/Header";
-import Main from "./components/main/Main";
+import Main from "./components/main/home/Main";
 //import Works from "./components/main/myWorks/Works";
 import Learning from "./components/main/learning/Learning";
 import { Routes, Route } from "react-router-dom";

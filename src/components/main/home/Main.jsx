@@ -1,6 +1,7 @@
 import styleMain from "./Main.module.scss";
 import { Link } from "react-router-dom";
 import React from "react";
+import News from "./news/News";
 
 const Main = () => {
   return (
@@ -14,6 +15,7 @@ const Main = () => {
         </Link>
       </div>
       <div className={styleMain.mainBackGraund}></div>
+      <News />
     </div>
   );
 };
