@@ -4,11 +4,7 @@ import InText from "./../inText/inText";
 
 const InSign = (props) => {
   return (
-    <button
-      type="reset"
-      onClick={props.toLogin}
-      className={styleButtonBlock.button_signIn}
-    >
+    <button onClick={props.toLogin} className={styleButtonBlock.button_signIn}>
       <InText />
     </button>
   );

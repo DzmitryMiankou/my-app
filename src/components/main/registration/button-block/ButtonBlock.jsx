@@ -11,7 +11,8 @@ const ButtonBlock = (props) => {
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
 
-  const toButton = async () => {
+  const toButton = async (e) => {
+    e.preventDefault();
     const { nickName, email, password } = state;
     if (nickName === "" || email === "" || password === "") {
       return props.set("Поля должны быть заполнены");
@@ -36,7 +37,8 @@ const ButtonBlock = (props) => {
     dispatch(props.registerActin());
   };
 
-  const toLogin = async () => {
+  const toLogin = async (e) => {
+    e.preventDefault();
     const { nickName, email, password } = state;
     if (email === "" || password === "") {
       return props.set("email и password обязательны для заполнения");
@@ -55,6 +57,7 @@ const ButtonBlock = (props) => {
         { "Content-Type": "application/json" }
       );
       if (response.message === undefined) {
+        localStorage.setItem("Token", response);
         props.set("Операция прошла успешно");
         dispatch(props.registerActin());
         return;
