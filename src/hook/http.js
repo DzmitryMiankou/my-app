@@ -3,10 +3,21 @@ export const useHTTP = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const request = useCallback(
-    async (url, method = "GET", body = null, headers = {}) => {
+    async (
+      url,
+      method = "GET",
+      body = null,
+      headers = {},
+      credentials = "same-origin"
+    ) => {
       setLoading(true);
       try {
-        const response = await fetch(url, { method, body, headers });
+        const response = await fetch(url, {
+          method,
+          body,
+          headers,
+          credentials,
+        });
         const data = response.json();
         setLoading(false);
         return data;

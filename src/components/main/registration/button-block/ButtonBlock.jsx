@@ -54,7 +54,8 @@ const ButtonBlock = (props) => {
         "http://localhost:5000/api/login",
         "POST",
         JSON.stringify(data),
-        { "Content-Type": "application/json" }
+        { Accept: "application/json", "Content-Type": "application/json" },
+        "include"
       );
       if (response.message === undefined) {
         localStorage.setItem("Token", response);
