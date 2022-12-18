@@ -58,7 +58,7 @@ const ButtonBlock = (props) => {
         "include"
       );
       if (response.message === undefined) {
-        localStorage.setItem("Token", response);
+        localStorage.setItem("Token", response.refreshToken);
         props.set("Операция прошла успешно");
         dispatch(props.registerActin());
         return;

@@ -8,7 +8,7 @@ export const useHTTP = () => {
       method = "GET",
       body = null,
       headers = {},
-      credentials = "same-origin"
+      credentials = "include"
     ) => {
       setLoading(true);
       try {
