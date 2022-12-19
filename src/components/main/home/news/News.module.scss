@@ -1,7 +1,11 @@
 .container {
-  height: 300px;
   background-color: #181818;
   margin: auto;
+  display: flex;
+  img {
+    margin-left: auto;
+    width: 400px;
+  }
 }
 
 
