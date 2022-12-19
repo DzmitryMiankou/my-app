@@ -11,7 +11,7 @@ const ButtonBlock = (props) => {
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
 
-  const toButton = async (e) => {
+  const register = async (e) => {
     e.preventDefault();
     const { nickName, email, password } = state;
     if (nickName === "" || email === "" || password === "") {
@@ -41,7 +41,7 @@ const ButtonBlock = (props) => {
     e.preventDefault();
     const { nickName, email, password } = state;
     if (email === "" || password === "") {
-      return props.set("email и password обязательны для заполнения");
+      return props.set("Поля должны быть заполнены");
     }
 
     const data = {
@@ -58,7 +58,7 @@ const ButtonBlock = (props) => {
         "include"
       );
       if (response.message === undefined) {
-        localStorage.setItem("Token", response.accessToken);
+        localStorage.setItem("UserData", JSON.stringify(response.userData));
         props.set("Операция прошла успешно");
         dispatch(props.registerActin());
         return;
@@ -78,7 +78,7 @@ const ButtonBlock = (props) => {
       <Choose add={props.add} reg={reg} />
       <div>
         {!props.add ? (
-          <RegButton toButton={toButton} />
+          <RegButton toButton={register} />
         ) : (
           <InSign toLogin={toLogin} />
         )}

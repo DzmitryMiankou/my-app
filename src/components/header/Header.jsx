@@ -18,7 +18,7 @@ const Header = () => {
           <Link text="О проекте" to="/" />
           <Link text="Портфолио" to="/works" />
           <Link text="Обучение" to="/learning" />
-          <Link text="Общение" to="/chat" />
+          <Link text="Общаться" to="/chat" />
           <div className={`${style.act} ${"act"}`}>
             <LangIcon onList={add} />
             <ul

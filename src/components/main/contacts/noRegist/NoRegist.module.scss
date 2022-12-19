@@ -1,0 +1,13 @@
+.container {
+  height: calc(100vh - 300px);
+  .background {
+    position: absolute;
+    background: no-repeat url("./../../../.././img/NoRegisteBG.svg");
+    background-size: cover;
+    width: 100%;
+    height: calc(100vh - (300px - 150px));
+    right: 0;
+    z-index: -1;
+    top: 60px;
+  }
+}

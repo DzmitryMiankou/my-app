@@ -9,19 +9,24 @@ import { useHTTP } from "../../../hook/http";
 import UserdBlocks from "././users-block/UsersBlock";
 import MessagesBlock from "././messages-block/MessagesBlock";
 import Dialogues from "././dialogues/Dialogues";
+import NoRegiste from "./noRegist/NoRegist";
 
 const Contacts = () => {
   const [data, setdata] = useState();
   const { request } = useHTTP();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-
+  const [auth, setAuth] = useState();
   useEffect(() => {
     const requestHandler = async () => {
       try {
         const data = await request("http://localhost:5000/api/users");
+        setAuth(false);
         return setdata(data);
-      } catch (error) {}
+      } catch (error) {
+        setAuth(true);
+        console.log(`No authorization ${error}`);
+      }
     };
     requestHandler();
   }, [request]);
@@ -34,7 +39,7 @@ const Contacts = () => {
     [dispatch]
   );
 
-  return (
+  return !auth ? (
     <div className={styleContacts.messeges}>
       <UserdBlocks data={data} />
       <Dialogues />
@@ -45,6 +50,8 @@ const Contacts = () => {
         addPostcreateActin={addPostcreateActin}
       />
     </div>
+  ) : (
+    <NoRegiste />
   );
 };
 export default Contacts;

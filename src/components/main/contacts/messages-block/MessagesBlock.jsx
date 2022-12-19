@@ -14,7 +14,7 @@ const MessagesBlock = (props) => {
       <ul className={styleContacts.container__messege}>{messegElem}</ul>
       <div className={styleContacts.container__textarea}>
         <Input increaseCounter={props.increaseCounter} state={props.state} />
-        <Button dispatch={() => props.dispatch(props.addPostcreateActin())} />;
+        <Button dispatch={() => props.dispatch(props.addPostcreateActin())} />
       </div>
     </div>
   );
