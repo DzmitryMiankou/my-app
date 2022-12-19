@@ -8,7 +8,8 @@ export const useHTTP = () => {
       method = "GET",
       body = null,
       headers = {},
-      credentials = "include"
+      credentials = "include",
+      redirect = "follow"
     ) => {
       setLoading(true);
       try {
@@ -17,6 +18,7 @@ export const useHTTP = () => {
           body,
           headers,
           credentials,
+          redirect,
         });
         const data = response.json();
         setLoading(false);
