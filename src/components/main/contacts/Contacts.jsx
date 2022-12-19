@@ -12,6 +12,7 @@ import Dialogues from "././dialogues/Dialogues";
 import NoRegiste from "./noRegist/NoRegist";
 
 const Contacts = () => {
+  const [getLoad, Louding] = useState();
   const [data, setdata] = useState();
   const { request } = useHTTP();
   const state = useSelector((state) => state);
@@ -20,11 +21,14 @@ const Contacts = () => {
   useEffect(() => {
     const requestHandler = async () => {
       try {
+        Louding(false);
         const data = await request("http://localhost:5000/api/users");
-        setAuth(false);
+        setAuth(true);
+        Louding(true);
         return setdata(data);
       } catch (error) {
-        setAuth(true);
+        setAuth(false);
+        Louding(true);
         console.log(`No authorization ${error}`);
       }
     };
@@ -38,8 +42,14 @@ const Contacts = () => {
     },
     [dispatch]
   );
-
-  return !auth ? (
+  if (!getLoad) {
+    return (
+      <div>
+        <h1>Загрузка...</h1>
+      </div>
+    );
+  }
+  return auth ? (
     <div className={styleContacts.messeges}>
       <UserdBlocks data={data} />
       <Dialogues />
