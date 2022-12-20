@@ -22,6 +22,12 @@ const initialState: InitialStateType = {
 }
 const registerReducer = (state = initialState, action: any) => {
   let copy;
+  const { nickName, email, password } = state;
+  const data = {
+    nickName: nickName,
+    email: email,
+    password: password,
+  };
   switch (action.type) {
     case NAME: {
       copy = { ...state, nickName: action.nickName };
@@ -36,19 +42,39 @@ const registerReducer = (state = initialState, action: any) => {
       return copy;
     }
     case REGISTER: {
+      async function postRegistr() {
+        if (email === "" || password === "") {
+          return console.log("Поля должны быть заполнены");
+        }
+        try {
+          const response = await fetch('http://localhost:5000/api/auth', {
+            method: 'POST',
+            headers: { Accept: "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+            credentials: "include",
+          })
+          const user = await response.json();
+          if (user.message === undefined) {
+            localStorage.setItem("UserData", JSON.stringify(user.userData));
+            console.log("Операция прошла успешно");
+            return;
+          } else {
+            console.log(user.message.errors[0]["msg"]);
+            return;
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      postRegistr();
       copy = { ...initialState };
       return copy;
     }
     case LOGIN: {
       async function postLogin() {
-        const { email, password } = state;
         if (email === "" || password === "") {
           return console.log("Поля должны быть заполнены");
         }
-        const data = {
-          email: email,
-          password: password,
-        };
         try {
           const response = await fetch('http://localhost:5000/api/login', {
             method: 'POST',
@@ -70,7 +96,7 @@ const registerReducer = (state = initialState, action: any) => {
         }
       }
       postLogin();
-      return state;
+      return copy = { ...state };
     }
     default:
       return state;
