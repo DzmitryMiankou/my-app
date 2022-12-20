@@ -61,6 +61,7 @@ const Registration = (props) => {
         registerActin={registerActin}
         loginActin={loginActin}
         get={get}
+        dispatch={dispatch}
       />
     </form>
   );

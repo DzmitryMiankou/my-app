@@ -1,22 +1,18 @@
-import styleButtonBlock from "./ButtonBlock.module.scss";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import styleButtonBlock from "./ButtonBlock.module.scss";
 import Choose from "./choose/Choose";
 import InSign from "./in-Sign/InSign";
 import RegButton from "./reg-button/RegButton";
 
 const ButtonBlock = (props) => {
-  const state = useSelector((state) => state.register);
-  const dispatch = useDispatch();
-
   const register = async (e) => {
     e.preventDefault();
-    dispatch(props.registerActin());
+    props.dispatch(props.registerActin());
   };
 
   const toLogin = (e) => {
     e.preventDefault();
-    dispatch(props.loginActin());
+    props.dispatch(props.loginActin());
   };
 
   const reg = () => {
@@ -39,35 +35,3 @@ const ButtonBlock = (props) => {
 };
 
 export default ButtonBlock;
-
-/*
-    e.preventDefault();
-    const { nickName, email, password } = state;
-    if (email === "" || password === "") {
-      return props.set("Поля должны быть заполнены");
-    }
-
-    const data = {
-      nickName: nickName,
-      email: email,
-      password: password,
-    };
-    try {
-      const response = await request(
-        "http://localhost:5000/api/login",
-        "POST",
-        JSON.stringify(data),
-        { Accept: "application/json", "Content-Type": "application/json" },
-        "include"
-      );
-      if (response.message === undefined) {
-        localStorage.setItem("UserData", JSON.stringify(response.userData));
-        props.set("Операция прошла успешно");
-        dispatch(props.registerActin());
-        return;
-      }
-      props.set(response.message.errors[0]["msg"]);
-    } catch (error) {
-      console.log(error);
-    }
-    dispatch(props.registerActin());*/
