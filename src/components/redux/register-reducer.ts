@@ -13,6 +13,17 @@ type InitialStateType = {
   isAoth: boolean,
 }
 
+type PropertyPostType = {
+  method: string;
+  headers: {
+    Accept: string;
+    "Content-Type": string;
+  };
+  body: string;
+  credentials: any;
+}
+
+
 const initialState: InitialStateType = {
   id: null,
   nickName: "",
@@ -20,6 +31,7 @@ const initialState: InitialStateType = {
   password: "",
   isAoth: false,
 }
+
 const registerReducer = (state = initialState, action: any) => {
   let copy;
   const { nickName, email, password } = state;
@@ -28,6 +40,12 @@ const registerReducer = (state = initialState, action: any) => {
     email: email,
     password: password,
   };
+  const propertyPost: PropertyPostType = {
+    method: 'POST',
+    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+    credentials: 'include',
+  }
   switch (action.type) {
     case INPUT_NAME: {
       copy = { ...state, nickName: action.nickName };
@@ -47,12 +65,7 @@ const registerReducer = (state = initialState, action: any) => {
           return console.log("Поля должны быть заполнены");
         }
         try {
-          const response = await fetch('http://localhost:5000/api/auth', {
-            method: 'POST',
-            headers: { Accept: "application/json", "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-            credentials: "include",
-          })
+          const response = await fetch('http://localhost:5000/api/auth', propertyPost)
           const user = await response.json();
           if (user.message === undefined) {
             localStorage.setItem("UserData", JSON.stringify(user.userData));
@@ -76,12 +89,7 @@ const registerReducer = (state = initialState, action: any) => {
           return console.log("Поля должны быть заполнены");
         }
         try {
-          const response = await fetch('http://localhost:5000/api/login', {
-            method: 'POST',
-            headers: { Accept: "application/json", "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-            credentials: "include",
-          })
+          const response = await fetch('http://localhost:5000/api/login', propertyPost)
           const user = await response.json();
           if (user.message === undefined) {
             localStorage.setItem("UserData", JSON.stringify(user.userData));
