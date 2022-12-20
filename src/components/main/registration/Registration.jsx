@@ -7,7 +7,6 @@ import {
   emailActin,
   passwordActin,
   registerActin,
-  loginActin,
 } from "../../redux/register-reducer.ts";
 import ButtonBlock from "./button-block/ButtonBlock";
 
@@ -59,10 +58,7 @@ const Registration = (props) => {
         setAdd={setAdd}
         set={set}
         registerActin={registerActin}
-        loginActin={loginActin}
         get={get}
-        dispatch={dispatch}
-        errorMessage={state.errorMessage}
       />
     </form>
   );

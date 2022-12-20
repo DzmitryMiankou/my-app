@@ -11,17 +11,6 @@ export type InitialStateType = {
   isAoth: boolean,
   errorMessage: string
 }
-
-export type PropertyPostType = {
-  method: string;
-  headers: {
-    Accept: string;
-    "Content-Type": string;
-  };
-  body: string;
-  credentials: any;
-}
-
 const initialState: InitialStateType = {
   id: null,
   nickName: "",
@@ -33,18 +22,7 @@ const initialState: InitialStateType = {
 
 const registerReducer = (state = initialState, action: any) => {
   let copy;
-  const { nickName, email, password } = state;
-  const data = {
-    nickName: nickName,
-    email: email,
-    password: password,
-  };
-  const propertyPost: PropertyPostType = {
-    method: 'POST',
-    headers: { Accept: "application/json", "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-    credentials: 'include',
-  }
+
   switch (action.type) {
     case INPUT_NAME: {
       copy = { ...state, nickName: action.nickName };
@@ -59,52 +37,8 @@ const registerReducer = (state = initialState, action: any) => {
       return copy;
     }
     case REGISTER: {
-      async function postRegistr() {
-        if (email === "" || password === "" || nickName === "") {
-          return console.log("Поля должны быть заполнены");
-        }
-        try {
-          const response = await fetch('http://localhost:5000/api/auth', propertyPost)
-          const user = await response.json();
-          if (user.message === undefined) {
-            localStorage.setItem("UserData", JSON.stringify(user.userData));
-            console.log("Операция прошла успешно");
-            return;
-          } else {
-            console.log(user.message.errors[0]["msg"]);
-            return;
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      postRegistr();
-      console.log(state);
       copy = { ...initialState };
       return copy;
-    }
-    case LOGIN: {
-      let messegServer: string[] = [];
-      async function postLogin() {
-        if (email === "" || password === "") {
-          return console.log("Поля должны быть заполнены");
-        }
-        try {
-          const response = await fetch('http://localhost:5000/api/login', propertyPost)
-          const user = await response.json();
-          if (user.message === undefined) {
-            localStorage.setItem("UserData", JSON.stringify(user.userData));
-            return messegServer.push('Операция прошла успешно');
-          } else {
-            return messegServer.push(user.message.errors[0]["msg"]);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      postLogin();
-      console.log(messegServer);
-      return copy = { ...state, errorMessage: messegServer };
     }
     default:
       return state;
