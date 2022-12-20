@@ -1,4 +1,4 @@
-import { InitialStateType, PropertyPostType } from "./type-register-reducer";
+import { InitialStateType, PropertyPostType } from "./register-type-reducer";
 const INPUT_NAME = "input_register_NAME";
 const INPUT_EMAIL = "input_register_EMAIL";
 const INPUT_PASSWORD = "input_register_PASSWORD";
