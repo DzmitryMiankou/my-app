@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react";
 export const useHTTP = () => {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const request = useCallback(
     async (
@@ -11,7 +10,6 @@ export const useHTTP = () => {
       credentials = "include",
       redirect = "follow"
     ) => {
-      setLoading(true);
       try {
         const response = await fetch(url, {
           method,
@@ -21,10 +19,8 @@ export const useHTTP = () => {
           redirect,
         });
         const data = response.json();
-        setLoading(false);
         return data;
       } catch (error) {
-        setLoading(false);
         setError(error.message);
         throw error;
       }
@@ -32,5 +28,5 @@ export const useHTTP = () => {
     []
   );
   const clearError = () => setError(null);
-  return { loading, request, error, clearError };
+  return { request, error, clearError };
 };

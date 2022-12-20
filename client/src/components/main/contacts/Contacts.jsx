@@ -20,8 +20,8 @@ const Contacts = () => {
   const [auth, setAuth] = useState();
   useEffect(() => {
     const requestHandler = async () => {
+      Louding(false);
       try {
-        Louding(false);
         const data = await request("http://localhost:5000/api/users");
         setAuth(true);
         Louding(true);
@@ -44,7 +44,7 @@ const Contacts = () => {
   );
   if (!getLoad) {
     return (
-      <div>
+      <div className={styleContacts.messeges}>
         <h1>Загрузка...</h1>
       </div>
     );
