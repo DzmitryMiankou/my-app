@@ -19,11 +19,9 @@ const ButtonBlock = (props) => {
   };
   const toButton = async (e) => {
     e.preventDefault();
-
     if (nickName === "" || email === "" || password === "") {
       return props.set("Поля должны быть заполнены");
     }
-
     try {
       const response = await request(
         "http://localhost:5000/api/auth",
@@ -31,7 +29,7 @@ const ButtonBlock = (props) => {
         JSON.stringify(data),
         { "Content-Type": "application/json" }
       );
-      await props.set(response.message.errors[0]["msg"]);
+      props.set(response.message.errors[0]["msg"]);
     } catch (error) {
       console.log(error);
     }
