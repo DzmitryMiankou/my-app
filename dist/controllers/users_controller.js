@@ -1,0 +1,115 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const validation_result_1 = require("express-validator/src/validation-result");
+const mySql_1 = require("../MySQL/mySql");
+const token_service_1 = __importDefault(require("../services/token-service"));
+const uuid_1 = require("uuid");
+const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
+const sql = "SELECT id, nickName FROM `createUsers`";
+const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?);";
+class useController {
+    usersList(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                mySql_1.connection.query(sql, (err, results, fields) => {
+                    return res.json(results);
+                });
+            }
+            catch (error) {
+                res.status(Number(process.env.NUMBER_500))
+                    .json({ message: process.env.MESSAGE_500 });
+            }
+        });
+    }
+    auth(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const err = (0, validation_result_1.validationResult)(req);
+                if (!err.isEmpty()) {
+                    return res.status(Number(process.env.NUMBER_400)).json({ message: err });
+                }
+                const { id, nickName, email, password } = req.body;
+                const hashPassword = yield bcrypt_1.default.hash(req.body.password, 3);
+                mySql_1.connection.query(postSQL, [id, nickName, email, hashPassword], (err, result) => err ? res.status(Number(process.env.NUMBER_400))
+                    .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_EMAIL }] } })
+                    : res.status(Number(process.env.NUMBER_201))
+                        .json({ message: { errors: [{ msg: process.env.MESSAGE_201 }] } }));
+                //await sendEmail(email, nickName);//////////////////////////////////
+            }
+            catch (error) {
+                res.status(Number(process.env.NUMBER_500))
+                    .json({ message: process.env.MESSAGE_500 });
+            }
+        });
+    }
+    login(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const err = (0, validation_result_1.validationResult)(req);
+                if (!err.isEmpty()) {
+                    return res.status(Number(process.env.NUMBER_400))
+                        .json({ message: err });
+                }
+                const { email, password } = req.body;
+                mySql_1.connection.query(sqlEm, email, (err, results, fields) => {
+                    if (err) {
+                        return res.status(Number(process.env.NUMBER_500))
+                            .json({ error: err });
+                    }
+                    if (results.length === 0) {
+                        return res.status(Number(process.env.NUMBER_404))
+                            .json({ message: { errors: [{ msg: process.env.MESSAGE_404_NOT_USER }] } });
+                    }
+                    const fromSqlPass = (results[0]["password"]);
+                    const validPassword = bcrypt_1.default.compareSync(password, fromSqlPass);
+                    if (!validPassword) {
+                        return res.status(Number(process.env.NUMBER_400))
+                            .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_PASSWORD }] } });
+                    }
+                    const data = {
+                        id: results[0]["id"],
+                        nickName: results[0]["nickName"],
+                        email: results[0]["email"],
+                    };
+                    //const token = generateAccessToken(results[0]["id"], "user");
+                    const generId = (0, uuid_1.v4)();
+                    const accessToken = token_service_1.default.generateToken({ id: generId, roles: "user" }).accessToken;
+                    return res.cookie("accessToken", accessToken, {
+                        httpOnly: true,
+                        maxAge: 1800000,
+                        secure: true,
+                        sameSite: 'none'
+                    }).status(200).json({ userData: Object.assign({}, data) });
+                });
+            }
+            catch (error) {
+                res.status(Number(process.env.NUMBER_500))
+                    .json({ message: { errors: [{ msg: process.env.MESSAGE_500 }] } });
+            }
+        });
+    }
+    logout(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            res.clearCookie("AccessToken", {
+                secure: true,
+                sameSite: "none",
+            }).status(200).json("Вы вышли");
+        });
+    }
+}
+exports.default = new useController();

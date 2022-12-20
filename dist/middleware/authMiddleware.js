@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthMiddleware = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+function AuthMiddleware(req, res, next) {
+    const token = req.cookies["accessToken"];
+    if (token) {
+        //@ts-ignore
+        jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY_ACCESS, (err, decodedToken) => {
+            if (err) {
+                console.log(err.message);
+                return res.redirect(307, 'http://localhost:3000/regist');
+            }
+            else {
+                console.log(decodedToken);
+                next();
+            }
+        });
+    }
+    else {
+        return res.redirect(307, 'http://localhost:3000/regist');
+    }
+}
+exports.AuthMiddleware = AuthMiddleware;
+;
