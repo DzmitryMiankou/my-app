@@ -1,7 +1,9 @@
-const NAME = "NAME";
-const EMAIL = "EMAIL";
-const PASSWORD = "PASSWORD";
-const REGISTER = "REGISTER";
+
+const NAME = "register_NAME";
+const EMAIL = "register_EMAIL";
+const PASSWORD = "register_PASSWORD";
+const REGISTER = "register_REGISTER";
+const LOGIN = "register_LOGIN";
 
 type InitialStateType = {
   id: number | null,
@@ -37,9 +39,45 @@ const registerReducer = (state = initialState, action: any) => {
       copy = { ...initialState };
       return copy;
     }
+    case LOGIN: {
+      async function postLogin() {
+        const { email, password } = state;
+        if (email === "" || password === "") {
+          return console.log("Поля должны быть заполнены");
+        }
+        const data = {
+          email: email,
+          password: password,
+        };
+        try {
+          const response = await fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: { Accept: "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+            credentials: "include",
+          })
+          const user = await response.json();
+          if (user.message === undefined) {
+            localStorage.setItem("UserData", JSON.stringify(user.userData));
+            console.log("Операция прошла успешно");
+            return;
+          } else {
+            console.log(user.message.errors[0]["msg"]);
+            return;
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      postLogin();
+      return state;
+    }
     default:
       return state;
   }
+};
+type loginActionType = {
+  type: typeof LOGIN
 };
 type registerActionType = {
   type: typeof REGISTER
@@ -57,7 +95,7 @@ type passwordActinType = {
   password: string
 };
 export const registerActin = (): registerActionType => ({ type: REGISTER });
-
+export const loginActin = (): loginActionType => ({ type: LOGIN });
 export const nickNameActin = (text: string): nickNameActinType => ({
   type: NAME,
   nickName: text,
@@ -70,21 +108,5 @@ export const passwordActin = (text: string): passwordActinType => ({
   type: PASSWORD,
   password: text,
 });
-export default registerReducer;
 
-/*const data = {
-      "nickName": state.nickName,
-      "email": state.email,
-      "password": state.password
-    };
-    fetch('http://localhost:5000/api/auth', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    }).then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-        // Handle data
-      }).catch((error) => {
-        console.error('Error:', error);
-      });*/
+export default registerReducer;

@@ -37,7 +37,33 @@ const ButtonBlock = (props) => {
     dispatch(props.registerActin());
   };
 
-  const toLogin = async (e) => {
+  const toLogin = (e) => {
+    e.preventDefault();
+    dispatch(props.loginActin());
+  };
+
+  const reg = () => {
+    props.setAdd(!props.add);
+    props.set("");
+  };
+  return (
+    <div className={styleButtonBlock.button_container}>
+      <Choose add={props.add} reg={reg} />
+      <div>
+        {!props.add ? (
+          <RegButton toButton={register} />
+        ) : (
+          <InSign toLogin={toLogin} />
+        )}
+      </div>
+      <p className={styleButtonBlock.error}>{props.get}</p>
+    </div>
+  );
+};
+
+export default ButtonBlock;
+
+/*
     e.preventDefault();
     const { nickName, email, password } = state;
     if (email === "" || password === "") {
@@ -67,25 +93,4 @@ const ButtonBlock = (props) => {
     } catch (error) {
       console.log(error);
     }
-    dispatch(props.registerActin());
-  };
-  const reg = () => {
-    props.setAdd(!props.add);
-    props.set("");
-  };
-  return (
-    <div className={styleButtonBlock.button_container}>
-      <Choose add={props.add} reg={reg} />
-      <div>
-        {!props.add ? (
-          <RegButton toButton={register} />
-        ) : (
-          <InSign toLogin={toLogin} />
-        )}
-      </div>
-      <p className={styleButtonBlock.error}>{props.get}</p>
-    </div>
-  );
-};
-
-export default ButtonBlock;
+    dispatch(props.registerActin());*/
