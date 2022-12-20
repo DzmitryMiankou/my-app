@@ -11,19 +11,25 @@ const ButtonBlock = (props) => {
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
   const { nickName, email, password } = state;
+
+  async function response(endPoint) {
+    return await request(
+      endPoint,
+      "POST",
+      JSON.stringify({ ...state }),
+      { Accept: "application/json", "Content-Type": "application/json" },
+      "include"
+    );
+  }
+
   const toAuth = async (e) => {
     e.preventDefault();
     if (nickName === "" || email === "" || password === "") {
       return props.set("Поля должны быть заполнены");
     }
     try {
-      const response = await request(
-        "http://localhost:5000/api/auth",
-        "POST",
-        JSON.stringify({ ...state }),
-        { "Content-Type": "application/json" }
-      );
-      props.set(response.message.errors[0]["msg"]);
+      const res = await response("http://localhost:5000/api/auth");
+      props.set(res.message.errors[0]["msg"]);
     } catch (error) {
       console.log(error);
     }
@@ -36,29 +42,25 @@ const ButtonBlock = (props) => {
       return props.set("email и password обязательны для заполнения");
     }
     try {
-      const response = await request(
-        "http://localhost:5000/api/login",
-        "POST",
-        JSON.stringify({ ...state }),
-        { Accept: "application/json", "Content-Type": "application/json" },
-        "include"
-      );
-      if (response.message === undefined) {
-        localStorage.setItem("user", JSON.stringify(response));
+      const res = await response("http://localhost:5000/api/login");
+      if (res.message === undefined) {
+        localStorage.setItem("user", JSON.stringify(res));
         props.set("Операция прошла успешно");
         dispatch(props.registerActin());
         return;
       }
-      props.set(response.message.errors[0]["msg"]);
+      props.set(res.message.errors[0]["msg"]);
     } catch (error) {
       console.log(error);
     }
     dispatch(props.registerActin());
   };
+
   const reg = () => {
     props.setAdd(!props.add);
     props.set("");
   };
+
   return (
     <div className={styleButtonBlock.button_container}>
       <Choose add={props.add} reg={reg} />
