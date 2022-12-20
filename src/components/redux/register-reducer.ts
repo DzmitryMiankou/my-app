@@ -9,6 +9,7 @@ export type InitialStateType = {
   email: string,
   password: string,
   isAoth: boolean,
+  errorMessage: string
 }
 
 export type PropertyPostType = {
@@ -27,6 +28,7 @@ const initialState: InitialStateType = {
   email: "",
   password: "",
   isAoth: false,
+  errorMessage: "",
 }
 
 const registerReducer = (state = initialState, action: any) => {
@@ -77,10 +79,12 @@ const registerReducer = (state = initialState, action: any) => {
         }
       }
       postRegistr();
+      console.log(state);
       copy = { ...initialState };
       return copy;
     }
     case LOGIN: {
+      let messegServer: string[] = [];
       async function postLogin() {
         if (email === "" || password === "") {
           return console.log("Поля должны быть заполнены");
@@ -90,18 +94,17 @@ const registerReducer = (state = initialState, action: any) => {
           const user = await response.json();
           if (user.message === undefined) {
             localStorage.setItem("UserData", JSON.stringify(user.userData));
-            console.log("Операция прошла успешно");
-            return;
+            return messegServer.push('Операция прошла успешно');
           } else {
-            console.log(user.message.errors[0]["msg"]);
-            return;
+            return messegServer.push(user.message.errors[0]["msg"]);
           }
         } catch (error) {
           console.log(error);
         }
       }
       postLogin();
-      return copy = { ...state };
+      console.log(messegServer);
+      return copy = { ...state, errorMessage: messegServer };
     }
     default:
       return state;

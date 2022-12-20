@@ -62,6 +62,7 @@ const Registration = (props) => {
         loginActin={loginActin}
         get={get}
         dispatch={dispatch}
+        errorMessage={state.errorMessage}
       />
     </form>
   );

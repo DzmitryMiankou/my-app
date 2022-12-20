@@ -9,7 +9,6 @@ const ButtonBlock = (props) => {
     e.preventDefault();
     props.dispatch(props.registerActin());
   };
-
   const toLogin = (e) => {
     e.preventDefault();
     props.dispatch(props.loginActin());
@@ -29,7 +28,7 @@ const ButtonBlock = (props) => {
           <InSign toLogin={toLogin} />
         )}
       </>
-      <p className={styleButtonBlock.error}>{props.get}</p>
+      <p className={styleButtonBlock.error}>{props.errorMessage}</p>
     </div>
   );
 };
