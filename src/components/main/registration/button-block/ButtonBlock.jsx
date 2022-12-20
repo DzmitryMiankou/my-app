@@ -11,18 +11,19 @@ const ButtonBlock = (props) => {
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
 
+  const { nickName, email, password } = state;
+  const data = {
+    nickName: nickName,
+    email: email,
+    password: password,
+  };
   const toButton = async (e) => {
     e.preventDefault();
-    const { nickName, email, password } = state;
+
     if (nickName === "" || email === "" || password === "") {
       return props.set("Поля должны быть заполнены");
     }
 
-    const data = {
-      nickName: nickName,
-      email: email,
-      password: password,
-    };
     try {
       const response = await request(
         "http://localhost:5000/api/auth",
@@ -39,16 +40,9 @@ const ButtonBlock = (props) => {
 
   const toLogin = async (e) => {
     e.preventDefault();
-    const { nickName, email, password } = state;
     if (email === "" || password === "") {
       return props.set("email и password обязательны для заполнения");
     }
-
-    const data = {
-      nickName: nickName,
-      email: email,
-      password: password,
-    };
     try {
       const response = await request(
         "http://localhost:5000/api/login",
