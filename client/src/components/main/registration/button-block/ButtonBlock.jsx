@@ -10,14 +10,8 @@ const ButtonBlock = (props) => {
   const { request } = useHTTP();
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
-
   const { nickName, email, password } = state;
-  const data = {
-    nickName: nickName,
-    email: email,
-    password: password,
-  };
-  const toButton = async (e) => {
+  const toAuth = async (e) => {
     e.preventDefault();
     if (nickName === "" || email === "" || password === "") {
       return props.set("Поля должны быть заполнены");
@@ -26,7 +20,7 @@ const ButtonBlock = (props) => {
       const response = await request(
         "http://localhost:5000/api/auth",
         "POST",
-        JSON.stringify(data),
+        JSON.stringify({ ...state }),
         { "Content-Type": "application/json" }
       );
       props.set(response.message.errors[0]["msg"]);
@@ -45,12 +39,12 @@ const ButtonBlock = (props) => {
       const response = await request(
         "http://localhost:5000/api/login",
         "POST",
-        JSON.stringify(data),
+        JSON.stringify({ ...state }),
         { Accept: "application/json", "Content-Type": "application/json" },
         "include"
       );
       if (response.message === undefined) {
-        localStorage.setItem("Token", response.accessToken);
+        localStorage.setItem("user", JSON.stringify(response));
         props.set("Операция прошла успешно");
         dispatch(props.registerActin());
         return;
@@ -70,7 +64,7 @@ const ButtonBlock = (props) => {
       <Choose add={props.add} reg={reg} />
       <div>
         {!props.add ? (
-          <RegButton toButton={toButton} />
+          <RegButton toAuth={toAuth} />
         ) : (
           <InSign toLogin={toLogin} />
         )}

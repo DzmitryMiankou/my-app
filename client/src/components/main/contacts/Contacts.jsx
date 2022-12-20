@@ -29,7 +29,7 @@ const Contacts = () => {
       } catch (error) {
         setAuth(false);
         Louding(true);
-        console.log(`No authorization ${error}`);
+        return console.log(`No authorization ${error}`);
       }
     };
     requestHandler();

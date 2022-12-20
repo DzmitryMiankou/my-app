@@ -3,7 +3,7 @@ import React from "react";
 
 const RegButton = (props) => {
   return (
-    <button onClick={props.toButton} className={styleButtonBlock.button}>
+    <button onClick={props.toAuth} className={styleButtonBlock.button}>
       регистрация
     </button>
   );
