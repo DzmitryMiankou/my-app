@@ -1,5 +1,5 @@
 .container {
-  display: flex;   
+  display: flex;
   flex-direction: column;
   gap: 15px;
   .container__messege {
@@ -10,14 +10,10 @@
     padding: 5%;
     overflow-x: hidden;
     overflow-y: scroll;
-    height: calc(100vh - 450px);          
+    height: calc(100vh - 450px);
   }
   .container__textarea {
     display: flex;
     align-items: center;
   }
 }
-    
-    
-
-

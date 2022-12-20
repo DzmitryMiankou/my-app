@@ -1,5 +1,5 @@
 @import "src/scss/formStyle.scss";
 .container__comment_text {
   @include textarea;
-  width: 100%
+  width: 100%;
 }

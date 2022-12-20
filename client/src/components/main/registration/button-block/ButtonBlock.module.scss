@@ -1,13 +1,13 @@
 @import "src/scss/button.scss";
 .button_container {
-  position:relative;
+  position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-}  
-.error {
-  color: var(--red);
-  right: 0px;
-  bottom: -30px;
-  position: absolute;
+  .error {
+    color: var(--red);
+    right: 0px;
+    bottom: -30px;
+    position: absolute;
+  }
 }

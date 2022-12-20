@@ -2,14 +2,17 @@
   color: var(--white);
   width: fit-content;
   word-break: break-all;
-    .container__list { 
-      list-style: none;
-        .container__list_messeg { 
-          background-color: rgb(67, 67, 67);
-          padding: 8px;
-            &:hover {background-color: var(--black-grey-BG);}
-          p {overflow-wrap: break-word; }
-        }
+  .container__list {
+    list-style: none;
+    .container__list_messeg {
+      background-color: rgb(67, 67, 67);
+      padding: 8px;
+      &:hover {
+        background-color: var(--black-grey-BG);
+      }
+      p {
+        overflow-wrap: break-word;
+      }
     }
+  }
 }
-
