@@ -1,9 +1,25 @@
-import { InitialStateType, PropertyPostType } from "./register-type-reducer";
 const INPUT_NAME = "input_register_NAME";
 const INPUT_EMAIL = "input_register_EMAIL";
 const INPUT_PASSWORD = "input_register_PASSWORD";
 const REGISTER = "input_register_REGISTER";
 const LOGIN = "input_register_LOGIN";
+export type InitialStateType = {
+  id: number | null,
+  nickName: string,
+  email: string,
+  password: string,
+  isAoth: boolean,
+}
+
+export type PropertyPostType = {
+  method: string;
+  headers: {
+    Accept: string;
+    "Content-Type": string;
+  };
+  body: string;
+  credentials: any;
+}
 
 const initialState: InitialStateType = {
   id: null,
