@@ -28,6 +28,7 @@ const ButtonBlock = (props) => {
     }
     try {
       const res = await response("http://localhost:5000/api/auth");
+      localStorage.setItem("user", JSON.stringify(res));
       props.set(res.message.errors[0]["msg"]);
     } catch (error) {
       console.log(error);

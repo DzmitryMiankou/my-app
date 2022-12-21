@@ -41,7 +41,7 @@ function start() {
 start();
 if (node_cluster_1.default.isPrimary) {
     const cpusCount = (0, node_os_1.cpus)().length;
-    for (let i = 0; i < cpusCount - 1; i++) {
+    for (let i = 0; i < cpusCount / 2; i++) {
         node_cluster_1.default.fork();
     }
     ;

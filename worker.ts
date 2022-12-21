@@ -35,7 +35,7 @@ start();
 
 if (cluster.isPrimary) {
   const cpusCount = cpus().length;
-  for (let i = 0; i < cpusCount - 1; i++) {
+  for (let i = 0; i < cpusCount / 2; i++) {
     cluster.fork();
   };
   cluster.on('exit', (worker, code, signal) => {

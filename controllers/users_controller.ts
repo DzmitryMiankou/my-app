@@ -9,8 +9,8 @@ import { v4 as uuidv4, v4 } from 'uuid';
 import { sendEmail } from '../services/mail-service';
 
 const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
-const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?);";
-
+const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
+const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
 
 
 
@@ -22,12 +22,33 @@ class useController {
                 return res.status(Number(process.env.NUMBER_400)).json({ message: err })
             }
             const { id, nickName, email, password } = req.body;
-            const hashPassword = await bcrypt.hash(req.body.password, 3);
-            connection.query(postSQL, [id, nickName, email, hashPassword],
-                (err, result) => err ? res.status(Number(process.env.NUMBER_400))
-                    .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_EMAIL }] } })
-                    : res.status(Number(process.env.NUMBER_201))
-                        .json({ message: { errors: [{ msg: process.env.MESSAGE_201 }] } }));
+            const hashPassword = await bcrypt.hash(password, 3);
+            const generId = v4();
+            connection.query(postSQL, [id, nickName, email, hashPassword, generId],
+                (err, result) => {
+                    if (err) {
+                        res.status(Number(process.env.NUMBER_400))
+                            .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_EMAIL }] } })
+                    }
+                    const usId = result.insertId;
+                    const accessToken = TokenService.generateToken({ id: usId, roles: "user" }).accessToken;
+                    const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
+                    connection.query(RefreshSQL, [usId, refreshToken],
+                        (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                return;
+                            }
+                            console.log(result);
+
+                        });
+                    return res.cookie("refreshToken", refreshToken, {
+                        httpOnly: true,
+                        maxAge: 2592000000,//30 dayss
+                        secure: true,
+                        sameSite: 'none'
+                    }).status(200).json({ userData: { usId }, "accessToken": accessToken });
+                });
             //await sendEmail(email, nickName);//////////////////////////////////
 
         } catch (error) {

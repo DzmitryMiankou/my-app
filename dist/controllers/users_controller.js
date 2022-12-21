@@ -20,7 +20,8 @@ const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const uuid_1 = require("uuid");
 const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
-const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?);";
+const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
+const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
 class useController {
     auth(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -30,11 +31,30 @@ class useController {
                     return res.status(Number(process.env.NUMBER_400)).json({ message: err });
                 }
                 const { id, nickName, email, password } = req.body;
-                const hashPassword = yield bcrypt_1.default.hash(req.body.password, 3);
-                mySql_1.connection.query(postSQL, [id, nickName, email, hashPassword], (err, result) => err ? res.status(Number(process.env.NUMBER_400))
-                    .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_EMAIL }] } })
-                    : res.status(Number(process.env.NUMBER_201))
-                        .json({ message: { errors: [{ msg: process.env.MESSAGE_201 }] } }));
+                const hashPassword = yield bcrypt_1.default.hash(password, 3);
+                const generId = (0, uuid_1.v4)();
+                mySql_1.connection.query(postSQL, [id, nickName, email, hashPassword, generId], (err, result) => {
+                    if (err) {
+                        res.status(Number(process.env.NUMBER_400))
+                            .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_EMAIL }] } });
+                    }
+                    const usId = result.insertId;
+                    const accessToken = token_service_1.default.generateToken({ id: usId, roles: "user" }).accessToken;
+                    const refreshToken = token_service_1.default.generateToken({ id: generId, roles: "user" }).refreshToken;
+                    mySql_1.connection.query(RefreshSQL, [usId, refreshToken], (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        console.log(result);
+                    });
+                    return res.cookie("refreshToken", refreshToken, {
+                        httpOnly: true,
+                        maxAge: 2592000000,
+                        secure: true,
+                        sameSite: 'none'
+                    }).status(200).json({ userData: { usId }, "accessToken": accessToken });
+                });
                 //await sendEmail(email, nickName);//////////////////////////////////
             }
             catch (error) {
