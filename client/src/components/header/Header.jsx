@@ -20,13 +20,7 @@ const Header = () => {
           <Link text="Портфолио" to="/works" />
           <Link text="Обучение" to="/learning" />
           <Link text="Общаться" to="/chat" />
-          <>
-            {!state.auth.isAoth ? (
-              <Link to="/regist" text={<RegistIcon />}></Link>
-            ) : (
-              <SignOut />
-            )}
-          </>
+
           <div className={`${style.act} ${"act"}`}>
             <LangIcon onList={add} />
             <ul
@@ -37,6 +31,13 @@ const Header = () => {
               <li>Русский</li>
             </ul>
           </div>
+          <>
+            {!state.auth.isAoth ? (
+              <Link to="/regist" text={<RegistIcon />}></Link>
+            ) : (
+              <SignOut />
+            )}
+          </>
         </ul>
       </menu>
     </header>
