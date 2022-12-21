@@ -20,7 +20,7 @@ const authReducer = (state = initialState, action: any) => {
             return copy;
         }
         default:
-            return state;
+            return state = { ...initialState };
     }
 };
 type loginActionType = {

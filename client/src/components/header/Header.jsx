@@ -6,21 +6,27 @@ import RegistIcon from "./registrIcon/registIcon";
 import LangIcon from "./langIcon/langIcon";
 import { useAddList } from "../../hook/useAddList";
 import { useSelector } from "react-redux";
+import SignOut from "./signOut/SignOut";
 
 const Header = () => {
   const state = useSelector((state) => state);
   const [value, add] = useAddList(false, ".act");
   return (
     <header className={style.header}>
-      <div>
-        <Logo />
-      </div>
+      <Logo />
       <menu className={style.menu}>
         <ul className={style.ul}>
           <Link text="О проекте" to="/" />
           <Link text="Портфолио" to="/works" />
           <Link text="Обучение" to="/learning" />
           <Link text="Общаться" to="/chat" />
+          <>
+            {!state.auth.isAoth ? (
+              <Link to="/regist" text={<RegistIcon />}></Link>
+            ) : (
+              <SignOut />
+            )}
+          </>
           <div className={`${style.act} ${"act"}`}>
             <LangIcon onList={add} />
             <ul
@@ -31,13 +37,6 @@ const Header = () => {
               <li>Русский</li>
             </ul>
           </div>
-          <>
-            {!state.auth.isAoth ? (
-              <Link to="/regist" text={<RegistIcon />}></Link>
-            ) : (
-              <div>Выйти</div>
-            )}
-          </>
         </ul>
       </menu>
     </header>

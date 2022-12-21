@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  color: var(--white);
+  gap: 8px;
+  align-items: center;
+  border: var(--red) 1px solid;
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    color: var(--red);
+  }
+}

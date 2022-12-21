@@ -13,7 +13,7 @@ const authReducer = (state = initialState, action) => {
             return copy;
         }
         default:
-            return state;
+            return state = Object.assign({}, initialState);
     }
 };
 const authActin = (inAuth) => ({
