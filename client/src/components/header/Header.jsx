@@ -31,13 +31,13 @@ const Header = () => {
               <li>Русский</li>
             </ul>
           </div>
-          <>
+          <div className={style.login}>
             {!state.auth.isAoth ? (
               <Link to="/regist" text={<RegistIcon />}></Link>
             ) : (
               <SignOut />
             )}
-          </>
+          </div>
         </ul>
       </menu>
     </header>

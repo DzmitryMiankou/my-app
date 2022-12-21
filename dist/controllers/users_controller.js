@@ -20,22 +20,8 @@ const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const uuid_1 = require("uuid");
 const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
-const sql = "SELECT id, nickName FROM `createUsers`";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?);";
 class useController {
-    usersList(req, res, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                mySql_1.connection.query(sql, (err, results, fields) => {
-                    return res.json(results);
-                });
-            }
-            catch (error) {
-                res.status(Number(process.env.NUMBER_500))
-                    .json({ message: process.env.MESSAGE_500 });
-            }
-        });
-    }
     auth(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -81,7 +67,6 @@ class useController {
                         return res.status(Number(process.env.NUMBER_400))
                             .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_PASSWORD }] } });
                     }
-                    //const token = generateAccessToken(results[0]["id"], "user");
                     const generId = (0, uuid_1.v4)();
                     const accessToken = token_service_1.default.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
                     const refreshToken = token_service_1.default.generateToken({ id: generId, roles: "user" }).refreshToken;
@@ -106,7 +91,7 @@ class useController {
     }
     logout(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            res.clearCookie("AccessToken", {
+            res.clearCookie("refreshToken", {
                 secure: true,
                 sameSite: "none",
             }).status(200).json("Вы вышли");
