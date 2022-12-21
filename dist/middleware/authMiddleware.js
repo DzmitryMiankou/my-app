@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthMiddleware = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function AuthMiddleware(req, res, next) {
-    const token = req.cookies["accessToken"];
+    const token = req.cookies["refreshToken"];
     if (token) {
         //@ts-ignore
-        jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY_ACCESS, (err, decodedToken) => {
+        jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
                 return res.redirect(307, 'http://localhost:3000/regist');

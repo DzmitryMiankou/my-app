@@ -74,20 +74,22 @@ class useController {
                     return res.status(Number(process.env.NUMBER_400))
                         .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_PASSWORD }] } });
                 }
+
+                //const token = generateAccessToken(results[0]["id"], "user");
+                const generId = v4();
+                const accessToken = TokenService.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
+                const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
                 const data = {
                     id: results[0]["id"],
                     nickName: results[0]["nickName"],
                     email: results[0]["email"],
                 }
-                //const token = generateAccessToken(results[0]["id"], "user");
-                const generId = v4();
-                const accessToken = TokenService.generateToken({ id: generId, roles: "user" }).accessToken;
-                return res.cookie("accessToken", accessToken, {
+                return res.cookie("refreshToken", refreshToken, {
                     httpOnly: true,
-                    maxAge: 1800000,
+                    maxAge: 2592000000,//30 days
                     secure: true,
                     sameSite: 'none'
-                }).status(200).json({ userData: { ...data } });
+                }).status(200).json({ userData: { ...data }, "accessToken": accessToken });
 
             });
         } catch (error) {
