@@ -5,8 +5,10 @@ import Logo from "./logo/Logo";
 import RegistIcon from "./registrIcon/registIcon";
 import LangIcon from "./langIcon/langIcon";
 import { useAddList } from "../../hook/useAddList";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const state = useSelector((state) => state);
   const [value, add] = useAddList(false, ".act");
   return (
     <header className={style.header}>
@@ -29,7 +31,13 @@ const Header = () => {
               <li>Русский</li>
             </ul>
           </div>
-          <Link to="/regist" text={<RegistIcon />}></Link>
+          <>
+            {!state.auth.isAoth ? (
+              <Link to="/regist" text={<RegistIcon />}></Link>
+            ) : (
+              <div>Выйти</div>
+            )}
+          </>
         </ul>
       </menu>
     </header>

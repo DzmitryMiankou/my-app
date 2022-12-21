@@ -5,11 +5,13 @@ import {
   onPostChangecreateActin,
   addPostcreateActin,
 } from "../../redux/messegData-reducer.ts";
+import { authActin } from "../../redux/auth-reducer.ts";
 import { useHTTP } from "../../../hook/http";
 import UserdBlocks from "././users-block/UsersBlock";
 import MessagesBlock from "././messages-block/MessagesBlock";
 import Dialogues from "././dialogues/Dialogues";
 import NoRegiste from "./noRegist/NoRegist";
+import { memo } from "react";
 
 const Contacts = () => {
   const [getLoad, Louding] = useState();
@@ -22,18 +24,21 @@ const Contacts = () => {
     const requestHandler = async () => {
       Louding(false);
       try {
+        dispatch(authActin(true));
         const data = await request("http://localhost:5000/api/users");
         setAuth(true);
         Louding(true);
+        console.log(`Authorization`);
         return setdata(data);
       } catch (error) {
+        dispatch(authActin(false));
         setAuth(false);
         Louding(true);
         return console.log(`No authorization ${error}`);
       }
     };
     requestHandler();
-  }, [request]);
+  }, [request, dispatch]);
 
   const increaseCounter = useCallback(
     (e) => {
@@ -64,4 +69,4 @@ const Contacts = () => {
     <NoRegiste />
   );
 };
-export default Contacts;
+export default memo(Contacts);

@@ -10,7 +10,6 @@ const ButtonBlock = (props) => {
   const { request } = useHTTP();
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
-  const { nickName, email, password } = state;
 
   async function response(endPoint) {
     return await request(
@@ -21,7 +20,7 @@ const ButtonBlock = (props) => {
       "include"
     );
   }
-
+  const { nickName, email, password } = state;
   const toAuth = async (e) => {
     e.preventDefault();
     if (nickName === "" || email === "" || password === "") {
