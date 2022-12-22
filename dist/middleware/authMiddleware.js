@@ -11,7 +11,6 @@ function AuthMiddleware(req, res, next) {
         //@ts-ignore
         jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
             if (err) {
-                console.log(err.message);
                 return res.redirect(307, 'http://localhost:3000/regist');
             }
             else {

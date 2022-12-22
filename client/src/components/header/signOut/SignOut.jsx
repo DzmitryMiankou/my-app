@@ -16,7 +16,7 @@ const SignOut = () => {
   const toAuth = async (e) => {
     e.preventDefault();
     try {
-      await response("http://localhost:5000/api/logout");
+      await response("http://localhost:5000/api/refresh");
     } catch (error) {
       console.log(error);
     }

@@ -23,6 +23,29 @@ class TokenService {
         })
         return tokenData;
     }
+
+
+    validateAccessToken(token: string) {
+        try {
+            //@ts-ignore
+            const userToken = jwt.verify(token, process.env.SECRET_KEY_ACCESS);
+            return userToken;
+        } catch (error) {
+            return null;
+        }
+    }
+
+
+    validateRefreshToken(token: string) {
+        try {
+            //@ts-ignore
+            const userToken = jwt.verify(token, process.env.SECRET_KEY);
+            return userToken;
+        } catch (error) {
+            return null;
+        }
+    }
 }
+
 
 export default new TokenService();    

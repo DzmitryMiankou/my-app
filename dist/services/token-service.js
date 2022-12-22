@@ -39,5 +39,25 @@ class TokenService {
             return tokenData;
         });
     }
+    validateAccessToken(token) {
+        try {
+            //@ts-ignore
+            const userToken = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY_ACCESS);
+            return userToken;
+        }
+        catch (error) {
+            return null;
+        }
+    }
+    validateRefreshToken(token) {
+        try {
+            //@ts-ignore
+            const userToken = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
+            return userToken;
+        }
+        catch (error) {
+            return null;
+        }
+    }
 }
 exports.default = new TokenService();

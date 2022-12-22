@@ -7,7 +7,6 @@ export function AuthMiddleware(req: Request, res: Response, next: NextFunction) 
         //@ts-ignore
         jwt.verify(token, process.env.SECRET_KEY, (err: any, decodedToken: any) => {
             if (err) {
-                console.log(err.message);
                 return res.redirect(307, 'http://localhost:3000/regist');
             } else {
                 next();
