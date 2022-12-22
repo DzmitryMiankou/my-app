@@ -11,7 +11,8 @@ import { sendEmail } from '../services/mail-service';
 const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
-const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?; "
+const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;"
+const deleteRefreshSQL = "DELETE FROM `userRefreshToken` WHERE `us_id` = ?;"
 
 
 
@@ -99,7 +100,7 @@ class useController {
                             console.log(err);
                             return;
                         }
-                        console.log(`ok`);
+                        console.log(`OK -- UPDATA refresh token`);
 
                     });
                 return res.cookie("refreshToken", refreshToken, {
@@ -117,6 +118,16 @@ class useController {
     }
 
     async logout(req: Request, res: Response, next: NextFunction) {
+        const { id } = req.body;
+        connection.query(deleteRefreshSQL, id,
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log(`OK-- DELETE refresh token`);
+
+            });
         res.clearCookie("refreshToken", {
             secure: true,
             sameSite: "none",
