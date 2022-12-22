@@ -12,7 +12,7 @@ const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
 const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;"
-const deleteRefreshSQL = "DELETE FROM `userRefreshToken` WHERE `us_id` = ?;"
+const deleteRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;;"
 
 
 
@@ -119,7 +119,7 @@ class useController {
 
     async logout(req: Request, res: Response, next: NextFunction) {
         const { id } = req.body;
-        connection.query(deleteRefreshSQL, id,
+        connection.query(deleteRefreshSQL, ["", id],
             (err, result) => {
                 if (err) {
                     console.log(err);
