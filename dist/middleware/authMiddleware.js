@@ -15,7 +15,6 @@ function AuthMiddleware(req, res, next) {
                 return res.redirect(307, 'http://localhost:3000/regist');
             }
             else {
-                console.log(decodedToken);
                 next();
             }
         });

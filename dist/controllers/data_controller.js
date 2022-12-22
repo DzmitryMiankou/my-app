@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mySql_1 = require("../MySQL/mySql");
-const sql = "SELECT id, nickName FROM `createUsers`";
+const sqls = "SELECT id, nickName FROM `createUsers`";
 class useController {
     usersList(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                mySql_1.connection.query(sql, (err, results, fields) => {
+                mySql_1.connection.query(sqls, (err, results, fields) => {
                     return res.json(results);
                 });
             }

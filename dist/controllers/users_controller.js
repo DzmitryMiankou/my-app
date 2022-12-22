@@ -22,6 +22,7 @@ const uuid_1 = require("uuid");
 const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
+const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?; ";
 class useController {
     auth(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -48,14 +49,14 @@ class useController {
                         }
                         console.log(result);
                     });
+                    //await sendEmail(email, nickName);//////////////////////////////////
                     return res.cookie("refreshToken", refreshToken, {
                         httpOnly: true,
                         maxAge: 2592000000,
                         secure: true,
                         sameSite: 'none'
-                    }).status(200).json({ userData: { usId }, "accessToken": accessToken });
+                    }).status(200).json({ userData: { usId }, token: { "accessToken": accessToken, "refreshToken": refreshToken } });
                 });
-                //await sendEmail(email, nickName);//////////////////////////////////
             }
             catch (error) {
                 res.status(Number(process.env.NUMBER_500))
@@ -95,6 +96,13 @@ class useController {
                         nickName: results[0]["nickName"],
                         email: results[0]["email"],
                     };
+                    mySql_1.connection.query(updadaRefreshSQL, [refreshToken, data.id], (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        console.log(`ok`);
+                    });
                     return res.cookie("refreshToken", refreshToken, {
                         httpOnly: true,
                         maxAge: 2592000000,
@@ -115,6 +123,14 @@ class useController {
                 secure: true,
                 sameSite: "none",
             }).status(200).json("Вы вышли");
+        });
+    }
+    activate(activateLink) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+            }
+            catch (error) {
+            }
         });
     }
 }

@@ -10,7 +10,6 @@ export function AuthMiddleware(req: Request, res: Response, next: NextFunction) 
                 console.log(err.message);
                 return res.redirect(307, 'http://localhost:3000/regist');
             } else {
-                console.log(decodedToken);
                 next();
             }
         });

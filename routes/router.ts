@@ -17,7 +17,7 @@ router.post('/login', [
     check('email', 'Некоректный адрес почты').normalizeEmail().isEmail(),
 ], users_controller.login);
 router.post('/logout', users_controller.logout);
-router.post('/activate/:link', users_controller.logout);
+router.post('/activate/:link', users_controller.activate);
 router.post('/refresh', users_controller.logout);
 router.get('/users', AuthMiddleware, data_controller.usersList);
 export default router;

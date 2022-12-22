@@ -11,6 +11,7 @@ import { sendEmail } from '../services/mail-service';
 const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
+const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?; "
 
 
 
@@ -42,14 +43,16 @@ class useController {
                             console.log(result);
 
                         });
+
+                    //await sendEmail(email, nickName);//////////////////////////////////
                     return res.cookie("refreshToken", refreshToken, {
                         httpOnly: true,
                         maxAge: 2592000000,//30 dayss
                         secure: true,
                         sameSite: 'none'
-                    }).status(200).json({ userData: { usId }, "accessToken": accessToken });
+                    }).status(200).json({ userData: { usId }, token: { "accessToken": accessToken, "refreshToken": refreshToken } });
+
                 });
-            //await sendEmail(email, nickName);//////////////////////////////////
 
         } catch (error) {
             res.status(Number(process.env.NUMBER_500))
@@ -65,6 +68,7 @@ class useController {
                 return res.status(Number(process.env.NUMBER_400))
                     .json({ message: err })
             }
+
             const { email, password } = req.body;
             connection.query(sqlEm, email, (err, results, fields) => {
                 if (err) {
@@ -89,6 +93,15 @@ class useController {
                     nickName: results[0]["nickName"],
                     email: results[0]["email"],
                 }
+                connection.query(updadaRefreshSQL, [refreshToken, data.id],
+                    (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        console.log(`ok`);
+
+                    });
                 return res.cookie("refreshToken", refreshToken, {
                     httpOnly: true,
                     maxAge: 2592000000,//30 days
@@ -103,12 +116,19 @@ class useController {
         }
     }
 
-
     async logout(req: Request, res: Response, next: NextFunction) {
         res.clearCookie("refreshToken", {
             secure: true,
             sameSite: "none",
         }).status(200).json("Вы вышли");
+    }
+
+    async activate(activateLink: string) {
+        try {
+
+        } catch (error) {
+
+        }
     }
 }
 

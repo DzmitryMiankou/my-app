@@ -1,10 +1,10 @@
 import { connection } from '../MySQL/mySql';
-const sql = "SELECT id, nickName FROM `createUsers`";
+const sqls = "SELECT id, nickName FROM `createUsers`";
 import { Request, Response, NextFunction } from 'express';
 class useController {
     async usersList(req: Request, res: Response, next: NextFunction) {
         try {
-            connection.query(sql, (err, results, fields) => {
+            connection.query(sqls, (err, results, fields) => {
                 return res.json(results);
             });
         } catch (error) {
