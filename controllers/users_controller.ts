@@ -8,11 +8,10 @@ import TokenService from '../services/token-service';
 import { v4 as uuidv4, v4 } from 'uuid';
 import { sendEmail } from '../services/mail-service';
 
-const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
+const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
-const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;"
-const deleteRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;;"
+const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
 
 
 
@@ -21,7 +20,7 @@ class useController {
         try {
             const err = validationResult(req);
             if (!err.isEmpty()) {
-                return res.status(Number(process.env.NUMBER_400)).json({ message: err })
+                return res.status(Number(process.env.NUMBER_400)).json({ message: err });
             }
             const { id, nickName, email, password } = req.body;
             const hashPassword = await bcrypt.hash(password, 3);
@@ -30,7 +29,7 @@ class useController {
                 (err, result) => {
                     if (err) {
                         res.status(Number(process.env.NUMBER_400))
-                            .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_EMAIL }] } })
+                            .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_EMAIL }] } });
                     }
                     const usId = result.insertId;
                     const accessToken = TokenService.generateToken({ id: usId, roles: "user" }).accessToken;
@@ -57,7 +56,7 @@ class useController {
 
         } catch (error) {
             res.status(Number(process.env.NUMBER_500))
-                .json({ message: process.env.MESSAGE_500 })
+                .json({ message: process.env.MESSAGE_500 });
         }
     }
 
@@ -67,7 +66,7 @@ class useController {
             const err = validationResult(req);
             if (!err.isEmpty()) {
                 return res.status(Number(process.env.NUMBER_400))
-                    .json({ message: err })
+                    .json({ message: err });
             }
 
             const { email, password } = req.body;
@@ -81,7 +80,7 @@ class useController {
                         .json({ message: { errors: [{ msg: process.env.MESSAGE_404_NOT_USER }] } });
                 }
                 const fromSqlPass = (results[0]["password"]);
-                const validPassword = bcrypt.compareSync(password, fromSqlPass)
+                const validPassword = bcrypt.compareSync(password, fromSqlPass);
                 if (!validPassword) {
                     return res.status(Number(process.env.NUMBER_400))
                         .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_PASSWORD }] } });
@@ -119,14 +118,13 @@ class useController {
 
     async logout(req: Request, res: Response, next: NextFunction) {
         const { id } = req.body;
-        connection.query(deleteRefreshSQL, ["", id],
+        connection.query(updadaRefreshSQL, ["", id],
             (err, result) => {
                 if (err) {
                     console.log(err);
                     return;
                 }
                 console.log(`OK-- DELETE refresh token`);
-
             });
         res.clearCookie("refreshToken", {
             secure: true,

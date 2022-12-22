@@ -19,11 +19,10 @@ const validation_result_1 = require("express-validator/src/validation-result");
 const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const uuid_1 = require("uuid");
-const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
+const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
 const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
-const deleteRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;;";
 class useController {
     auth(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -121,7 +120,7 @@ class useController {
     logout(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.body;
-            mySql_1.connection.query(deleteRefreshSQL, ["", id], (err, result) => {
+            mySql_1.connection.query(updadaRefreshSQL, ["", id], (err, result) => {
                 if (err) {
                     console.log(err);
                     return;
