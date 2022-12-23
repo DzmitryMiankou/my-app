@@ -48,7 +48,7 @@ class useController {
                             console.log(err);
                             return;
                         }
-                        console.log(result);
+                        //console.log(result);
                     });
                     //await sendEmail(email, nickName);//////////////////////////////////
                     return res.cookie("refreshToken", refreshToken, {
@@ -164,7 +164,6 @@ class useController {
                         console.log(err);
                         return;
                     }
-                    console.log(result[0]["RefreshToken"]);
                     if (result[0]["RefreshToken"] === refreshTokens) {
                         console.log("yes");
                     }

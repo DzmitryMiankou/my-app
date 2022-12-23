@@ -41,7 +41,7 @@ class useController {
                                 console.log(err);
                                 return;
                             }
-                            console.log(result);
+                            //console.log(result);
 
                         });
 
@@ -163,7 +163,6 @@ class useController {
                         console.log(err);
                         return;
                     }
-                    console.log(result[0]["RefreshToken"]);
                     if (result[0]["RefreshToken"] === refreshTokens) {
                         console.log("yes");
                     }
@@ -171,6 +170,7 @@ class useController {
                         console.log("no");
                     }
                 });
+
             /*
                         const generId = v4();
                         const accessToken = TokenService.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
