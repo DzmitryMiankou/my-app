@@ -9,6 +9,7 @@ import { v4 as uuidv4, v4 } from 'uuid';
 import { sendEmail } from '../services/mail-service';
 import { resolve } from 'path';
 
+
 const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
@@ -96,12 +97,8 @@ class useController {
                 }
                 connection.query(updadaRefreshSQL, [refreshToken, data.id],
                     (err, result) => {
-                        if (err) {
-                            console.log(err);
-                            return;
-                        }
+                        if (err) return console.log(err);
                         console.log(`OK -- UPDATA refresh token`);
-
                     });
                 return res.cookie("refreshToken", refreshToken, {
                     httpOnly: true,
@@ -136,38 +133,17 @@ class useController {
     async refresh(req: Request, res: Response, next: NextFunction) {
         try {
             const refreshTokens = req.cookies["refreshToken"];
-            const { email, password } = req.body;
-            /*connection.query(sqlEm, email, (err, results, fields) => {
-                if (err) {
-                    return res.status(Number(process.env.NUMBER_500))
-                        .json({ error: err });
-                }
-                if (results.length === 0) {
-                    return res.status(Number(process.env.NUMBER_404))
-                        .json({ message: { errors: [{ msg: process.env.MESSAGE_404_NOT_USER }] } });
-                }
-                const fromSqlPass = (results[0]["password"]);
-                const validPassword = bcrypt.compareSync(password, fromSqlPass);
-                if (!validPassword) {
-                    return res.status(Number(process.env.NUMBER_400))
-                        .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_PASSWORD }] } });
-                }*/
+            if (!refreshTokens) throw new Error("No refresh token");
+
             const validRefreshToken = TokenService.validateRefreshToken(refreshTokens);
-            if (!validRefreshToken) {
-                return console.log("no");
-            }
-            console.log(validRefreshToken);
-            const rows = connection.query(searchRefreshSQL,
+            if (!validRefreshToken) return console.log("no");
+
+            connection.query(searchRefreshSQL,
                 (err, result) => {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    }
+                    if (err) return console.log(err);
+                    if (result[0]["RefreshToken"] !== refreshTokens) return console.log("no");
                     if (result[0]["RefreshToken"] === refreshTokens) {
-                        console.log("yes");
-                    }
-                    if (result[0]["RefreshToken"] !== refreshTokens) {
-                        console.log("no");
+                        return console.log("yes");
                     }
                 });
 
