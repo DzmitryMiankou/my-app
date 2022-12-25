@@ -18,6 +18,8 @@ const searchRefreshSQL = "SELECT `RefreshToken`  FROM `userRefreshToken`;";
 
 
 class useController {
+
+
     async auth(req: Request, res: Response, next: NextFunction) {
         try {
             const err = validationResult(req);
@@ -89,7 +91,7 @@ class useController {
                 }
                 const generId = v4();
                 const accessToken = TokenService.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
-                const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
+                const refreshToken = TokenService.generateToken({ id: results[0]["id"], id_4: generId, roles: "user" }).refreshToken;
                 const data = {
                     id: results[0]["id"],
                     nickName: results[0]["nickName"],
@@ -106,7 +108,6 @@ class useController {
                     secure: true,
                     sameSite: 'none'
                 }).status(200).json({ userData: { ...data }, "accessToken": accessToken });
-
             });
         } catch (error) {
             res.status(Number(process.env.NUMBER_500))
@@ -114,9 +115,12 @@ class useController {
         }
     }
 
+
     async logout(req: Request, res: Response, next: NextFunction) {
-        const { id } = req.body;
-        connection.query(updadaRefreshSQL, [null, id],
+        const refreshToken = await req.cookies["refreshToken"];
+        const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
+        if (!validRefreshToken) return console.log("no");
+        connection.query(updadaRefreshSQL, [null, validRefreshToken["id"]],
             (err, result) => {
                 if (err) {
                     console.log(err);
@@ -130,27 +134,40 @@ class useController {
         }).status(200).json("Вы вышли");
     }
 
+
     async refresh(req: Request, res: Response, next: NextFunction) {
         try {
-            const refreshTokens = req.cookies["refreshToken"];
-            if (!refreshTokens) throw new Error("No refresh token");
+            const refreshToken = await req.cookies["refreshToken"];
+            if (!refreshToken) return console.log("No refresh token");
 
-            const validRefreshToken = TokenService.validateRefreshToken(refreshTokens);
+            const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
             if (!validRefreshToken) return console.log("no");
 
             connection.query(searchRefreshSQL,
                 (err, result) => {
                     if (err) return console.log(err);
-                    if (result[0]["RefreshToken"] !== refreshTokens) return console.log("no");
-                    if (result[0]["RefreshToken"] === refreshTokens) {
+                    if (result[0]["RefreshToken"] !== refreshToken) return console.log("no");
+                    if (result[0]["RefreshToken"] === refreshToken) {
+                        /* const generId = v4();
+                         const accessToken = TokenService.generateToken({ id: validRefreshToken["id"], roles: "user" }).accessToken;
+                         const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
+                         connection.query(updadaRefreshSQL, [refreshToken, validRefreshToken["id"]],
+                             (err, result) => {
+                                 if (err) {
+                                     console.log(err);
+                                     return;
+                                 }
+                                 console.log(`OK -- UPDATA refresh token`);
+ 
+                             });
+                         console.log(validRefreshToken);*/
                         return console.log("yes");
                     }
                 });
 
             /*
-                        const generId = v4();
-                        const accessToken = TokenService.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
-                        const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
+                        
+                        
                         const data = {
                             id: results[0]["id"],
                             nickName: results[0]["nickName"],

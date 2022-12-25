@@ -91,7 +91,7 @@ class useController {
                     }
                     const generId = (0, uuid_1.v4)();
                     const accessToken = token_service_1.default.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
-                    const refreshToken = token_service_1.default.generateToken({ id: generId, roles: "user" }).refreshToken;
+                    const refreshToken = token_service_1.default.generateToken({ id: results[0]["id"], id_4: generId, roles: "user" }).refreshToken;
                     const data = {
                         id: results[0]["id"],
                         nickName: results[0]["nickName"],
@@ -118,8 +118,11 @@ class useController {
     }
     logout(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.body;
-            mySql_1.connection.query(updadaRefreshSQL, [null, id], (err, result) => {
+            const refreshToken = yield req.cookies["refreshToken"];
+            const validRefreshToken = token_service_1.default.validateRefreshToken(refreshToken);
+            if (!validRefreshToken)
+                return console.log("no");
+            mySql_1.connection.query(updadaRefreshSQL, [null, validRefreshToken["id"]], (err, result) => {
                 if (err) {
                     console.log(err);
                     return;
@@ -135,25 +138,37 @@ class useController {
     refresh(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const refreshTokens = req.cookies["refreshToken"];
-                if (!refreshTokens)
-                    throw new Error("No refresh token");
-                const validRefreshToken = token_service_1.default.validateRefreshToken(refreshTokens);
+                const refreshToken = yield req.cookies["refreshToken"];
+                if (!refreshToken)
+                    return console.log("No refresh token");
+                const validRefreshToken = token_service_1.default.validateRefreshToken(refreshToken);
                 if (!validRefreshToken)
                     return console.log("no");
                 mySql_1.connection.query(searchRefreshSQL, (err, result) => {
                     if (err)
                         return console.log(err);
-                    if (result[0]["RefreshToken"] !== refreshTokens)
+                    if (result[0]["RefreshToken"] !== refreshToken)
                         return console.log("no");
-                    if (result[0]["RefreshToken"] === refreshTokens) {
+                    if (result[0]["RefreshToken"] === refreshToken) {
+                        /* const generId = v4();
+                         const accessToken = TokenService.generateToken({ id: validRefreshToken["id"], roles: "user" }).accessToken;
+                         const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
+                         connection.query(updadaRefreshSQL, [refreshToken, validRefreshToken["id"]],
+                             (err, result) => {
+                                 if (err) {
+                                     console.log(err);
+                                     return;
+                                 }
+                                 console.log(`OK -- UPDATA refresh token`);
+ 
+                             });
+                         console.log(validRefreshToken);*/
                         return console.log("yes");
                     }
                 });
                 /*
-                            const generId = v4();
-                            const accessToken = TokenService.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
-                            const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
+                            
+                            
                             const data = {
                                 id: results[0]["id"],
                                 nickName: results[0]["nickName"],
