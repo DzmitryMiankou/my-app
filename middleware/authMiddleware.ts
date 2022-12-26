@@ -3,16 +3,17 @@ import { Request, Response, NextFunction } from 'express';
 
 export function AuthMiddleware(req: Request, res: Response, next: NextFunction) {
     const token = req.cookies["refreshToken"];
-    if (token) {
+    const accessToken = req.headers.authorisation;
+    if (accessToken) {
         //@ts-ignore
-        jwt.verify(token, process.env.SECRET_KEY, (err: any, decodedToken: any) => {
+        jwt.verify(accessToken, process.env.SECRET_KEY_ACCESS, (err: any, decodedToken: any) => {
             if (err) {
-                return res.redirect(307, 'http://localhost:3000/regist');
+                return res.redirect(401, 'http://localhost:3000/regist');
             } else {
                 next();
             }
         });
     } else {
-        return res.redirect(307, 'http://localhost:3000/regist');
+        return res.redirect(401, 'http://localhost:3000/regist');
     }
 };

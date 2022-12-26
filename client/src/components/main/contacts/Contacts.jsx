@@ -25,7 +25,14 @@ const Contacts = () => {
       Louding(false);
       try {
         dispatch(authActin(true));
-        const data = await request("http://localhost:5000/api/users");
+        const data = await request(
+          "http://localhost:5000/api/users",
+          "GET",
+          null,
+          {
+            authorisation: JSON.parse(localStorage.getItem("user")).accessToken,
+          }
+        );
         setAuth(true);
         Louding(true);
         console.log(`Authorization`);

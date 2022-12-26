@@ -137,6 +137,7 @@ class useController {
 
     async refresh(req: Request, res: Response, next: NextFunction) {
         try {
+
             const refreshToken = await req.cookies["refreshToken"];
             if (!refreshToken) return console.log("No refresh token");
 
@@ -161,7 +162,8 @@ class useController {
  
                              });
                          console.log(validRefreshToken);*/
-                        return console.log("yes");
+                        console.log("yes");
+                        return res.status(200)
                     }
                 });
 

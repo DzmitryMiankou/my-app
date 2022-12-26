@@ -7,9 +7,10 @@ const SignOut = () => {
   async function response(endPoint) {
     return await request(
       endPoint,
-      "POST",
-      JSON.stringify({ id: null }),
-      { Accept: "application/json", "Content-Type": "application/json" },
+      "GET",
+      null,
+      "application/json",
+
       "include"
     );
   }

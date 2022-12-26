@@ -163,7 +163,8 @@ class useController {
  
                              });
                          console.log(validRefreshToken);*/
-                        return console.log("yes");
+                        console.log("yes");
+                        return res.status(200);
                     }
                 });
                 /*

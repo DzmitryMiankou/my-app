@@ -20,6 +20,6 @@ router.post('/login', [
 ], users_controller_1.default.login);
 router.post('/logout', users_controller_1.default.logout);
 router.post('/activate/:link', users_controller_1.default.activate);
-router.post('/refresh', users_controller_1.default.refresh);
+router.get('/refresh', users_controller_1.default.refresh);
 router.get('/users', authMiddleware_1.AuthMiddleware, data_controller_1.default.usersList);
 exports.default = router;

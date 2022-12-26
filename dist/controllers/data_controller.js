@@ -14,6 +14,7 @@ const sqls = "SELECT id, nickName FROM `createUsers`";
 class useController {
     usersList(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
+            const refreshheaders = req.headers.authorisation;
             try {
                 mySql_1.connection.query(sqls, (err, results, fields) => {
                     return res.json(results);
