@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 
 export function AuthMiddleware(req: Request, res: Response, next: NextFunction) {
-    const token = req.cookies["refreshToken"];
     const accessToken = req.headers.authorisation;
     if (accessToken) {
         //@ts-ignore

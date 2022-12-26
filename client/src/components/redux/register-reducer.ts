@@ -8,16 +8,12 @@ export type InitialStateType = {
   nickName: string,
   email: string,
   password: string,
-  isAoth: boolean,
-  errorMessage: string
 }
 const initialState: InitialStateType = {
   id: null,
   nickName: "",
   email: "",
   password: "",
-  isAoth: false,
-  errorMessage: "",
 }
 
 const registerReducer = (state = initialState, action: any) => {

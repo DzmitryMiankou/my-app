@@ -11,8 +11,6 @@ const initialState = {
     nickName: "",
     email: "",
     password: "",
-    isAoth: false,
-    errorMessage: "",
 };
 const registerReducer = (state = initialState, action) => {
     let copy;

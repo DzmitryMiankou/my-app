@@ -9,10 +9,27 @@ import Contacts from "./components/main/contacts/Contacts";
 import Footer from "./components/footer/Footer";
 import Layout from "./components/main/learning/layout";
 import Registration from "./components/main/registration/Registration";
+import { getUsers } from "./components/api/usersAPI.ts";
+import { useDispatch } from "react-redux";
+import { authActin } from "./components/redux/auth-reducer.ts";
 const OtherComponent = React.lazy(() =>
   import("./components/main/myWorks/Works")
 );
+
 function App() {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    async function d() {
+      try {
+        const d = await getUsers();
+        dispatch(authActin(true));
+        console.log(d);
+      } catch (error) {
+        dispatch(authActin(false));
+      }
+    }
+    d();
+  }, [dispatch]);
   return (
     <div className="App">
       <Header />

@@ -5,12 +5,13 @@ import { useHTTP } from "./../../../.././hook/http";
 import Choose from "./choose/Choose";
 import InSign from "./in-Sign/InSign";
 import RegButton from "./reg-button/RegButton";
+import { useNavigate } from "react-router-dom";
 
 const ButtonBlock = (props) => {
+  const navigate = useNavigate();
   const { request } = useHTTP();
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
-
   async function response(endPoint) {
     return await request(
       endPoint,
@@ -38,6 +39,7 @@ const ButtonBlock = (props) => {
 
   const toLogin = async (e) => {
     e.preventDefault();
+
     if (email === "" || password === "") {
       return props.set("email и password обязательны для заполнения");
     }
@@ -45,9 +47,8 @@ const ButtonBlock = (props) => {
       const res = await response("http://localhost:5000/api/login");
       if (res.message === undefined) {
         localStorage.setItem("user", JSON.stringify(res));
-        props.set("Операция прошла успешно");
         dispatch(props.registerActin());
-        return;
+        navigate("/chat");
       }
       props.set(res.message.errors[0]["msg"]);
     } catch (error) {

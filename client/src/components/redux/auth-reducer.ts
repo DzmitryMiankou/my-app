@@ -1,9 +1,6 @@
 const AUTH = "AUTH";
 
 
-
-
-
 export type InitialStateType = {
     isAoth: boolean,
 }

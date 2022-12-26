@@ -18,7 +18,7 @@ router.post('/login', [
     (0, express_validator_1.check)('password', 'Длинна от 6 и до 13').isLength({ min: 6, max: 13 }),
     (0, express_validator_1.check)('email', 'Некоректный адрес почты').normalizeEmail().isEmail(),
 ], users_controller_1.default.login);
-router.post('/logout', users_controller_1.default.logout);
+router.get('/logout', users_controller_1.default.logout);
 router.post('/activate/:link', users_controller_1.default.activate);
 router.get('/refresh', users_controller_1.default.refresh);
 router.get('/users', authMiddleware_1.AuthMiddleware, data_controller_1.default.usersList);

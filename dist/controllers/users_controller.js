@@ -56,7 +56,7 @@ class useController {
                         maxAge: 2592000000,
                         secure: true,
                         sameSite: 'none'
-                    }).status(200).json({ userData: { usId }, token: { "accessToken": accessToken, "refreshToken": refreshToken } });
+                    }).status(200).json({ userData: { usId }, "accessToken": accessToken });
                 });
             }
             catch (error) {
