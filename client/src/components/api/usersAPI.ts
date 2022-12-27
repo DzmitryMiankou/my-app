@@ -7,5 +7,8 @@ export const getUsers = async () => {
             authorisation: JSON.parse(localStorage.getItem("user")).accessToken,
         }
     })
+    if (request.status === 401) {
+        console.log("Пользователь не авторизован")
+    }
     return await request.json();
 }

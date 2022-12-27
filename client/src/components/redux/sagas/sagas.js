@@ -1,8 +1,8 @@
+import { take } from "rxjs";
 import { getUsers } from "../../api/usersAPI.ts";
-import { call } from "redux-saga/effects";
 
 export function* workerSaga() {
-  const data = yield call(getUsers());
+  const data = yield getUsers();
   console.log(data);
 }
 

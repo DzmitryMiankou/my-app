@@ -18,6 +18,9 @@ const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
             authorisation: JSON.parse(localStorage.getItem("user")).accessToken,
         }
     });
+    if (request.status === 401) {
+        console.log("Пользователь не авторизован");
+    }
     return yield request.json();
 });
 exports.getUsers = getUsers;
