@@ -23,7 +23,7 @@ const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
 const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
-const searchRefreshSQL = "SELECT `RefreshToken`  FROM `userRefreshToken`;";
+const searchRefreshSQL = "SELECT * FROM `userRefreshToken` WHERE `us_id` LIKE (?);";
 class useController {
     auth(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -53,7 +53,7 @@ class useController {
                     //await sendEmail(email, nickName);//////////////////////////////////
                     return res.cookie("refreshToken", refreshToken, {
                         httpOnly: true,
-                        maxAge: 2592000000,
+                        maxAge: 1296000000,
                         secure: true,
                         sameSite: 'none'
                     }).status(200).json({ userData: { usId }, "accessToken": accessToken });
@@ -90,13 +90,13 @@ class useController {
                             .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_PASSWORD }] } });
                     }
                     const generId = (0, uuid_1.v4)();
-                    const accessToken = token_service_1.default.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
-                    const refreshToken = token_service_1.default.generateToken({ id: results[0]["id"], id_4: generId, roles: "user" }).refreshToken;
                     const data = {
                         id: results[0]["id"],
                         nickName: results[0]["nickName"],
                         email: results[0]["email"],
                     };
+                    const accessToken = token_service_1.default.generateToken({ id: data.id, roles: "user" }).accessToken;
+                    const refreshToken = token_service_1.default.generateToken({ id: data.id, nickName: data.nickName, email: data.email, id_4: generId, roles: "user" }).refreshToken;
                     mySql_1.connection.query(updadaRefreshSQL, [refreshToken, data.id], (err, result) => {
                         if (err)
                             return console.log(err);
@@ -104,7 +104,7 @@ class useController {
                     });
                     return res.cookie("refreshToken", refreshToken, {
                         httpOnly: true,
-                        maxAge: 2592000000,
+                        maxAge: 1296000000,
                         secure: true,
                         sameSite: 'none'
                     }).status(200).json({ userData: Object.assign({}, data), "accessToken": accessToken });
@@ -121,7 +121,7 @@ class useController {
             const refreshToken = yield req.cookies["refreshToken"];
             const validRefreshToken = token_service_1.default.validateRefreshToken(refreshToken);
             if (!validRefreshToken)
-                return console.log("no");
+                return console.log("noLogout");
             mySql_1.connection.query(updadaRefreshSQL, [null, validRefreshToken["id"]], (err, result) => {
                 if (err) {
                     console.log(err);
@@ -143,57 +143,39 @@ class useController {
                     return console.log("No refresh token");
                 const validRefreshToken = token_service_1.default.validateRefreshToken(refreshToken);
                 if (!validRefreshToken)
-                    return console.log("no");
-                mySql_1.connection.query(searchRefreshSQL, (err, result) => {
+                    return console.log("noRefresh");
+                const data = {
+                    id: validRefreshToken["id"],
+                    nickName: validRefreshToken["nickName"],
+                    email: validRefreshToken["email"],
+                };
+                const generId = (0, uuid_1.v4)();
+                mySql_1.connection.query(searchRefreshSQL, [data.id], (err, result) => {
                     if (err)
                         return console.log(err);
                     if (result[0]["RefreshToken"] !== refreshToken)
-                        return console.log("no");
+                        return console.log("noDataBase");
                     if (result[0]["RefreshToken"] === refreshToken) {
-                        /* const generId = v4();
-                         const accessToken = TokenService.generateToken({ id: validRefreshToken["id"], roles: "user" }).accessToken;
-                         const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
-                         connection.query(updadaRefreshSQL, [refreshToken, validRefreshToken["id"]],
-                             (err, result) => {
-                                 if (err) {
-                                     console.log(err);
-                                     return;
-                                 }
-                                 console.log(`OK -- UPDATA refresh token`);
- 
-                             });
-                         console.log(validRefreshToken);*/
-                        console.log("yes");
-                        return res.status(200);
+                        const accessToken = token_service_1.default.generateToken({ id: data.id, roles: "user" }).accessToken;
+                        const refreshToken = token_service_1.default.generateToken({ id: data.id, nickName: data.nickName, email: data.email, id_4: generId, roles: "user" }).refreshToken;
+                        mySql_1.connection.query(updadaRefreshSQL, [refreshToken, data.id], (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                return;
+                            }
+                            console.log(`OK -- UPDATA refresh token`);
+                        });
+                        return res.cookie("refreshToken", refreshToken, {
+                            httpOnly: true,
+                            maxAge: 1296000000,
+                            secure: true,
+                            sameSite: 'none'
+                        }).status(200).json({ userData: Object.assign({}, data), "accessToken": accessToken });
                     }
                 });
-                /*
-                            
-                            
-                            const data = {
-                                id: results[0]["id"],
-                                nickName: results[0]["nickName"],
-                                email: results[0]["email"],
-                            }
-                            connection.query(updadaRefreshSQL, [refreshToken, data.id],
-                                (err, result) => {
-                                    if (err) {
-                                        console.log(err);
-                                        return;
-                                    }
-                                    console.log(`OK -- UPDATA refresh token`);
-                
-                                });
-                            return res.cookie("refreshToken", refreshToken, {
-                                httpOnly: true,
-                                maxAge: 2592000000,//30 days
-                                secure: true,
-                                sameSite: 'none'
-                            }).status(200).json({ userData: { ...data }, "accessToken": accessToken });
-                
-                        });*/
             }
             catch (error) {
+                console.log(error);
             }
         });
     }

@@ -9,9 +9,9 @@ dotenv_1.default.config();
 class TokenService {
     generateToken(payLoad) {
         //@ts-ignore
-        const accessToken = jsonwebtoken_1.default.sign(payLoad, process.env.SECRET_KEY_ACCESS, { expiresIn: '30m' });
+        const accessToken = jsonwebtoken_1.default.sign(payLoad, process.env.SECRET_KEY_ACCESS, { expiresIn: '50m' });
         //@ts-ignore
-        const refreshToken = jsonwebtoken_1.default.sign(payLoad, process.env.SECRET_KEY, { expiresIn: '30d' });
+        const refreshToken = jsonwebtoken_1.default.sign(payLoad, process.env.SECRET_KEY, { expiresIn: '10d' });
         return {
             accessToken,
             refreshToken

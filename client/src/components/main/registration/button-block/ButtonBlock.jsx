@@ -48,7 +48,7 @@ const ButtonBlock = (props) => {
       if (res.message === undefined) {
         localStorage.setItem("user", JSON.stringify(res));
         dispatch(props.registerActin());
-        navigate("/chat");
+        return navigate("/chat");
       }
       props.set(res.message.errors[0]["msg"]);
     } catch (error) {

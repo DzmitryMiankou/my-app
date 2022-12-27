@@ -5,9 +5,9 @@ dotenv.config();
 class TokenService {
     generateToken(payLoad: Object) {
         //@ts-ignore
-        const accessToken = jwt.sign(payLoad, process.env.SECRET_KEY_ACCESS, { expiresIn: '30m' });
+        const accessToken = jwt.sign(payLoad, process.env.SECRET_KEY_ACCESS, { expiresIn: '50m' });
         //@ts-ignore
-        const refreshToken = jwt.sign(payLoad, process.env.SECRET_KEY, { expiresIn: '30d' });
+        const refreshToken = jwt.sign(payLoad, process.env.SECRET_KEY, { expiresIn: '10d' });
         return {
             accessToken,
             refreshToken

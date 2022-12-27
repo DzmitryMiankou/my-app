@@ -21,15 +21,18 @@ function App() {
   React.useEffect(() => {
     async function d() {
       try {
-        const d = await getUsers();
         dispatch(authActin(true));
-        console.log(d);
+        const a = await getUsers();
+        if (a === undefined) {
+          await getUsers();
+        }
       } catch (error) {
         dispatch(authActin(false));
       }
     }
     d();
   }, [dispatch]);
+
   return (
     <div className="App">
       <Header />

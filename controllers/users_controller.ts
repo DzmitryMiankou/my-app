@@ -7,18 +7,16 @@ import { connection } from '../MySQL/mySql';
 import TokenService from '../services/token-service';
 import { v4 as uuidv4, v4 } from 'uuid';
 import { sendEmail } from '../services/mail-service';
-import { resolve } from 'path';
 
 
 const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
 const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
 const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
 const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
-const searchRefreshSQL = "SELECT `RefreshToken`  FROM `userRefreshToken`;";
+const searchRefreshSQL = "SELECT * FROM `userRefreshToken` WHERE `us_id` LIKE (?);"
 
 
 class useController {
-
 
     async auth(req: Request, res: Response, next: NextFunction) {
         try {
@@ -51,7 +49,7 @@ class useController {
                     //await sendEmail(email, nickName);//////////////////////////////////
                     return res.cookie("refreshToken", refreshToken, {
                         httpOnly: true,
-                        maxAge: 2592000000,//30 dayss
+                        maxAge: 1296000000,//15 days
                         secure: true,
                         sameSite: 'none'
                     }).status(200).json({ userData: { usId }, "accessToken": accessToken });
@@ -90,13 +88,13 @@ class useController {
                         .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_PASSWORD }] } });
                 }
                 const generId = v4();
-                const accessToken = TokenService.generateToken({ id: results[0]["id"], roles: "user" }).accessToken;
-                const refreshToken = TokenService.generateToken({ id: results[0]["id"], id_4: generId, roles: "user" }).refreshToken;
                 const data = {
                     id: results[0]["id"],
                     nickName: results[0]["nickName"],
                     email: results[0]["email"],
                 }
+                const accessToken = TokenService.generateToken({ id: data.id, roles: "user" }).accessToken;
+                const refreshToken = TokenService.generateToken({ id: data.id, nickName: data.nickName, email: data.email, id_4: generId, roles: "user" }).refreshToken;
                 connection.query(updadaRefreshSQL, [refreshToken, data.id],
                     (err, result) => {
                         if (err) return console.log(err);
@@ -104,7 +102,7 @@ class useController {
                     });
                 return res.cookie("refreshToken", refreshToken, {
                     httpOnly: true,
-                    maxAge: 2592000000,//30 days
+                    maxAge: 1296000000,//15 days
                     secure: true,
                     sameSite: 'none'
                 }).status(200).json({ userData: { ...data }, "accessToken": accessToken });
@@ -119,7 +117,7 @@ class useController {
     async logout(req: Request, res: Response, next: NextFunction) {
         const refreshToken = await req.cookies["refreshToken"];
         const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
-        if (!validRefreshToken) return console.log("no");
+        if (!validRefreshToken) return console.log("noLogout");
         connection.query(updadaRefreshSQL, [null, validRefreshToken["id"]],
             (err, result) => {
                 if (err) {
@@ -142,39 +140,20 @@ class useController {
             if (!refreshToken) return console.log("No refresh token");
 
             const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
-            if (!validRefreshToken) return console.log("no");
-
-            connection.query(searchRefreshSQL,
+            if (!validRefreshToken) return console.log("noRefresh");
+            const data = {
+                id: validRefreshToken["id"],
+                nickName: validRefreshToken["nickName"],
+                email: validRefreshToken["email"],
+            }
+            const generId = v4();
+            connection.query(searchRefreshSQL, [data.id],
                 (err, result) => {
                     if (err) return console.log(err);
-                    if (result[0]["RefreshToken"] !== refreshToken) return console.log("no");
+                    if (result[0]["RefreshToken"] !== refreshToken) return console.log("noDataBase");
                     if (result[0]["RefreshToken"] === refreshToken) {
-                        /* const generId = v4();
-                         const accessToken = TokenService.generateToken({ id: validRefreshToken["id"], roles: "user" }).accessToken;
-                         const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
-                         connection.query(updadaRefreshSQL, [refreshToken, validRefreshToken["id"]],
-                             (err, result) => {
-                                 if (err) {
-                                     console.log(err);
-                                     return;
-                                 }
-                                 console.log(`OK -- UPDATA refresh token`);
- 
-                             });
-                         console.log(validRefreshToken);*/
-                        console.log("yes");
-                        return res.status(200)
-                    }
-                });
-
-            /*
-                        
-                        
-                        const data = {
-                            id: results[0]["id"],
-                            nickName: results[0]["nickName"],
-                            email: results[0]["email"],
-                        }
+                        const accessToken = TokenService.generateToken({ id: data.id, roles: "user" }).accessToken;
+                        const refreshToken = TokenService.generateToken({ id: data.id, nickName: data.nickName, email: data.email, id_4: generId, roles: "user" }).refreshToken;
                         connection.query(updadaRefreshSQL, [refreshToken, data.id],
                             (err, result) => {
                                 if (err) {
@@ -182,19 +161,18 @@ class useController {
                                     return;
                                 }
                                 console.log(`OK -- UPDATA refresh token`);
-            
+
                             });
                         return res.cookie("refreshToken", refreshToken, {
                             httpOnly: true,
-                            maxAge: 2592000000,//30 days
+                            maxAge: 1296000000,//15 days
                             secure: true,
                             sameSite: 'none'
                         }).status(200).json({ userData: { ...data }, "accessToken": accessToken });
-            
-                    });*/
-
+                    }
+                });
         } catch (error) {
-
+            console.log(error);
         }
     }
 
