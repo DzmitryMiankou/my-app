@@ -3,19 +3,16 @@ import styleSign from "./SignOut.module.scss";
 import { useHTTP } from "./../../.././hook/http";
 
 const SignOut = () => {
-  const { request } = useHTTP();
-  async function response(endPoint) {
-    return await request(endPoint, "GET");
-  }
   const toAuth = async (e) => {
     localStorage.removeItem("user");
     window.location.reload();
-    try {
-      await response("http://localhost:5000/api/logout");
-    } catch (error) {
-      console.log(error);
-    }
+    const request = await fetch("http://localhost:5000/api/logoutUsers", {
+      method: "GET",
+      credentials: "include",
+    });
+    return request;
   };
+
   return (
     <button onClick={toAuth} className={styleSign.container}>
       <p>Выйти</p>

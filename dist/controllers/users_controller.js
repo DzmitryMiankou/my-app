@@ -19,11 +19,11 @@ const validation_result_1 = require("express-validator/src/validation-result");
 const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const uuid_1 = require("uuid");
-const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
-const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
-const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
-const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
-const searchRefreshSQL = "SELECT * FROM `userRefreshToken` WHERE `us_id` LIKE (?);";
+const $searchEmailSQL = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
+const $searchRefreshSQL = "SELECT * FROM `userRefreshToken` WHERE `us_id` LIKE (?);";
+const $createUsersSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
+const $createRefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
+const $updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
 class useController {
     auth(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -35,7 +35,7 @@ class useController {
                 const { id, nickName, email, password } = req.body;
                 const hashPassword = yield bcrypt_1.default.hash(password, 3);
                 const generId = (0, uuid_1.v4)();
-                mySql_1.connection.query(postSQL, [id, nickName, email, hashPassword, generId], (err, result) => {
+                mySql_1.connection.query($createUsersSQL, [id, nickName, email, hashPassword, generId], (err, result) => {
                     if (err) {
                         res.status(Number(process.env.NUMBER_400))
                             .json({ message: { errors: [{ msg: process.env.MESSAGE_400_BAD_EMAIL }] } });
@@ -43,7 +43,7 @@ class useController {
                     const usId = result.insertId;
                     const accessToken = token_service_1.default.generateToken({ id: usId, roles: "user" }).accessToken;
                     const refreshToken = token_service_1.default.generateToken({ id: generId, roles: "user" }).refreshToken;
-                    mySql_1.connection.query(RefreshSQL, [usId, refreshToken], (err, result) => {
+                    mySql_1.connection.query($createRefreshSQL, [usId, refreshToken], (err, result) => {
                         if (err) {
                             console.log(err);
                             return;
@@ -74,7 +74,7 @@ class useController {
                         .json({ message: err });
                 }
                 const { email, password } = req.body;
-                mySql_1.connection.query(sqlEm, email, (err, results, fields) => {
+                mySql_1.connection.query($searchEmailSQL, email, (err, results, fields) => {
                     if (err) {
                         return res.status(Number(process.env.NUMBER_500))
                             .json({ error: err });
@@ -97,7 +97,7 @@ class useController {
                     };
                     const accessToken = token_service_1.default.generateToken({ id: data.id, roles: "user" }).accessToken;
                     const refreshToken = token_service_1.default.generateToken({ id: data.id, nickName: data.nickName, email: data.email, id_4: generId, roles: "user" }).refreshToken;
-                    mySql_1.connection.query(updadaRefreshSQL, [refreshToken, data.id], (err, result) => {
+                    mySql_1.connection.query($updadaRefreshSQL, [refreshToken, data.id], (err, result) => {
                         if (err)
                             return console.log(err);
                         console.log(`OK -- UPDATA refresh token`);
@@ -118,21 +118,26 @@ class useController {
     }
     logout(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const refreshToken = yield req.cookies["refreshToken"];
-            const validRefreshToken = token_service_1.default.validateRefreshToken(refreshToken);
-            if (!validRefreshToken)
-                return console.log("noLogout");
-            mySql_1.connection.query(updadaRefreshSQL, [null, validRefreshToken["id"]], (err, result) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                console.log(`OK-- DELETE refresh token`);
-            });
-            res.clearCookie("refreshToken", {
-                secure: true,
-                sameSite: "none",
-            }).status(200).json("Вы вышли");
+            try {
+                const refreshToken = yield req.cookies["refreshToken"];
+                const validRefreshToken = token_service_1.default.validateRefreshToken(refreshToken);
+                if (!validRefreshToken)
+                    return console.log("noLogout");
+                mySql_1.connection.query($updadaRefreshSQL, [null, validRefreshToken["id"]], (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    console.log(`OK-- DELETE refresh token`);
+                });
+                res.clearCookie("refreshToken", {
+                    secure: true,
+                    sameSite: "none",
+                }).status(200).json("Вы вышли");
+            }
+            catch (error) {
+                console.log(error);
+            }
         });
     }
     refresh(req, res, next) {
@@ -150,7 +155,7 @@ class useController {
                     email: validRefreshToken["email"],
                 };
                 const generId = (0, uuid_1.v4)();
-                mySql_1.connection.query(searchRefreshSQL, [data.id], (err, result) => {
+                mySql_1.connection.query($searchRefreshSQL, [data.id], (err, result) => {
                     if (err)
                         return console.log(err);
                     if (result[0]["RefreshToken"] !== refreshToken)
@@ -158,7 +163,7 @@ class useController {
                     if (result[0]["RefreshToken"] === refreshToken) {
                         const accessToken = token_service_1.default.generateToken({ id: data.id, roles: "user" }).accessToken;
                         const refreshToken = token_service_1.default.generateToken({ id: data.id, nickName: data.nickName, email: data.email, id_4: generId, roles: "user" }).refreshToken;
-                        mySql_1.connection.query(updadaRefreshSQL, [refreshToken, data.id], (err, result) => {
+                        mySql_1.connection.query($updadaRefreshSQL, [refreshToken, data.id], (err, result) => {
                             if (err) {
                                 console.log(err);
                                 return;

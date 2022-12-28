@@ -1,17 +1,40 @@
 import { connection } from '../MySQL/mySql';
-const sqls = "SELECT id, nickName FROM `createUsers`";
 import { Request, Response, NextFunction } from 'express';
+import TokenService from '../services/token-service';
+
+const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
+const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?, ?, ?);";
 class useController {
     async usersList(req: Request, res: Response, next: NextFunction) {
         const refreshheaders = req.headers.authorisation;
         try {
-            connection.query(sqls, (err, results, fields) => {
+            connection.query($searchIdNickNameSQL, (err, results, fields) => {
                 return res.json(results);
             });
         } catch (error) {
             res.status(Number(process.env.NUMBER_500))
-                .json({ message: process.env.MESSAGE_500 })
+                .json({ message: process.env.MESSAGE_500 });
         }
     }
+    async createDialogues(req: Request, res: Response, next: NextFunction) {
+        try {
+            const refreshToken = await req.cookies["refreshToken"];
+            if (!refreshToken) return console.log("No refresh token");
+            const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
+            if (!validRefreshToken) return console.log("noRefresh");
+            const data = {
+                id: validRefreshToken["id"],
+                nickName: validRefreshToken["nickName"],
+                email: validRefreshToken["email"],
+            }
+            connection.query($createDialoguesSQL, [null, data.id, null, null, null, null,], (err, results, fields) => {
+                if (err) return console.log(err);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
+
 export default new useController();

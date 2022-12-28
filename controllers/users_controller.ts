@@ -9,11 +9,12 @@ import { v4 as uuidv4, v4 } from 'uuid';
 import { sendEmail } from '../services/mail-service';
 
 
-const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
-const postSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
-const RefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
-const updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
-const searchRefreshSQL = "SELECT * FROM `userRefreshToken` WHERE `us_id` LIKE (?);"
+const $searchEmailSQL = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
+const $searchRefreshSQL = "SELECT * FROM `userRefreshToken` WHERE `us_id` LIKE (?);"
+const $createUsersSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
+const $createRefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
+const $updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
+
 
 
 class useController {
@@ -27,7 +28,7 @@ class useController {
             const { id, nickName, email, password } = req.body;
             const hashPassword = await bcrypt.hash(password, 3);
             const generId = v4();
-            connection.query(postSQL, [id, nickName, email, hashPassword, generId],
+            connection.query($createUsersSQL, [id, nickName, email, hashPassword, generId],
                 (err, result) => {
                     if (err) {
                         res.status(Number(process.env.NUMBER_400))
@@ -36,7 +37,7 @@ class useController {
                     const usId = result.insertId;
                     const accessToken = TokenService.generateToken({ id: usId, roles: "user" }).accessToken;
                     const refreshToken = TokenService.generateToken({ id: generId, roles: "user" }).refreshToken;
-                    connection.query(RefreshSQL, [usId, refreshToken],
+                    connection.query($createRefreshSQL, [usId, refreshToken],
                         (err, result) => {
                             if (err) {
                                 console.log(err);
@@ -72,7 +73,7 @@ class useController {
             }
 
             const { email, password } = req.body;
-            connection.query(sqlEm, email, (err, results, fields) => {
+            connection.query($searchEmailSQL, email, (err, results, fields) => {
                 if (err) {
                     return res.status(Number(process.env.NUMBER_500))
                         .json({ error: err });
@@ -95,7 +96,7 @@ class useController {
                 }
                 const accessToken = TokenService.generateToken({ id: data.id, roles: "user" }).accessToken;
                 const refreshToken = TokenService.generateToken({ id: data.id, nickName: data.nickName, email: data.email, id_4: generId, roles: "user" }).refreshToken;
-                connection.query(updadaRefreshSQL, [refreshToken, data.id],
+                connection.query($updadaRefreshSQL, [refreshToken, data.id],
                     (err, result) => {
                         if (err) return console.log(err);
                         console.log(`OK -- UPDATA refresh token`);
@@ -115,21 +116,25 @@ class useController {
 
 
     async logout(req: Request, res: Response, next: NextFunction) {
-        const refreshToken = await req.cookies["refreshToken"];
-        const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
-        if (!validRefreshToken) return console.log("noLogout");
-        connection.query(updadaRefreshSQL, [null, validRefreshToken["id"]],
-            (err, result) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                console.log(`OK-- DELETE refresh token`);
-            });
-        res.clearCookie("refreshToken", {
-            secure: true,
-            sameSite: "none",
-        }).status(200).json("Вы вышли");
+        try {
+            const refreshToken = await req.cookies["refreshToken"];
+            const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
+            if (!validRefreshToken) return console.log("noLogout");
+            connection.query($updadaRefreshSQL, [null, validRefreshToken["id"]],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    console.log(`OK-- DELETE refresh token`);
+                });
+            res.clearCookie("refreshToken", {
+                secure: true,
+                sameSite: "none",
+            }).status(200).json("Вы вышли");
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -147,14 +152,14 @@ class useController {
                 email: validRefreshToken["email"],
             }
             const generId = v4();
-            connection.query(searchRefreshSQL, [data.id],
+            connection.query($searchRefreshSQL, [data.id],
                 (err, result) => {
                     if (err) return console.log(err);
                     if (result[0]["RefreshToken"] !== refreshToken) return console.log("noDataBase");
                     if (result[0]["RefreshToken"] === refreshToken) {
                         const accessToken = TokenService.generateToken({ id: data.id, roles: "user" }).accessToken;
                         const refreshToken = TokenService.generateToken({ id: data.id, nickName: data.nickName, email: data.email, id_4: generId, roles: "user" }).refreshToken;
-                        connection.query(updadaRefreshSQL, [refreshToken, data.id],
+                        connection.query($updadaRefreshSQL, [refreshToken, data.id],
                             (err, result) => {
                                 if (err) {
                                     console.log(err);

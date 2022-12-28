@@ -14,9 +14,10 @@ router.post('/login', [
     check('password', 'Длинна от 6 и до 13').isLength({ min: 6, max: 13 }),
     check('email', 'Некоректный адрес почты').normalizeEmail().isEmail(),
 ], users_controller.login);
-router.get('/logout', users_controller.logout);
+router.get('/logoutUsers', users_controller.logout);
 router.post('/activate/:link', users_controller.activate);
 router.get('/refresh', users_controller.refresh);
 router.get('/users', AuthMiddleware, data_controller.usersList);
+router.get('/dialogues', AuthMiddleware, data_controller.createDialogues);
 
 export default router;

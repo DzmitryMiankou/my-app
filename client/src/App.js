@@ -22,10 +22,7 @@ function App() {
     async function d() {
       try {
         dispatch(authActin(true));
-        const a = await getUsers();
-        if (a === undefined) {
-          await getUsers();
-        }
+        await getUsers();
       } catch (error) {
         dispatch(authActin(false));
       }
