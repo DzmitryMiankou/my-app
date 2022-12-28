@@ -1,6 +1,5 @@
 import React from "react";
 import styleSign from "./SignOut.module.scss";
-import { useHTTP } from "./../../.././hook/http";
 
 const SignOut = () => {
   const toAuth = async (e) => {
