@@ -19,7 +19,6 @@ const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?, ?, 
 class useController {
     usersList(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const refreshheaders = req.headers.authorisation;
             try {
                 mySql_1.connection.query($searchIdNickNameSQL, (err, results, fields) => {
                     return res.json(results);
@@ -45,10 +44,11 @@ class useController {
                     nickName: validRefreshToken["nickName"],
                     email: validRefreshToken["email"],
                 };
-                mySql_1.connection.query($createDialoguesSQL, [null, data.id, null, null, null, null,], (err, results, fields) => {
+                mySql_1.connection.query($createDialoguesSQL, [null, data.id, req.body.id, null, null, null,], (err, results, fields) => {
                     if (err)
                         return console.log(err);
                 });
+                return res.status(201).json({ messeges: "Good" });
             }
             catch (error) {
                 console.log(error);

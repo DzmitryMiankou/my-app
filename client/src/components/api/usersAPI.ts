@@ -1,10 +1,10 @@
 export const getUsers = async () => {
     async function getListUsers() {
         const request = await fetch("http://localhost:5000/api/users", {
+            method: "GET",
             headers: {
-                method: "GET",
                 //@ts-ignore
-                authorisation: JSON.parse(localStorage.getItem("user")).accessToken,
+                Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
             }
         })
         return request;

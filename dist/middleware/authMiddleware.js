@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthMiddleware = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function AuthMiddleware(req, res, next) {
-    const accessToken = req.headers.authorisation;
+    const accessToken = req.headers.authentication;
     if (accessToken) {
         //@ts-ignore
         jsonwebtoken_1.default.verify(accessToken, process.env.SECRET_KEY_ACCESS, (err, decodedToken) => {

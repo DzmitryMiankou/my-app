@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 
 export function AuthMiddleware(req: Request, res: Response, next: NextFunction) {
-    const accessToken = req.headers.authorisation;
+    const accessToken = req.headers.authentication;
     if (accessToken) {
         //@ts-ignore
         jwt.verify(accessToken, process.env.SECRET_KEY_ACCESS, (err: any, decodedToken: any) => {

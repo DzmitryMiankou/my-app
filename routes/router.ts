@@ -18,6 +18,6 @@ router.get('/logoutUsers', users_controller.logout);
 router.post('/activate/:link', users_controller.activate);
 router.get('/refresh', users_controller.refresh);
 router.get('/users', AuthMiddleware, data_controller.usersList);
-router.get('/dialogues', AuthMiddleware, data_controller.createDialogues);
+router.post('/dialogues', AuthMiddleware, data_controller.createDialogues);
 
 export default router;

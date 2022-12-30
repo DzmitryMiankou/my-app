@@ -1,15 +1,26 @@
 import React from "react";
 import styleSign from "./SignOut.module.scss";
+import { useDispatch } from "react-redux";
+import { authActin } from "./../.././redux/auth-reducer.ts";
+import { useNavigate } from "react-router-dom";
 
 const SignOut = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const toAuth = async (e) => {
+    const a = window.confirm(
+      "Эта страница просит Вас подтвердить, что вы хотите уйти."
+    );
+    if (!a) return;
     localStorage.removeItem("user");
-    window.location.reload();
-    const request = await fetch("http://localhost:5000/api/logoutUsers", {
+    //window.location.reload();
+    await fetch("http://localhost:5000/api/logoutUsers", {
       method: "GET",
       credentials: "include",
     });
-    return request;
+    dispatch(authActin(false));
+    return navigate("/");
   };
 
   return (

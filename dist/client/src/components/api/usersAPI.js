@@ -14,10 +14,10 @@ const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     function getListUsers() {
         return __awaiter(this, void 0, void 0, function* () {
             const request = yield fetch("http://localhost:5000/api/users", {
+                method: "GET",
                 headers: {
-                    method: "GET",
                     //@ts-ignore
-                    authorisation: JSON.parse(localStorage.getItem("user")).accessToken,
+                    Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
                 }
             });
             return request;
