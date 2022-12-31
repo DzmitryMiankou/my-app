@@ -1,10 +1,12 @@
 import { connection } from '../MySQL/mySql';
 import { Request, Response, NextFunction } from 'express';
 import TokenService from '../services/token-service';
-import { rmSync } from 'node:fs';
 
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
+const $searchDialoguesSQL = "SELECT * FROM `userDialogues`";
 const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
+const grde = "SELECT * FROM `userDialogues`, `createUsers` WHERE `user_id2`  = `id`;";
+
 
 class useController {
 
@@ -36,8 +38,26 @@ class useController {
             }
             connection.query($createDialoguesSQL, [null, data.id, req.body.id, dateTime], (err, results, fields) => {
                 if (err) return console.log(err);
+
             });
+
             return res.status(201).json({ messeges: "Good" });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    async getDialogues(req: Request, res: Response, next: NextFunction) {
+        try {
+            connection.query($searchDialoguesSQL, (err, results, fields) => {
+                console.log(results);
+                return res.json(results);
+            });
+            connection.query(grde, (err, results, fields) => {
+                console.log(results);
+                return;
+            });
         } catch (error) {
             console.log(error);
         }

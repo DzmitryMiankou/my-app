@@ -23,4 +23,5 @@ router.post('/activate/:link', users_controller_1.default.activate);
 router.get('/refresh', users_controller_1.default.refresh);
 router.get('/users', authMiddleware_1.AuthMiddleware, data_controller_1.default.usersList);
 router.post('/dialogues', authMiddleware_1.AuthMiddleware, data_controller_1.default.createDialogues);
+router.get('/chat', authMiddleware_1.AuthMiddleware, data_controller_1.default.getDialogues);
 exports.default = router;

@@ -10,7 +10,7 @@ const UsersList = ({ id, nickName }) => {
         "Content-Type": "application/json",
         Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
       },
-      body: JSON.stringify({ id: id }),
+      body: JSON.stringify({ id: id, nickName: nickName }),
     });
   };
   return (
