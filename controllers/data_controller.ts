@@ -4,7 +4,7 @@ import TokenService from '../services/token-service';
 import { rmSync } from 'node:fs';
 
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
-const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?, ?, ?);";
+const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
 
 class useController {
 
@@ -23,6 +23,8 @@ class useController {
 
     async createDialogues(req: Request, res: Response, next: NextFunction) {
         try {
+            const now = new Date().toJSON();
+            const dateTime = new Date(now);
             const refreshToken = await req.cookies["refreshToken"];
             if (!refreshToken) return console.log("No refresh token");
             const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
@@ -32,7 +34,7 @@ class useController {
                 nickName: validRefreshToken["nickName"],
                 email: validRefreshToken["email"],
             }
-            connection.query($createDialoguesSQL, [null, data.id, req.body.id, null, null, null,], (err, results, fields) => {
+            connection.query($createDialoguesSQL, [null, data.id, req.body.id, dateTime], (err, results, fields) => {
                 if (err) return console.log(err);
             });
             return res.status(201).json({ messeges: "Good" });

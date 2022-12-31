@@ -3,11 +3,12 @@
   stroke: var(--white);
   stroke-miterlimit: 10;
   stroke-width: 11px;
+  transition: 0.1s;
 }
 .v2 {
   fill: var(--white);
+  transition: 0.1s;
 }
-
 svg:hover .v1 {
   stroke: var(--red);
 }

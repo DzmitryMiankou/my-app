@@ -1,21 +1,13 @@
 import React from "react";
+import DeleteDialog from "./delete/DeleteDialog";
 import styleUsers from "./Users.module.scss";
-import imgUsers from "./icon_users.png";
 
 const Users = (props) => {
   return (
-    <ul className={styleUsers.list}>
-      <li className={styleUsers.list__string}>
-        <a className={styleUsers.list__string_elem} href="#3">
-          <img className={styleUsers.elem_img} src={imgUsers} alt="png" />
-          <p>Norman</p>
-        </a>
-      </li>
-      <li className={styleUsers.list__string}>
-        <a className={styleUsers.list__string_elem} href="#3">
-          <img className={styleUsers.elem_img} src={imgUsers} alt="png" />
-          <p>Otton</p>
-        </a>
+    <ul>
+      <li className={styleUsers.dialogues_list}>
+        <p className={styleUsers.dialogues_name}>Dzmitry</p>
+        <DeleteDialog />
       </li>
     </ul>
   );

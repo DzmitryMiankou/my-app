@@ -1,0 +1,9 @@
+.dialogues_delete {
+  margin-left: auto;
+  font-size: 10px;
+  cursor: pointer;
+  color: var(--black-grey-BG);
+  &:hover {
+    color: var(--red);
+  }
+}
