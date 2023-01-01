@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
-const $searchDialoguesSQL = "SELECT * FROM `userDialogues`";
 const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
-const grde = "SELECT * FROM `userDialogues`, `createUsers` WHERE `user_id2`  = `id`;";
+const $searchDialoguesSQL = "SELECT userDialogues.id, user_id1, nickName, user_id2 FROM `userDialogues` \
+ INNER JOIN `createUsers` ON (userDialogues.user_id2 = createUsers.id) WHERE `user_id1` = ?;";
 class useController {
     usersList(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -62,13 +62,21 @@ class useController {
     getDialogues(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                mySql_1.connection.query($searchDialoguesSQL, (err, results, fields) => {
-                    console.log(results);
-                    return res.json(results);
-                });
-                mySql_1.connection.query(grde, (err, results, fields) => {
-                    console.log(results);
-                    return;
+                const refreshToken = yield req.cookies["refreshToken"];
+                if (!refreshToken)
+                    return console.log("No refresh token");
+                const validRefreshToken = token_service_1.default.validateRefreshToken(refreshToken);
+                if (!validRefreshToken)
+                    return console.log("noRefresh");
+                const data = {
+                    id: validRefreshToken["id"],
+                    nickName: validRefreshToken["nickName"],
+                    email: validRefreshToken["email"],
+                };
+                mySql_1.connection.query($searchDialoguesSQL, data.id, (err, results, fields) => {
+                    if (err)
+                        return console.log(err);
+                    return res.status(200).json(results);
                 });
             }
             catch (error) {

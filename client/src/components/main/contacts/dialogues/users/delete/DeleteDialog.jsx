@@ -3,8 +3,11 @@ import styleDeleteDialog from "./DeleteDialog.module.scss";
 import SvgDelete from "./svg/SvgDelete";
 
 const DeleteDialog = (props) => {
+  const hi = () => {
+    alert("Hello");
+  };
   return (
-    <button className={styleDeleteDialog.button}>
+    <button onClick={hi} className={styleDeleteDialog.button}>
       <SvgDelete />
     </button>
   );

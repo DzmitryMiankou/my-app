@@ -1,17 +1,17 @@
 @import "src/scss/button.scss";
 @import "src/scss/formStyle.scss";
 
-  .dialogs {
-    background-color: var(--grey-text-BG);
-    color: var(--red);
-    font-size: 20px;
-    padding: 10px;
-      .users {
-        background-color: var(--grey-text-BG);
-        padding: 10px;
-      }
+.dialogs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--grey-text-BG);
+  color: var(--red);
+  font-size: 20px;
+  padding: 10px;
+  .users {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
-
-
-
-
+}

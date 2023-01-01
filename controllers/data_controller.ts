@@ -3,14 +3,12 @@ import { Request, Response, NextFunction } from 'express';
 import TokenService from '../services/token-service';
 
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
-const $searchDialoguesSQL = "SELECT * FROM `userDialogues`";
 const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
-const grde = "SELECT * FROM `userDialogues`, `createUsers` WHERE `user_id2`  = `id`;";
+const $searchDialoguesSQL = "SELECT userDialogues.id, user_id1, nickName, user_id2 FROM `userDialogues` \
+ INNER JOIN `createUsers` ON (userDialogues.user_id2 = createUsers.id) WHERE `user_id1` = ?;";
 
 
 class useController {
-
-
     async usersList(req: Request, res: Response, next: NextFunction) {
         try {
             connection.query($searchIdNickNameSQL, (err, results, fields) => {
@@ -50,13 +48,18 @@ class useController {
 
     async getDialogues(req: Request, res: Response, next: NextFunction) {
         try {
-            connection.query($searchDialoguesSQL, (err, results, fields) => {
-                console.log(results);
-                return res.json(results);
-            });
-            connection.query(grde, (err, results, fields) => {
-                console.log(results);
-                return;
+            const refreshToken = await req.cookies["refreshToken"];
+            if (!refreshToken) return console.log("No refresh token");
+            const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
+            if (!validRefreshToken) return console.log("noRefresh");
+            const data = {
+                id: validRefreshToken["id"],
+                nickName: validRefreshToken["nickName"],
+                email: validRefreshToken["email"],
+            }
+            connection.query($searchDialoguesSQL, data.id, (err, results, fields) => {
+                if (err) return console.log(err);
+                return res.status(200).json(results);
             });
         } catch (error) {
             console.log(error);
