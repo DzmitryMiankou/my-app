@@ -15,9 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
-const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
 const $searchDialoguesSQL = "SELECT userDialogues.id, user_id1, nickName, user_id2 FROM `userDialogues` \
  INNER JOIN `createUsers` ON (userDialogues.user_id2 = createUsers.id) WHERE `user_id1` = ?;";
+const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? AND `user_id2` LIKE ?;";
+const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
 class useController {
     usersList(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -48,11 +49,22 @@ class useController {
                     nickName: validRefreshToken["nickName"],
                     email: validRefreshToken["email"],
                 };
-                mySql_1.connection.query($createDialoguesSQL, [null, data.id, req.body.id, dateTime], (err, results, fields) => {
+                if (data.id === req.body.id)
+                    return res.status(400).json({ messeges: "Вы пытаетесь создать диалог с самим собой" });
+                mySql_1.connection.query($searchDialoguesUserSQL, [data.id, req.body.id], (err, results, fields) => {
                     if (err)
                         return console.log(err);
+                    if (results.length > 0) {
+                        return res.status(400).json({ messeges: "Такой диалог уже существет" });
+                    }
+                    else {
+                        mySql_1.connection.query($createDialoguesSQL, [null, data.id, req.body.id, dateTime], (err, results, fields) => {
+                            if (err)
+                                return console.log(err);
+                        });
+                        return res.status(201).json({ messeges: "Диалог создан" });
+                    }
                 });
-                return res.status(201).json({ messeges: "Good" });
             }
             catch (error) {
                 console.log(error);
