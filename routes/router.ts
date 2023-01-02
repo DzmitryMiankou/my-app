@@ -18,8 +18,8 @@ router.get('/logoutUsers', users_controller.logout);
 router.post('/activate/:link', users_controller.activate);
 router.get('/refresh', users_controller.refresh);
 
-router.get('/users', AuthMiddleware, data_controller.usersList);
 router.post('/dialogues', AuthMiddleware, data_controller.createDialogues);
+router.get('/users', AuthMiddleware, data_controller.usersList);
 router.get('/chat', AuthMiddleware, data_controller.getDialogues);
 
 export default router;

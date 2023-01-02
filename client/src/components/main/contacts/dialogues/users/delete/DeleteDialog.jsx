@@ -4,7 +4,7 @@ import SvgDelete from "./svg/SvgDelete";
 
 const DeleteDialog = (props) => {
   const hi = () => {
-    alert("Hello");
+    window.confirm("Вы точно желаете удалить диалог?");
   };
   return (
     <button onClick={hi} className={styleDeleteDialog.button}>

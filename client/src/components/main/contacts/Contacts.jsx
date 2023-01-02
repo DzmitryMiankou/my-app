@@ -55,6 +55,10 @@ const Contacts = () => {
 
   return auth ? (
     <div className={styleContacts.messeges}>
+      <h1>
+        <span>ваше имя: </span>
+        {JSON.parse(localStorage.getItem("user")).userData.nickName}
+      </h1>
       <UserdBlocks data={data} />
       <Dialogues />
       <MessagesBlock
