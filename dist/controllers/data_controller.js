@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
-const $searchDialoguesSQL = "SELECT userDialogues.id, user_id1, nickName, user_id2 FROM `userDialogues` \
- INNER JOIN `createUsers` ON (userDialogues.user_id2 = createUsers.id) WHERE `user_id1` = ?;";
+const $searchDialoguesSQL = `SELECT userDialogues.id, user_id1, nickName, user_id2 FROM userDialogues \
+  JOIN createUsers ON (userDialogues.user_id1 = createUsers.id) WHERE user_id1= ? || user_id2  = ?;`;
 const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? AND `user_id2` LIKE ?;";
 const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
 const $createMessegesSQL = "INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);";
@@ -63,9 +63,10 @@ class useController {
                         mySql_1.connection.query($createDialoguesSQL, [null, data.id, req.body.id, dateTime], (err, results, fields) => {
                             if (err)
                                 return console.log(err);
+                            console.log(results);
                         });
-                        return res.status(201).json({ messeges: "Диалог создан" });
                     }
+                    return res.status(201).json({ messeges: "Диалог создан" });
                 });
             }
             catch (error) {
@@ -87,9 +88,10 @@ class useController {
                     nickName: validRefreshToken["nickName"],
                     email: validRefreshToken["email"],
                 };
-                mySql_1.connection.query($searchDialoguesSQL, data.id, (err, results, fields) => {
+                mySql_1.connection.query($searchDialoguesSQL, [data.id, data.id], (err, results, fields) => {
                     if (err)
                         return console.log(err);
+                    console.log(results);
                     return res.status(200).json(results);
                 });
             }
@@ -134,7 +136,7 @@ class useController {
                 mySql_1.connection.query($searchMessegesSQL, idDialogues, (err, results, fields) => {
                     if (err)
                         return console.log(err);
-                    console.log(results);
+                    //console.log(results);
                     return res.status(200).json(results);
                 });
             }
