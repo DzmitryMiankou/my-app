@@ -3,12 +3,25 @@ import { Request, Response, NextFunction } from 'express';
 import TokenService from '../services/token-service';
 
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
-const $searchDialoguesSQL = `SELECT userDialogues.id, user_id1, nickName, user_id2 FROM userDialogues \
-  JOIN createUsers ON (userDialogues.user_id1 = createUsers.id) WHERE user_id1= ? || user_id2  = ?;` ;
-const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? && `user_id2` LIKE ?;";
+const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? && `user_id2` LIKE ? \
+|| `user_id1` LIKE ? && `user_id2` LIKE ?;";
+//const $searchDialoguesSQL = `SELECT userDialogues.id, user_id1, nickName, user_id2 FROM userDialogues \
+//JOIN createUsers ON (userDialogues.user_id1 = createUsers.id) WHERE user_id1 = ? || user_id2  = ?;`;
+const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
 const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
 const $createMessegesSQL = "INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);";
-const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
+
+const $searchDialoguesSQL =
+    `SELECT userDialogues.id, user_id1, nickName, user_id2
+     FROM userDialogues 
+     JOIN createUsers
+     ON createUsers.id =
+     CASE
+     WHEN user_id1 = ?
+     THEN userDialogues.user_id2 
+     ELSE userDialogues.user_id1 
+     END
+     WHERE user_id1 = ? || user_id2  = ?;`;
 
 class useController {
     async usersList(req: Request, res: Response, next: NextFunction) {
@@ -37,14 +50,13 @@ class useController {
                 email: validRefreshToken["email"],
             }
             if (data.id === req.body.id) return res.status(400).json({ messeges: "Вы пытаетесь создать диалог с самим собой" });
-            connection.query($searchDialoguesUserSQL, [data.id, req.body.id], (err, results, fields) => {
+            connection.query($searchDialoguesUserSQL, [data.id, req.body.id, req.body.id, data.id], (err, results, fields) => {
                 if (err) return console.log(err);
                 if (results.length > 0) {
                     return res.status(400).json({ messeges: "Такой диалог уже существет" });
                 } else {
                     connection.query($createDialoguesSQL, [null, data.id, req.body.id, dateTime], (err, results, fields) => {
                         if (err) return console.log(err);
-                        console.log(results);
                     })
                 }
                 return res.status(201).json({ messeges: "Диалог создан" });
@@ -68,8 +80,10 @@ class useController {
                 nickName: validRefreshToken["nickName"],
                 email: validRefreshToken["email"],
             }
-            connection.query($searchDialoguesSQL, [data.id, data.id], (err, results, fields) => {
+
+            connection.query($searchDialoguesSQL, [data.id, data.id, data.id], (err, results, fields) => {
                 if (err) return console.log(err);
+
                 console.log(results)
                 return res.status(200).json(results);
             });
@@ -106,7 +120,6 @@ class useController {
     async searchMesseges(req: Request, res: Response, next: NextFunction) {
         try {
             const idDialogues = req.headers.dialoguesid;
-            console.log(idDialogues);
             connection.query($searchMessegesSQL, idDialogues, (err, results, fields) => {
                 if (err) return console.log(err);
                 //console.log(results);
