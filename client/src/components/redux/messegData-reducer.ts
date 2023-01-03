@@ -2,7 +2,7 @@ const ADD_POST = "ADDPOST";
 const NEW_POST = "NEWPOST";
 
 type InitialStateType = {
-  messegData: (string | { id: number; messege: string; })[],
+  messegData: (string | { messege: string; })[],
   newChanges: string,
 }
 const initialState: InitialStateType = {
@@ -17,6 +17,23 @@ const messegDataReducer = (state = initialState, action: any): InitialStateType 
       return copy;
     }
     case ADD_POST:
+      //@ts-ignore
+      const data = JSON.parse(localStorage.getItem("dialogues"));
+      async function getListUsers() {
+        const request = await fetch("http://localhost:5000/api/messeges", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            //@ts-ignore
+            Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+          body: JSON.stringify({ dialogId: data.idDialogues, userId: data.user_id2, messegData: [state.newChanges] }),
+          credentials: "include",
+        });
+        return request;
+      }
+      getListUsers();
       if (state.newChanges === "") {
         return state;
       }
@@ -25,7 +42,6 @@ const messegDataReducer = (state = initialState, action: any): InitialStateType 
         messegData: [
           ...state.messegData,
           {
-            id: 5,
             messege: state.newChanges,
           },
         ],

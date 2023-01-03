@@ -27,7 +27,7 @@ const Dialogues = () => {
   const formElem =
     data &&
     data.map(({ id, user_id2, nickName }) => (
-      <Users key={id} nickName={nickName} />
+      <Users key={id} nickName={nickName} user_id2={user_id2} id={id} />
     ));
 
   return (

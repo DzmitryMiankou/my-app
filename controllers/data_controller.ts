@@ -7,7 +7,7 @@ const $searchDialoguesSQL = "SELECT userDialogues.id, user_id1, nickName, user_i
  INNER JOIN `createUsers` ON (userDialogues.user_id2 = createUsers.id) WHERE `user_id1` = ?;";
 const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? AND `user_id2` LIKE ?;";
 const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
-
+const $createMessegesSQL = "INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);";
 
 class useController {
     async usersList(req: Request, res: Response, next: NextFunction) {
@@ -66,6 +66,30 @@ class useController {
                 email: validRefreshToken["email"],
             }
             connection.query($searchDialoguesSQL, data.id, (err, results, fields) => {
+                if (err) return console.log(err);
+                return res.status(200).json(results);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    async createMesseges(req: Request, res: Response, next: NextFunction) {
+        try {
+            console.log(req.body.messegData[0]);
+            const refreshToken = await req.cookies["refreshToken"];
+            if (!refreshToken) return console.log("No refresh token");
+            const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
+            if (!validRefreshToken) return console.log("noRefresh");
+            const data = {
+                id: validRefreshToken["id"],
+                nickName: validRefreshToken["nickName"],
+                email: validRefreshToken["email"],
+            }
+            const now = new Date().toJSON();
+            const dateTime = new Date(now);
+            connection.query($createMessegesSQL, [null, req.body.dialogId, data.id, req.body.userId, req.body.messegData[0], dateTime], (err, results, fields) => {
                 if (err) return console.log(err);
                 return res.status(200).json(results);
             });
