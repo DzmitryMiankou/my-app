@@ -25,5 +25,5 @@ router.post('/messeges', data_controller_1.default.createMesseges);
 router.post('/dialogues', authMiddleware_1.AuthMiddleware, data_controller_1.default.createDialogues);
 router.get('/users', authMiddleware_1.AuthMiddleware, data_controller_1.default.usersList);
 router.get('/chat', authMiddleware_1.AuthMiddleware, data_controller_1.default.getDialogues);
-router.get('/messegeId', data_controller_1.default.searchMesseges);
+router.get('/messegeId', authMiddleware_1.AuthMiddleware, data_controller_1.default.searchMesseges);
 exports.default = router;
