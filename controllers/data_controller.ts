@@ -83,8 +83,6 @@ class useController {
 
             connection.query($searchDialoguesSQL, [data.id, data.id, data.id], (err, results, fields) => {
                 if (err) return console.log(err);
-
-                console.log(results)
                 return res.status(200).json(results);
             });
         } catch (error) {
