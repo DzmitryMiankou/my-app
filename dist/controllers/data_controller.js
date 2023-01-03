@@ -20,6 +20,7 @@ const $searchDialoguesSQL = "SELECT userDialogues.id, user_id1, nickName, user_i
 const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? AND `user_id2` LIKE ?;";
 const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
 const $createMessegesSQL = "INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);";
+const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
 class useController {
     usersList(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -117,6 +118,23 @@ class useController {
                 mySql_1.connection.query($createMessegesSQL, [null, req.body.dialogId, data.id, req.body.userId, req.body.messegData[0], dateTime], (err, results, fields) => {
                     if (err)
                         return console.log(err);
+                    return res.status(200).json(results);
+                });
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    searchMesseges(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const idDialogues = req.headers.dialoguesid;
+                console.log(idDialogues);
+                mySql_1.connection.query($searchMessegesSQL, idDialogues, (err, results, fields) => {
+                    if (err)
+                        return console.log(err);
+                    console.log(results);
                     return res.status(200).json(results);
                 });
             }

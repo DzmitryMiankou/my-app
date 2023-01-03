@@ -23,5 +23,6 @@ router.post('/messeges', data_controller.createMesseges);
 router.post('/dialogues', AuthMiddleware, data_controller.createDialogues);
 router.get('/users', AuthMiddleware, data_controller.usersList);
 router.get('/chat', AuthMiddleware, data_controller.getDialogues);
+router.get('/messegeId', data_controller.searchMesseges);
 
 export default router;
