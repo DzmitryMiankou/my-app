@@ -5,7 +5,7 @@ import TokenService from '../services/token-service';
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
 const $searchDialoguesSQL = `SELECT userDialogues.id, user_id1, nickName, user_id2 FROM userDialogues \
   JOIN createUsers ON (userDialogues.user_id1 = createUsers.id) WHERE user_id1= ? || user_id2  = ?;` ;
-const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? AND `user_id2` LIKE ?;";
+const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? && `user_id2` LIKE ?;";
 const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
 const $createMessegesSQL = "INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);";
 const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
