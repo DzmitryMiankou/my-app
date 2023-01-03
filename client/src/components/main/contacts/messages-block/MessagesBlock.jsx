@@ -5,6 +5,7 @@ import Input from "./input/Input";
 import Button from "./button-message/Button";
 
 const MessagesBlock = (props) => {
+  const [get, set] = React.useState();
   async function getMesseges() {
     const request = await fetch("http://localhost:5000/api/messegeId", {
       method: "GET",
@@ -17,15 +18,16 @@ const MessagesBlock = (props) => {
     });
     const response = await request.json();
     console.log(response);
+    set(response);
   }
 
   React.useEffect(() => {
     getMesseges();
   }, []);
 
-  const messegElem = props.state.messeges.messegData.map((m, i) => (
-    <Messeg key={i} text={m.messege} />
-  ));
+  const messegElem =
+    get &&
+    get.map((m, i) => <Messeg key={i} id={m.Source_Id} text={m.Message} />);
 
   return (
     <div className={styleContacts.container}>

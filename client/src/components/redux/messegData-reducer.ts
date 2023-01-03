@@ -2,11 +2,9 @@ const ADD_POST = "ADDPOST";
 const NEW_POST = "NEWPOST";
 
 type InitialStateType = {
-  messegData: (string | { messege: string; })[],
   newChanges: string,
 }
 const initialState: InitialStateType = {
-  messegData: [],
   newChanges: "",
 };
 const messegDataReducer = (state = initialState, action: any): InitialStateType => {
@@ -17,8 +15,11 @@ const messegDataReducer = (state = initialState, action: any): InitialStateType 
       return copy;
     }
     case ADD_POST:
+      if (state.newChanges === "") {
+        return state;
+      }
       //@ts-ignore
-      const data = JSON.parse(localStorage.getItem("dialogues"));
+      const dataD = JSON.parse(localStorage.getItem("dialogues"));
       async function getListUsers() {
         const request = await fetch("http://localhost:5000/api/messeges", {
           method: "POST",
@@ -28,24 +29,14 @@ const messegDataReducer = (state = initialState, action: any): InitialStateType 
             //@ts-ignore
             Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
           },
-          body: JSON.stringify({ dialogId: data.idDialogues, userId: data.user_id2, messegData: [state.newChanges] }),
+          body: JSON.stringify({ dialogId: dataD.idDialogues, userId: dataD.user_id2, messegData: [state.newChanges] }),
           credentials: "include",
         });
         return request;
       }
       getListUsers();
-      if (state.newChanges === "") {
-        return state;
-      }
       copy = {
-        ...state,
-        messegData: [
-          ...state.messegData,
-          {
-            messege: state.newChanges,
-          },
-        ],
-        newChanges: "",
+        ...initialState
       };
       return copy;
     default:

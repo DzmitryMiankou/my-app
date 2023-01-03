@@ -13,7 +13,6 @@ exports.onPostChangecreateActin = exports.addPostcreateActin = void 0;
 const ADD_POST = "ADDPOST";
 const NEW_POST = "NEWPOST";
 const initialState = {
-    messegData: [],
     newChanges: "",
 };
 const messegDataReducer = (state = initialState, action) => {
@@ -24,8 +23,11 @@ const messegDataReducer = (state = initialState, action) => {
             return copy;
         }
         case ADD_POST:
+            if (state.newChanges === "") {
+                return state;
+            }
             //@ts-ignore
-            const data = JSON.parse(localStorage.getItem("dialogues"));
+            const dataD = JSON.parse(localStorage.getItem("dialogues"));
             function getListUsers() {
                 return __awaiter(this, void 0, void 0, function* () {
                     const request = yield fetch("http://localhost:5000/api/messeges", {
@@ -36,22 +38,14 @@ const messegDataReducer = (state = initialState, action) => {
                             //@ts-ignore
                             Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
                         },
-                        body: JSON.stringify({ dialogId: data.idDialogues, userId: data.user_id2, messegData: [state.newChanges] }),
+                        body: JSON.stringify({ dialogId: dataD.idDialogues, userId: dataD.user_id2, messegData: [state.newChanges] }),
                         credentials: "include",
                     });
                     return request;
                 });
             }
             getListUsers();
-            if (state.newChanges === "") {
-                return state;
-            }
-            copy = Object.assign(Object.assign({}, state), { messegData: [
-                    ...state.messegData,
-                    {
-                        messege: state.newChanges,
-                    },
-                ], newChanges: "" });
+            copy = Object.assign({}, initialState);
             return copy;
         default:
             return state;

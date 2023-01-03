@@ -93,7 +93,6 @@ class useController {
 
     async createMesseges(req: Request, res: Response, next: NextFunction) {
         try {
-            console.log(req.body.messegData[0]);
             const refreshToken = await req.cookies["refreshToken"];
             if (!refreshToken) return console.log("No refresh token");
             const validRefreshToken = TokenService.validateRefreshToken(refreshToken);

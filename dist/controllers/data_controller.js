@@ -112,7 +112,6 @@ class useController {
     createMesseges(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log(req.body.messegData[0]);
                 const refreshToken = yield req.cookies["refreshToken"];
                 if (!refreshToken)
                     return console.log("No refresh token");

@@ -26,14 +26,20 @@ const Dialogues = () => {
 
   const formElem =
     data &&
-    data.map(({ id, user_id2, nickName }) => (
-      <Users key={id} nickName={nickName} user_id2={user_id2} id={id} />
+    data.map(({ id, user_id2, nickName, user_id1 }) => (
+      <Users
+        key={id}
+        nickName={nickName}
+        user_id2={user_id2}
+        id={id}
+        user_id1={user_id1}
+      />
     ));
 
   return (
     <div className={styleContacts.dialogs}>
       <p>DIALOGUES</p>
-      <div className={styleContacts.users}>{formElem}</div>
+      <ul className={styleContacts.users}>{formElem}</ul>
     </div>
   );
 };
