@@ -1,5 +1,4 @@
 import React from "react";
-
 import styleMesseg from "./Messeg.module.scss";
 
 const Messeg = (props) => {

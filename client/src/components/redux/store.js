@@ -1,11 +1,11 @@
 import { combineReducers, applyMiddleware, compose } from "redux";
-import createSagaMiddleware from "redux-saga";
 import messegDataReducer from "./messegData-reducer.ts";
 //import commitDataReducer from "./commitData-reducer";
 import { legacy_createStore as createStore } from "redux";
 import registerReducer from "./register-reducer.ts";
 import authReducer from "./auth-reducer.ts";
-import { rootSaga } from "./sagas/sagas.js";
+import getDialogListUsersReducer from "./dialog-reducer.ts";
+import thunk from "redux-thunk";
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -14,19 +14,17 @@ const composeEnhancers =
       })
     : compose;
 
-const sagaMiddleware = createSagaMiddleware();
-
-const reducers = combineReducers({
+const rootReducers = combineReducers({
   messeges: messegDataReducer,
   //commit: commitDataReducer,
   register: registerReducer,
   auth: authReducer,
+  dialogListAPI: getDialogListUsersReducer,
 });
 
 const store = createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
+  rootReducers,
+  composeEnhancers(applyMiddleware(thunk))
 );
 
-sagaMiddleware.run(rootSaga);
 export default store;

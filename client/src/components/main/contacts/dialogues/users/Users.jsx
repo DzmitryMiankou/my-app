@@ -5,13 +5,9 @@ import styleUsers from "./Users.module.scss";
 const Users = ({ nickName, id, user_id2, user_id1 }) => {
   const data = JSON.parse(localStorage.getItem("user")).userData.id;
 
-  const dff = () => {
+  const setLocalStore = () => {
     let userdd = user_id2;
-    if (user_id2 === data) {
-      userdd = user_id1;
-    } else {
-      userdd = user_id2;
-    }
+    user_id2 === data ? (userdd = user_id1) : (userdd = user_id2);
     const res = {
       idDialogues: id,
       nickName: nickName,
@@ -21,7 +17,7 @@ const Users = ({ nickName, id, user_id2, user_id1 }) => {
   };
   return (
     <li className={styleUsers.dialogues_list}>
-      <p onClick={dff} className={styleUsers.dialogues_name}>
+      <p onClick={setLocalStore} className={styleUsers.dialogues_name}>
         {nickName}
       </p>
       <DeleteDialog />
