@@ -32,4 +32,4 @@ const Dialogues = () => {
   );
 };
 
-export default React.memo(Dialogues);
+export default Dialogues;

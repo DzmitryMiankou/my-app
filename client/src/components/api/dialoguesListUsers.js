@@ -1,6 +1,4 @@
 import { getDialogListActin, getMessegesActin } from "../redux/action.ts";
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:5000");
 
 export const fetchDialogUsers = () => {
   return async function (dispatch) {
@@ -24,18 +22,6 @@ export const fetchDialogUsers = () => {
 export const fetchMesseges = () => {
   return async function (dispatch) {
     try {
-      const f = JSON.parse(localStorage.getItem("dialogues")).idDialogues;
-      socket.emit("user", { message: f });
-      socket.on("user", (data) => {
-        dispatch(getMessegesActin(data));
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  /*
-  return async function (dispatch) {
-    try {
       const request = await fetch("http://localhost:5000/api/messegeId", {
         method: "GET",
         credentials: "include",
@@ -50,5 +36,6 @@ export const fetchMesseges = () => {
     } catch (error) {
       console.log(error);
       return;
-    }*/
+    }
+  };
 };

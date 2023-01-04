@@ -15,11 +15,11 @@ const composeEnhancers =
     : compose;
 
 const rootReducers = combineReducers({
+  dialogListAPI: getDialogListUsersReducer,
   messeges: messegDataReducer,
   //commit: commitDataReducer,
   register: registerReducer,
   auth: authReducer,
-  dialogListAPI: getDialogListUsersReducer,
 });
 
 const store = createStore(

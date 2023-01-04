@@ -14,23 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
-const socket_io_1 = require("socket.io");
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
-const app = (0, express_1.default)();
-const mySql_1 = require("./MySQL/mySql");
 const node_cluster_1 = __importDefault(require("node:cluster"));
 const node_os_1 = require("node:os");
 const router_1 = __importDefault(require("./routes/router"));
-const PORT = process.env.PORT;
+const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
-const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
-const io = new socket_io_1.Server(server, {
-    cors: {
-        origin: process.env.CORS_ORIGIN,
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    }
-});
+const PORT = process.env.PORT;
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)({
     credentials: true,
@@ -38,21 +29,6 @@ app.use((0, cors_1.default)({
 }));
 app.use(express_1.default.json());
 app.use('/api', router_1.default);
-io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-    socket.on('user', (message) => {
-        setInterval(() => {
-            mySql_1.connection.query($searchMessegesSQL, message.message, (err, results, fields) => {
-                if (err)
-                    return console.log(err);
-                socket.emit("user", results);
-            });
-        }, 500);
-    });
-});
 function start() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -78,45 +54,3 @@ if (node_cluster_1.default.isPrimary) {
 else {
     server.listen(PORT);
 }
-/*
-let users = {
-  name: "Ritik",
-  Age: "18"
-}
-
-server.get('/setuser', (req, res) => {
-  res.cookie("userData", users);
-  res.send('user data added to cookie');
-});
-
-server.get('/getuser', (req, res) => {
-  //shows all the cookies
-  res.send(req.cookies);
-});
-*/
-//////////////////read a file//////////////////////////////
-/*
-import fs from "fs";
-fs.readFile('./text/bagdan.txt', 'utf8', function (err, data) {
-  server.get("/text", (req, res) => {
-    res.json(`${data}`);
-  });
-});*/
-/*
-
-type typeDBusers = {
-  id: number,
-  nickName: string,
-  email: string,
-  password: string
-};
-
-const dataBase: {users: typeDBusers[]} = {
-  users: [
-    {id:1, nickName: "David", email: "givaslook@gmail.com", password: "1244rdhrt65"},
-    {id:2, nickName: "Michael", email: "minsksity@mail.ru", password: "Afdrhtr456"},
-    {id:3, nickName: "Pedra", email: "vasilisy@mail.tut", password: "SDF_56556r"},
-    {id:4, nickName: "Linkoln", email: "const123f@mail.ru", password: "eww456567"},
-    {id:5, nickName: "Imbra", email: "fgghesf234ftt@bing.com", password: "bfdgnmgm4354"}
-  ]
-};*/
