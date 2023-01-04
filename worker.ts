@@ -1,24 +1,52 @@
 import express from 'express';
+import http from 'http'
+import { Server } from "socket.io"
 import cors from 'cors';
 import cookieParser from 'cookie-parser'
-const server = express();
+const app = express();
+import { connection } from './MySQL/mySql';
+
 import cluster from 'node:cluster';
 import { cpus } from 'node:os';
 import router from "./routes/router";
 const PORT = process.env.PORT;
+const server = http.createServer(app)
+const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
 
 
-server.use(cookieParser());
-server.use(cors(
+const io = new Server(server, {
+  cors: {
+    origin: process.env.CORS_ORIGIN,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  }
+})
+
+
+
+app.use(cookieParser());
+app.use(cors(
   {
     credentials: true,
     origin: process.env.CORS_ORIGIN,
   }
 ));
-server.use(express.json());
-server.use('/api', router);
-server.use('/users', router);
+app.use(express.json());
+app.use('/api', router);
 
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  socket.on('user', (message) => {
+    setInterval(() => {
+      connection.query($searchMessegesSQL, message.message, (err, results, fields) => {
+        if (err) return console.log(err);
+        socket.emit("user", results);
+      });
+    }, 500);
+  });
+});
 
 
 async function start() {

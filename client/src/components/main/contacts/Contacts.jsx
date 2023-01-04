@@ -25,10 +25,10 @@ const Contacts = () => {
       Louding(false);
       try {
         const data = await getUsers();
-        setdata(data);
+        dispatch(authActin(true));
         setAuth(true);
         Louding(true);
-        dispatch(authActin(true));
+        setdata(data);
       } catch (error) {
         dispatch(authActin(false));
         setAuth(false);

@@ -13,21 +13,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const http_1 = __importDefault(require("http"));
+const socket_io_1 = require("socket.io");
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
-const server = (0, express_1.default)();
+const app = (0, express_1.default)();
+const mySql_1 = require("./MySQL/mySql");
 const node_cluster_1 = __importDefault(require("node:cluster"));
 const node_os_1 = require("node:os");
 const router_1 = __importDefault(require("./routes/router"));
 const PORT = process.env.PORT;
-server.use((0, cookie_parser_1.default)());
-server.use((0, cors_1.default)({
+const server = http_1.default.createServer(app);
+const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
+const io = new socket_io_1.Server(server, {
+    cors: {
+        origin: process.env.CORS_ORIGIN,
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    }
+});
+app.use((0, cookie_parser_1.default)());
+app.use((0, cors_1.default)({
     credentials: true,
     origin: process.env.CORS_ORIGIN,
 }));
-server.use(express_1.default.json());
-server.use('/api', router_1.default);
-server.use('/users', router_1.default);
+app.use(express_1.default.json());
+app.use('/api', router_1.default);
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+    socket.on('user', (message) => {
+        setInterval(() => {
+            mySql_1.connection.query($searchMessegesSQL, message.message, (err, results, fields) => {
+                if (err)
+                    return console.log(err);
+                socket.emit("user", results);
+            });
+        }, 500);
+    });
+});
 function start() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
