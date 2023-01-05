@@ -1,41 +1,21 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import styleContacts from "./Contacts.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import {
   onPostChangecreateActin,
   addPostcreateActin,
 } from "../../redux/messegData-reducer.ts";
-import { authActin } from "../../redux/auth-reducer.ts";
 import UserdBlocks from "././users-block/UsersBlock";
 import MessagesBlock from "././messages-block/MessagesBlock";
 import Dialogues from "././dialogues/Dialogues";
-import NoRegiste from "./noRegist/NoRegist";
-import { memo } from "react";
-import { getUsers } from "../.././api/usersAPI.ts";
+import { fetchUsers } from "./../.././api/dialoguesListUsers";
 
 const Contacts = () => {
-  const [getLoad, Louding] = useState();
-  const [data, setdata] = useState();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const [auth, setAuth] = useState();
 
   React.useEffect(() => {
-    const requestHandler = async () => {
-      Louding(false);
-      try {
-        const data = await getUsers();
-        setdata(data);
-        setAuth(true);
-        Louding(true);
-        dispatch(authActin(true));
-      } catch (error) {
-        dispatch(authActin(false));
-        setAuth(false);
-        Louding(true);
-      }
-    };
-    requestHandler();
+    dispatch(fetchUsers());
   }, [dispatch]);
 
   const increaseCounter = useCallback(
@@ -46,20 +26,13 @@ const Contacts = () => {
     [dispatch]
   );
 
-  if (!getLoad)
-    return (
-      <div className={styleContacts.messeges}>
-        <h1>Загрузка...</h1>
-      </div>
-    );
-
-  return auth ? (
+  return (
     <div className={styleContacts.messeges}>
       <h1>
         <span>ваше имя: </span>
         {JSON.parse(localStorage.getItem("user")).userData.nickName}
       </h1>
-      <UserdBlocks data={data} />
+      <UserdBlocks data={state.dialogListAPI.users} />
       <Dialogues />
       <MessagesBlock
         state={state}
@@ -68,8 +41,15 @@ const Contacts = () => {
         addPostcreateActin={addPostcreateActin}
       />
     </div>
-  ) : (
-    <NoRegiste />
   );
 };
-export default memo(Contacts);
+export default Contacts;
+
+//auth ? ) : (
+//<NoRegiste />
+/*if (!getLoad)
+    return (
+      <div className={styleContacts.messeges}>
+        <h1>Загрузка...</h1>
+      </div>
+    );*/

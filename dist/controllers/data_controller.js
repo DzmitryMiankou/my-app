@@ -152,5 +152,26 @@ class useController {
             }
         });
     }
+    key(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const refreshToken = yield req.cookies["refreshToken"];
+                if (!refreshToken)
+                    return console.log("No refresh token");
+                const validRefreshToken = token_service_1.default.validateRefreshToken(refreshToken);
+                if (!validRefreshToken)
+                    return console.log("noRefresh");
+                const data = {
+                    id: validRefreshToken["id"],
+                    nickName: validRefreshToken["nickName"],
+                    email: validRefreshToken["email"],
+                };
+                return res.status(200).json(data);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
 }
 exports.default = new useController();

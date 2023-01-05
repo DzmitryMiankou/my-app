@@ -1,4 +1,9 @@
-import { getDialogListActin, getMessegesActin } from "../redux/action.ts";
+import {
+  getDialogListActin,
+  getMessegesActin,
+  getUsersActin,
+  getKEYActin,
+} from "../redux/action.ts";
 
 export const fetchDialogUsers = () => {
   return async function (dispatch) {
@@ -39,3 +44,55 @@ export const fetchMesseges = () => {
     }
   };
 };
+
+export const fetchUsers = () => {
+  return async function (dispatch) {
+    try {
+      const request = await fetch("http://localhost:5000/api/users", {
+        method: "GET",
+        headers: {
+          //@ts-ignore
+          Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      const response = await request.json();
+      dispatch(getUsersActin(response));
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
+};
+
+export const fetchKey = () => {
+  return async function (dispatch) {
+    async function getListUsers() {
+      const request = await fetch("http://localhost:5000/api/users", {
+        method: "GET",
+        headers: {
+          //@ts-ignore
+          Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      return request;
+    }
+    const request = await getListUsers();
+    if (request.status === 401) {
+      refresh(getListUsers);
+    }
+    const response = await request.json();
+    dispatch(getKEYActin(response));
+  };
+};
+//dispatch(getKEYActin(response));
+
+async function refresh(getListUsers) {
+  const refreshrequest = await fetch("http://localhost:5000/api/refresh", {
+    method: "GET",
+    credentials: "include",
+  });
+  const response = await refreshrequest.json();
+  localStorage.setItem("user", JSON.stringify(response));
+  const request = await getListUsers();
+  return await request.json();
+}

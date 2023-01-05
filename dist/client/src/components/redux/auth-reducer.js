@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.authActin = void 0;
 const AUTH = "AUTH";
 const initialState = {
-    isAoth: false,
+    isAoth: true,
 };
 const authReducer = (state = initialState, action) => {
     let copy;

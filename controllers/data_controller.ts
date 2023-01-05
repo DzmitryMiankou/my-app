@@ -126,6 +126,24 @@ class useController {
             console.log(error);
         }
     }
+
+
+    async key(req: Request, res: Response, next: NextFunction) {
+        try {
+            const refreshToken = await req.cookies["refreshToken"];
+            if (!refreshToken) return console.log("No refresh token");
+            const validRefreshToken = TokenService.validateRefreshToken(refreshToken);
+            if (!validRefreshToken) return console.log("noRefresh");
+            const data = {
+                id: validRefreshToken["id"],
+                nickName: validRefreshToken["nickName"],
+                email: validRefreshToken["email"],
+            }
+            return res.status(200).json(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 export default new useController();
