@@ -8,13 +8,14 @@ import {
 import UserdBlocks from "././users-block/UsersBlock";
 import MessagesBlock from "././messages-block/MessagesBlock";
 import Dialogues from "././dialogues/Dialogues";
-import { fetchUsers } from "./../.././api/dialoguesListUsers";
+import { fetchUsers, fetchKey } from "./../.././api/dialoguesListUsers";
 
 const Contacts = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    dispatch(fetchKey());
     dispatch(fetchUsers());
   }, [dispatch]);
 

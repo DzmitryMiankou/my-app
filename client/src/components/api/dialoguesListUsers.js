@@ -66,7 +66,7 @@ export const fetchUsers = () => {
 
 export const fetchKey = () => {
   return async function (dispatch) {
-    async function getListUsers() {
+    async function key() {
       const request = await fetch("http://localhost:5000/api/users", {
         method: "GET",
         headers: {
@@ -76,9 +76,9 @@ export const fetchKey = () => {
       });
       return request;
     }
-    const request = await getListUsers();
+    const request = await key();
     if (request.status === 401) {
-      refresh(getListUsers);
+      refresh(key, dispatch);
     }
     const response = await request.json();
     dispatch(getKEYActin(response));
@@ -86,13 +86,14 @@ export const fetchKey = () => {
 };
 //dispatch(getKEYActin(response));
 
-async function refresh(getListUsers) {
+async function refresh(callback, dispatch) {
   const refreshrequest = await fetch("http://localhost:5000/api/refresh", {
     method: "GET",
     credentials: "include",
   });
   const response = await refreshrequest.json();
   localStorage.setItem("user", JSON.stringify(response));
-  const request = await getListUsers();
-  return await request.json();
+  const request = await callback();
+  const responseNew = await request.json();
+  dispatch(getKEYActin(responseNew));
 }
