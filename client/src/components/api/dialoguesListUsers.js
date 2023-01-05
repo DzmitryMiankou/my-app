@@ -66,11 +66,12 @@ export const fetchUsers = () => {
 export const fetchKey = () => {
   return async function (dispatch) {
     async function key() {
-      const request = await fetch("http://localhost:5000/api/users", {
+      const request = await fetch("http://localhost:5000/api/key", {
         method: "GET",
         headers: {
           Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
         },
+        credentials: "include",
       });
       return request;
     }
