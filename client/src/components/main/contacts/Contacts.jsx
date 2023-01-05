@@ -31,7 +31,7 @@ const Contacts = () => {
     <div className={styleContacts.messeges}>
       <h1>
         <span>ваше имя: </span>
-        {JSON.parse(localStorage.getItem("user")).userData.nickName}
+        {JSON.parse(localStorage.getItem("user"))?.userData?.nickName}
       </h1>
       <UserdBlocks data={state.dialogListAPI.users} />
       <Dialogues />

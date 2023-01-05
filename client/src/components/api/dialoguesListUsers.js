@@ -12,7 +12,7 @@ export const fetchDialogUsers = () => {
         method: "GET",
         credentials: "include",
         headers: {
-          Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
+          Authentication: JSON.parse(localStorage.getItem("user"))?.accessToken,
         },
       });
       const response = await request.json();
@@ -31,9 +31,9 @@ export const fetchMesseges = () => {
         method: "GET",
         credentials: "include",
         headers: {
-          Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
+          Authentication: JSON.parse(localStorage.getItem("user"))?.accessToken,
           DialoguesId: JSON.parse(localStorage.getItem("dialogues"))
-            .idDialogues,
+            ?.idDialogues,
         },
       });
       const response = await request.json();
@@ -51,7 +51,7 @@ export const fetchUsers = () => {
       const request = await fetch("http://localhost:5000/api/users", {
         method: "GET",
         headers: {
-          Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
+          Authentication: JSON.parse(localStorage.getItem("user"))?.accessToken,
         },
       });
       const response = await request.json();
@@ -69,7 +69,7 @@ export const fetchKey = () => {
       const request = await fetch("http://localhost:5000/api/key", {
         method: "GET",
         headers: {
-          Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
+          Authentication: JSON.parse(localStorage.getItem("user"))?.accessToken,
         },
         credentials: "include",
       });

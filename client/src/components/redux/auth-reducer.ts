@@ -5,7 +5,7 @@ export type InitialStateType = {
     isAoth: boolean,
 }
 const initialState: InitialStateType = {
-    isAoth: true,
+    isAoth: false,
 }
 
 const authReducer = (state = initialState, action: any) => {

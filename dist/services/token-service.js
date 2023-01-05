@@ -17,16 +17,6 @@ class TokenService {
             refreshToken
         };
     }
-    /* async saveToken(email: string, refreshToken: string) {
-         const sqlEm = "SELECT * FROM `createUsers` WHERE `email` LIKE (?)";
-         const tokenData = connection.query(sqlEm, email, (err, results, fields) => {
-             if (err) {
-                 return { er: "екекек" }
-             }
-             return { jk: "ok" };
-         })
-         return tokenData;
-     }*/
     validateAccessToken(token) {
         try {
             //@ts-ignore

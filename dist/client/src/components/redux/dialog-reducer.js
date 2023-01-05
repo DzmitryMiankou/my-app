@@ -31,5 +31,6 @@ const getDialogListUsersReducer = (state = initialState, action) => {
         default:
             return state;
     }
+    ;
 };
 exports.default = getDialogListUsersReducer;
