@@ -51,7 +51,6 @@ export const fetchUsers = () => {
       const request = await fetch("http://localhost:5000/api/users", {
         method: "GET",
         headers: {
-          //@ts-ignore
           Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
         },
       });
@@ -70,7 +69,6 @@ export const fetchKey = () => {
       const request = await fetch("http://localhost:5000/api/users", {
         method: "GET",
         headers: {
-          //@ts-ignore
           Authentication: JSON.parse(localStorage.getItem("user")).accessToken,
         },
       });
@@ -84,7 +82,6 @@ export const fetchKey = () => {
     dispatch(getKEYActin(response));
   };
 };
-//dispatch(getKEYActin(response));
 
 async function refresh(callback, dispatch) {
   const refreshrequest = await fetch("http://localhost:5000/api/refresh", {
