@@ -13,7 +13,7 @@ const MessagesBlock = (props) => {
   React.useEffect(() => {
     dispatch(fetchMesseges());
   }, [dispatch]);
-  console.log(state.messeges.Created_At);
+
   const mapMessegElem = state.messeges.map(
     ({ id, Source_Id, Message, Created_At }) => (
       <Messeg key={id} id={Source_Id} text={Message} date={Created_At} />

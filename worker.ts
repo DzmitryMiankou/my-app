@@ -5,10 +5,25 @@ import cookieParser from 'cookie-parser'
 import cluster from 'node:cluster';
 import { cpus } from 'node:os';
 import router from "./routes/router";
+import ws from 'ws';
+
+
 
 const app = express();
-const server = http.createServer(app)
+const server = http.createServer(app);
 const PORT = process.env.PORT;
+const wss = new ws.Server({ server: server });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(data) {
+    wss.clients.forEach(function each(client) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(data);
+        // console.log('data', data);
+      }
+    });
+  });
+});
 
 app.use(cookieParser());
 app.use(cors(
@@ -19,7 +34,6 @@ app.use(cors(
 ));
 app.use(express.json());
 app.use('/api', router);
-
 
 
 async function start() {

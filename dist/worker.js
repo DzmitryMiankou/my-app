@@ -19,9 +19,21 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const node_cluster_1 = __importDefault(require("node:cluster"));
 const node_os_1 = require("node:os");
 const router_1 = __importDefault(require("./routes/router"));
+const ws_1 = __importDefault(require("ws"));
 const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
 const PORT = process.env.PORT;
+const wss = new ws_1.default.Server({ server: server });
+wss.on('connection', function connection(ws) {
+    ws.on('message', function incoming(data) {
+        wss.clients.forEach(function each(client) {
+            if (client !== ws && client.readyState === WebSocket.OPEN) {
+                client.send(data);
+                // console.log('data', data);
+            }
+        });
+    });
+});
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)({
     credentials: true,
