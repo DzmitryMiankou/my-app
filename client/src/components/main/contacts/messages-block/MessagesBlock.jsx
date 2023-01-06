@@ -13,10 +13,12 @@ const MessagesBlock = (props) => {
   React.useEffect(() => {
     dispatch(fetchMesseges());
   }, [dispatch]);
-
-  const mapMessegElem = state.messeges.map((m, i) => (
-    <Messeg key={i} id={m.Source_Id} text={m.Message} />
-  ));
+  console.log(state.messeges.Created_At);
+  const mapMessegElem = state.messeges.map(
+    ({ id, Source_Id, Message, Created_At }) => (
+      <Messeg key={id} id={Source_Id} text={Message} date={Created_At} />
+    )
+  );
 
   return (
     <div className={styleContacts.container}>

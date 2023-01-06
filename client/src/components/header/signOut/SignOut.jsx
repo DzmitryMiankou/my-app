@@ -14,13 +14,13 @@ const SignOut = () => {
     );
     if (!a) return;
     localStorage.removeItem("user");
+    navigate("/");
+    dispatch(authActin(false));
     //window.location.reload();
     await fetch("http://localhost:5000/api/logoutUsers", {
       method: "GET",
       credentials: "include",
     });
-    dispatch(authActin(false));
-    return navigate("/");
   };
 
   return (

@@ -2,10 +2,10 @@ const AUTH = "AUTH";
 
 
 export type InitialStateType = {
-    isAoth: boolean,
+    isAoth: any,
 }
 const initialState: InitialStateType = {
-    isAoth: false,
+    isAoth: true,
 }
 
 const authReducer = (state = initialState, action: any) => {
@@ -13,11 +13,11 @@ const authReducer = (state = initialState, action: any) => {
 
     switch (action.type) {
         case AUTH: {
-            copy = { ...state, isAoth: action.inAuth };
+            copy = { isAoth: action.inAuth };
             return copy;
         }
         default:
-            return state = { ...initialState };
+            return state;
     }
 };
 type loginActionType = {

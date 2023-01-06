@@ -2,17 +2,37 @@
   color: var(--white);
   width: fit-content;
   word-break: break-all;
-  .container__list {
-    list-style: none;
-    .container__list_messeg {
-      background-color: rgb(67, 67, 67);
-      padding: 8px;
-      &:hover {
-        background-color: var(--black-grey-BG);
-      }
-      p {
-        overflow-wrap: break-word;
-      }
+  list-style: none;
+  .container__list_messeg {
+    background-color: #1d6f7020;
+    padding: 5px;
+    min-width: 150px;
+    display: grid;
+    grid-template-columns: 2fr auto auto;
+    &:hover {
+      background-color: #1d6f7038;
+    }
+    p {
+      grid-column-start: 1;
+      grid-column-end: 4;
+      overflow-wrap: break-word;
+    }
+    .date {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 3;
+      grid-row-end: 4;
+      font-size: 8px;
+      color: #a6b6b6e3;
+      align-self: flex-end;
+    }
+    .nickName {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 3;
+      grid-row-end: 4;
+      font-size: 12px;
+      color: #a6b6b6e3;
     }
   }
 }

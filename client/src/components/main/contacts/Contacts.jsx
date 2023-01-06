@@ -9,14 +9,15 @@ import UserdBlocks from "././users-block/UsersBlock";
 import MessagesBlock from "././messages-block/MessagesBlock";
 import Dialogues from "././dialogues/Dialogues";
 import { fetchUsers, fetchKey } from "./../.././api/dialoguesListUsers";
+import NoRegiste from "./noRegist/NoRegist";
 
 const Contacts = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchKey());
     dispatch(fetchUsers());
+    dispatch(fetchKey());
   }, [dispatch]);
 
   const increaseCounter = useCallback(
@@ -27,7 +28,9 @@ const Contacts = () => {
     [dispatch]
   );
 
-  return (
+  return !state.auth.isAoth ? (
+    <NoRegiste />
+  ) : (
     <div className={styleContacts.messeges}>
       <h1>
         <span>ваше имя: </span>
@@ -46,8 +49,6 @@ const Contacts = () => {
 };
 export default Contacts;
 
-//auth ? ) : (
-//<NoRegiste />
 /*if (!getLoad)
     return (
       <div className={styleContacts.messeges}>
