@@ -17,7 +17,7 @@ const Header = () => {
       <menu className={style.menu}>
         <ul className={style.ul}>
           <Link text="О проекте" to="/" />
-          <Link text="Портфолио" to="/works" />
+          <Link text="Примеры" to="/works" />
           <Link text="Обучение" to="/learning" />
           <Link text="Общаться" to="/chat" />
 

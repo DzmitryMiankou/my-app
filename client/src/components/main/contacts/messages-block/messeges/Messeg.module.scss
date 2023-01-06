@@ -8,29 +8,25 @@
     padding: 5px;
     min-width: 150px;
     display: grid;
-    grid-template-columns: 2fr auto auto;
+    grid-template-areas:
+      "text text"
+      "nickName  date";
+    grid-template-columns: 2fr repeat(2, auto);
     &:hover {
       background-color: #1d6f7038;
     }
     p {
-      grid-column-start: 1;
-      grid-column-end: 4;
+      grid-area: text;
       overflow-wrap: break-word;
     }
     .date {
-      grid-column-start: 1;
-      grid-column-end: 2;
-      grid-row-start: 3;
-      grid-row-end: 4;
+      grid-area: date;
       font-size: 8px;
       color: #a6b6b6e3;
       align-self: flex-end;
     }
     .nickName {
-      grid-column-start: 2;
-      grid-column-end: 3;
-      grid-row-start: 3;
-      grid-row-end: 4;
+      grid-area: nickName;
       font-size: 12px;
       color: #a6b6b6e3;
     }
