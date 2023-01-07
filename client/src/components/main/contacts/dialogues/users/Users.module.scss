@@ -5,6 +5,23 @@
   list-style: none;
   font-size: 18px;
   padding: 5px;
+  border-bottom: solid 1px var(--azure-button);
+  .dialogues_name {
+    cursor: pointer;
+    color: var(--white);
+    &:hover {
+      color: var(--azure-button);
+    }
+  }
+}
+.dialogues_list_active {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  list-style: none;
+  font-size: 18px;
+  padding: 5px;
+  border-bottom: solid 1px var(--red);
   .dialogues_name {
     cursor: pointer;
     color: var(--white);

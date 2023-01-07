@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styleContacts from "./MessagesBlock.module.scss";
 import Messeg from "./messeges/Messeg";
 import Input from "./input/Input";
@@ -9,6 +9,29 @@ import { fetchMesseges } from "./../../.././api/dialoguesListUsers";
 const MessagesBlock = (props) => {
   const state = useSelector((state) => state.dialogListAPI);
   const dispatch = useDispatch();
+
+  const URL = "ws://127.0.0.1:5000";
+
+  const [messages, setMessages] = useState([]);
+  const [ws, setWs] = useState(new WebSocket(URL));
+
+  React.useEffect(() => {
+    ws.onopen = () => {
+      console.log("WebSocket Connected");
+    };
+
+    ws.onmessage = (e) => {
+      const message = JSON.parse(e.data);
+      setMessages([message, ...messages]);
+    };
+
+    return () => {
+      ws.onclose = () => {
+        console.log("WebSocket Disconnected");
+        setWs(new WebSocket(URL));
+      };
+    };
+  }, [ws.onmessage, ws.onopen, ws.onclose, messages, ws]);
 
   React.useEffect(() => {
     dispatch(fetchMesseges());

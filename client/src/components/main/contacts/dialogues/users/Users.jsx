@@ -4,11 +4,8 @@ import styleUsers from "./Users.module.scss";
 
 const Users = ({ nickName, id, user_id2, user_id1 }) => {
   const data = JSON.parse(localStorage.getItem("user")).userData.id;
-  const a = JSON.parse(localStorage.getItem("dialogues")).user_id2;
 
   const setLocalStore = () => {
-    console.log(a);
-    console.log(data);
     let userdd = user_id2;
     user_id2 === data ? (userdd = user_id1) : (userdd = user_id2);
     const res = {
@@ -18,15 +15,18 @@ const Users = ({ nickName, id, user_id2, user_id1 }) => {
     };
     localStorage.setItem("dialogues", JSON.stringify(res));
   };
+
+  const a = JSON.parse(localStorage.getItem("dialogues")).nickName;
+
   return (
     <li
-      id={`nick_${a}`}
-      style={
-        data === user_id2
-          ? { borderBottom: `solid 1px var(--red)` }
-          : { borderBottom: ` solid 1px var(--azure-button)` }
+      id={`nick_${user_id2}`}
+      data-toggle="tab"
+      className={
+        a !== nickName
+          ? styleUsers.dialogues_list
+          : styleUsers.dialogues_list_active
       }
-      className={styleUsers.dialogues_list}
     >
       <p onClick={setLocalStore} className={styleUsers.dialogues_name}>
         {nickName}

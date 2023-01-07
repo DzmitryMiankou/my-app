@@ -25,6 +25,9 @@ const server = http_1.default.createServer(app);
 const PORT = process.env.PORT;
 const wss = new ws_1.default.Server({ server: server });
 wss.on('connection', function connection(ws) {
+    ws.on('open', function open() {
+        ws.send('something');
+    });
     ws.on('message', function incoming(data) {
         wss.clients.forEach(function each(client) {
             if (client !== ws && client.readyState === WebSocket.OPEN) {
