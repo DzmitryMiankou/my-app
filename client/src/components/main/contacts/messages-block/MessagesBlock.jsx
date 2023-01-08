@@ -4,37 +4,71 @@ import Messeg from "./messeges/Messeg";
 import Input from "./input/Input";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "./button-message/Button";
-import { fetchMesseges } from "./../../.././api/dialoguesListUsers";
-import socketIO from "socket.io-client";
-const port = "ws://localhost:5000";
-const socket = socketIO.connect(port);
+import io from "socket.io-client";
+
+const port = "http://localhost:5000";
+const socket = io.connect(port);
+
 const MessagesBlock = (props) => {
-  const state = useSelector((state) => state.dialogListAPI);
-  const dispatch = useDispatch();
+  const state2 = useSelector((state) => state.messeges.newChanges);
+  const [mes, setmes] = React.useState();
 
   React.useEffect(() => {
-    socket.emit("chat message", "hello");
+    socket.on("connect", (data) => {
+      console.log("ok");
+    });
   }, []);
 
-  React.useEffect(() => {
-    dispatch(fetchMesseges());
-  }, [dispatch]);
+  const set = () => {
+    const dataD = JSON.parse(localStorage.getItem("dialogues"));
+    const dataD1 = JSON.parse(localStorage.getItem("user")).userData;
+    socket.emit(
+      "chat message",
+      JSON.stringify({
+        dialogId: dataD.idDialogues,
+        userId: dataD.user_id2,
+        messegData: state2,
+        id: dataD1.id,
+      })
+    );
+    socket.on("chat message", (data) => {
+      setmes(data);
+    });
+  };
 
-  const mapMessegElem = state.messeges.map(
-    ({ id, Source_Id, Message, Created_At }) => (
+  React.useEffect(() => {
+    const dataD = JSON.parse(localStorage.getItem("dialogues"));
+    const dataD1 = JSON.parse(localStorage.getItem("user")).userData;
+    socket.emit(
+      "mess",
+      JSON.stringify({
+        dialogId: dataD.idDialogues,
+        userId: dataD.user_id2,
+        id: dataD1.id,
+      })
+    );
+    socket.on("mess", (data) => {
+      setmes(data);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket, mes]);
+
+  const mapMessegElem =
+    mes &&
+    mes.map(({ id, Source_Id, Message, Created_At }) => (
       <Messeg key={id} id={Source_Id} text={Message} date={Created_At} />
-    )
-  );
+    ));
 
   return (
     <div className={styleContacts.container}>
       <ul className={styleContacts.container__messege}>{mapMessegElem}</ul>
       <div className={styleContacts.container__textarea}>
         <Input increaseCounter={props.increaseCounter} state={props.state} />
-        <Button dispatch={() => props.dispatch(props.addPostcreateActin())} />
+        <Button dispatch={set} />
       </div>
     </div>
   );
 };
 
 export default MessagesBlock;
+//() => props.dispatch(props.addPostcreateActin())

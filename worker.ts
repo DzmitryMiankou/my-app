@@ -6,6 +6,7 @@ import cluster from 'node:cluster';
 import { cpus } from 'node:os';
 import router from "./routes/router";
 import { Server } from 'socket.io';
+import { connection } from './MySQL/mySql';
 
 
 
@@ -28,19 +29,41 @@ app.use('/api', router);
 
 
 
-const socketIO = require('socket.io')(server, {
+const io = require('socket.io')(server, {
   cors: {
     origin: "http://localhost:3000",
     methods: ['GET', 'POST'],
   }
 });
-
-socketIO.on('connection', (socket: any) => {
-  console.log(` user just connected!`);
+io.on('connection', (socket: any) => {
+  console.log(`a user connected!`);
 
   socket.on('chat message', (data: any) => {
     console.log(data);
+    const ds = JSON.parse(data);
+    const now = new Date().toJSON();
+    const dateTime = new Date(now);
+    connection.query("INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);", [null, ds.dialogId, ds.id, ds.userId, ds.messegData, dateTime], (err, results, fields) => {
+      if (err) return console.log(err);
+    });
+    connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
+      if (err) return console.log(err);
+      socket.emit('chat message',
+        results
+      );
+    })
   });
+
+  socket.on('mess', (data: any) => {
+    const ds = JSON.parse(data);
+    connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
+      if (err) return console.log(err);
+      socket.emit('mess',
+        results
+      );
+    })
+  });
+
 
   socket.on('disconnect', () => {
     console.log('🔥: A user disconnected');
@@ -71,3 +94,8 @@ if (cluster.isPrimary) {
 } else {
   server.listen(PORT);
 }
+/*connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", 42, (err, results, fields) => {
+      if (err) return console.log(err);
+      //console.log(results);
+      return results;
+    })*/

@@ -1,5 +1,5 @@
 @mixin border($props) {
-  border:solid 1px $props;
+  border: solid 1px $props;
 }
 
 .container {
@@ -10,9 +10,9 @@
     flex-direction: column;
     gap: 20px;
     position: relative;
-    height: 500px;
+    height: 600px;
     overflow-x: hidden;
-  
+
     .link {
       font-size: 18px;
       text-decoration: none;
@@ -31,12 +31,9 @@
     position: absolute;
     z-index: -1;
     right: 0%;
-    height: 500px;
+    height: 600px;
     width: 100%;
     background: no-repeat url("../../../img/mainBackGraund.svg");
     background-size: cover;
   }
 }
-
-
-

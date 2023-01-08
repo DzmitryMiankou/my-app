@@ -19,6 +19,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const node_cluster_1 = __importDefault(require("node:cluster"));
 const node_os_1 = require("node:os");
 const router_1 = __importDefault(require("./routes/router"));
+const mySql_1 = require("./MySQL/mySql");
 const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
 const PORT = process.env.PORT;
@@ -29,16 +30,36 @@ app.use((0, cors_1.default)({
 }));
 app.use(express_1.default.json());
 app.use('/api', router_1.default);
-const socketIO = require('socket.io')(server, {
+const io = require('socket.io')(server, {
     cors: {
         origin: "http://localhost:3000",
         methods: ['GET', 'POST'],
     }
 });
-socketIO.on('connection', (socket) => {
-    console.log(` user just connected!`);
+io.on('connection', (socket) => {
+    console.log(`a user connected!`);
     socket.on('chat message', (data) => {
         console.log(data);
+        const ds = JSON.parse(data);
+        const now = new Date().toJSON();
+        const dateTime = new Date(now);
+        mySql_1.connection.query("INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);", [null, ds.dialogId, ds.id, ds.userId, ds.messegData, dateTime], (err, results, fields) => {
+            if (err)
+                return console.log(err);
+        });
+        mySql_1.connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
+            if (err)
+                return console.log(err);
+            socket.emit('chat message', results);
+        });
+    });
+    socket.on('mess', (data) => {
+        const ds = JSON.parse(data);
+        mySql_1.connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
+            if (err)
+                return console.log(err);
+            socket.emit('mess', results);
+        });
     });
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
@@ -69,3 +90,8 @@ if (node_cluster_1.default.isPrimary) {
 else {
     server.listen(PORT);
 }
+/*connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", 42, (err, results, fields) => {
+      if (err) return console.log(err);
+      //console.log(results);
+      return results;
+    })*/ 
