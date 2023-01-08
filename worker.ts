@@ -5,31 +5,14 @@ import cookieParser from 'cookie-parser'
 import cluster from 'node:cluster';
 import { cpus } from 'node:os';
 import router from "./routes/router";
-import ws from 'ws';
+import { Server } from 'socket.io';
 
 
 
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT;
-const wss = new ws.Server({ server: server });
 
-
-
-
-wss.on('connection', function connection(ws) {
-  ws.on('open', function open() {
-    ws.send('something');
-  });
-  ws.on('message', function incoming(data) {
-    wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(data);
-        // console.log('data', data);
-      }
-    });
-  });
-});
 
 
 
@@ -42,6 +25,29 @@ app.use(cors(
 ));
 app.use(express.json());
 app.use('/api', router);
+
+
+
+const socketIO = require('socket.io')(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ['GET', 'POST'],
+  }
+});
+
+socketIO.on('connection', (socket: any) => {
+  console.log(` user just connected!`);
+
+  socket.on('chat message', (data: any) => {
+    console.log(data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('🔥: A user disconnected');
+  });
+
+});
+
 
 
 async function start() {

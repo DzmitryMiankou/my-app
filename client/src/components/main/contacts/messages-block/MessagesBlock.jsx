@@ -5,33 +5,16 @@ import Input from "./input/Input";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "./button-message/Button";
 import { fetchMesseges } from "./../../.././api/dialoguesListUsers";
-
+import socketIO from "socket.io-client";
+const port = "ws://localhost:5000";
+const socket = socketIO.connect(port);
 const MessagesBlock = (props) => {
   const state = useSelector((state) => state.dialogListAPI);
   const dispatch = useDispatch();
 
-  const URL = "ws://127.0.0.1:5000";
-
-  const [messages, setMessages] = useState([]);
-  const [ws, setWs] = useState(new WebSocket(URL));
-
   React.useEffect(() => {
-    ws.onopen = () => {
-      console.log("WebSocket Connected");
-    };
-
-    ws.onmessage = (e) => {
-      const message = JSON.parse(e.data);
-      setMessages([message, ...messages]);
-    };
-
-    return () => {
-      ws.onclose = () => {
-        console.log("WebSocket Disconnected");
-        setWs(new WebSocket(URL));
-      };
-    };
-  }, [ws.onmessage, ws.onopen, ws.onclose, messages, ws]);
+    socket.emit("chat message", "hello");
+  }, []);
 
   React.useEffect(() => {
     dispatch(fetchMesseges());
