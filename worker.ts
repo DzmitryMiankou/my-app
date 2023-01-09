@@ -29,12 +29,14 @@ app.use('/api', router);
 
 
 
-const io = require('socket.io')(server, {
+const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ['GET', 'POST'],
-  }
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
 });
+
+
 io.on('connection', (socket: any) => {
   console.log(`a user connected!`);
 
