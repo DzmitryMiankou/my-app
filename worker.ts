@@ -31,17 +31,18 @@ app.use('/api', router);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
+    credentials: true,
+
   },
 });
 
 
 io.on('connection', (socket: any) => {
-  console.log(`a user connected!`);
 
+  console.log(socket.rooms);
   socket.on('chat message', (data: any) => {
-    console.log(data);
     const ds = JSON.parse(data);
     const now = new Date().toJSON();
     const dateTime = new Date(now);
@@ -50,7 +51,7 @@ io.on('connection', (socket: any) => {
     });
     connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
       if (err) return console.log(err);
-      socket.emit('chat message',
+      io.emit('chat message',
         results
       );
     })
@@ -60,7 +61,7 @@ io.on('connection', (socket: any) => {
     const ds = JSON.parse(data);
     connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
       if (err) return console.log(err);
-      socket.emit('mess',
+      io.emit('mess',
         results
       );
     })
@@ -96,6 +97,23 @@ if (cluster.isPrimary) {
 } else {
   server.listen(PORT);
 }
+
+
+/*
+let gcInterval: any;
+
+function init() {
+  gcInterval = setInterval(function () { gcDo(); }, 2000);
+}
+
+function gcDo() {
+  //@ts-ignore
+  global.gc();
+  clearInterval(gcInterval);
+  init();
+}
+
+init();*/
 /*connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", 42, (err, results, fields) => {
       if (err) return console.log(err);
       //console.log(results);

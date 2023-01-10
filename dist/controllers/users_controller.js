@@ -19,11 +19,11 @@ const validation_result_1 = require("express-validator/src/validation-result");
 const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const uuid_1 = require("uuid");
-const $searchEmailSQL = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
-const $searchRefreshSQL = "SELECT * FROM `userRefreshToken` WHERE `us_id` LIKE (?);";
-const $createUsersSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
-const $createRefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
-const $updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
+const $searchEmailSQL = "SELECT * FROM `users` WHERE `email` LIKE (?);";
+const $searchRefreshSQL = "SELECT * FROM `user_refresh_token` WHERE `us_id` LIKE (?);";
+const $createUsersSQL = "INSERT INTO `users` VALUES (?, ?, ?, ?, ?);";
+const $createRefreshSQL = "INSERT INTO `user_refresh_token` VALUES (?, ?);";
+const $updadaRefreshSQL = "UPDATE `user_refresh_token` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
 class useController {
     auth(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {

@@ -2,7 +2,7 @@ import { connection } from '../MySQL/mySql';
 import { Request, Response, NextFunction } from 'express';
 import TokenService from '../services/token-service';
 
-const $searchIdNickNameSQL = "SELECT id, nickName FROM `createUsers`";
+const $searchIdNickNameSQL = "SELECT id, nickName FROM `users`";
 const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? && `user_id2` LIKE ? \
 || `user_id1` LIKE ? && `user_id2` LIKE ?;";
 //const $searchDialoguesSQL = `SELECT userDialogues.id, user_id1, nickName, user_id2 FROM userDialogues \
@@ -14,8 +14,8 @@ const $createMessegesSQL = "INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);
 const $searchDialoguesSQL =
     `SELECT userDialogues.id, user_id1, nickName, user_id2
      FROM userDialogues 
-     JOIN createUsers
-     ON createUsers.id =
+     JOIN users
+     ON users.id =
      CASE
      WHEN user_id1 = ?
      THEN userDialogues.user_id2 

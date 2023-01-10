@@ -9,11 +9,11 @@ import { v4 as uuidv4, v4 } from 'uuid';
 import { sendEmail } from '../services/mail-service';
 
 
-const $searchEmailSQL = "SELECT * FROM `createUsers` WHERE `email` LIKE (?);";
-const $searchRefreshSQL = "SELECT * FROM `userRefreshToken` WHERE `us_id` LIKE (?);"
-const $createUsersSQL = "INSERT INTO `createUsers` VALUES (?, ?, ?, ?, ?);";
-const $createRefreshSQL = "INSERT INTO `userRefreshToken` VALUES (?, ?);";
-const $updadaRefreshSQL = "UPDATE `userRefreshToken` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
+const $searchEmailSQL = "SELECT * FROM `users` WHERE `email` LIKE (?);";
+const $searchRefreshSQL = "SELECT * FROM `user_refresh_token` WHERE `us_id` LIKE (?);"
+const $createUsersSQL = "INSERT INTO `users` VALUES (?, ?, ?, ?, ?);";
+const $createRefreshSQL = "INSERT INTO `user_refresh_token` VALUES (?, ?);";
+const $updadaRefreshSQL = "UPDATE `user_refresh_token` SET `RefreshToken` = ?  WHERE  `us_id` = ?;";
 
 
 

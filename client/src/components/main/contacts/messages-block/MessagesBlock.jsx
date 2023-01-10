@@ -4,12 +4,15 @@ import Messeg from "./messeges/Messeg";
 import Input from "./input/Input";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "./button-message/Button";
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:5000");
+import { io } from "socket.io-client";
+const socket = io.connect("http://localhost:5000", {
+  withCredentials: true,
+  transports: ["websocket", "polling"],
+});
 
 const MessagesBlock = (props) => {
   const state2 = useSelector((state) => state.messeges.newChanges);
-  const [get, setState] = useState(null);
+  const [get, setState] = useState([]);
   const set = () => {
     const dataD = JSON.parse(localStorage.getItem("dialogues"));
     const dataD1 = JSON.parse(localStorage.getItem("user")).userData;
@@ -22,30 +25,36 @@ const MessagesBlock = (props) => {
         id: dataD1.id,
       })
     );
-    socket.on("chat message", (data) => {
-      setState(data);
+    socket.once("chat message", (data) => {
+      setState([data]);
     });
   };
 
   React.useEffect(() => {
     const dataD = JSON.parse(localStorage.getItem("dialogues"));
     const dataD1 = JSON.parse(localStorage.getItem("user")).userData;
-    socket.emit(
-      "mess",
-      JSON.stringify({
-        dialogId: dataD.idDialogues,
-        userId: dataD.user_id2,
-        id: dataD1.id,
-      })
-    );
-    socket.on("mess", (data) => {
-      setState(data);
-    });
-  }, [get]);
+    try {
+      socket.emit(
+        "mess",
+        JSON.stringify({
+          dialogId: dataD.idDialogues,
+          userId: dataD.user_id2,
+          id: dataD1.id,
+        })
+      );
+      socket.once("mess", (data) => {
+        setState((get) => [...get, data]);
+        console.log(data);
+      });
+      return () => socket.off("mess");
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const mapMesseg =
-    get &&
-    get.map(({ id, Source_Id, Message, Created_At }) => (
+    get[0] &&
+    get[0].map(({ id, Source_Id, Message, Created_At }) => (
       <Messeg key={id} id={Source_Id} text={Message} date={Created_At} />
     ));
 

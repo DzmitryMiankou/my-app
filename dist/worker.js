@@ -33,14 +33,14 @@ app.use(express_1.default.json());
 app.use('/api', router_1.default);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: "*",
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"],
+        credentials: true,
     },
 });
 io.on('connection', (socket) => {
-    console.log(`a user connected!`);
+    console.log(socket.rooms);
     socket.on('chat message', (data) => {
-        console.log(data);
         const ds = JSON.parse(data);
         const now = new Date().toJSON();
         const dateTime = new Date(now);
@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
         mySql_1.connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
             if (err)
                 return console.log(err);
-            socket.emit('chat message', results);
+            io.emit('chat message', results);
         });
     });
     socket.on('mess', (data) => {
@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
         mySql_1.connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
             if (err)
                 return console.log(err);
-            socket.emit('mess', results);
+            io.emit('mess', results);
         });
     });
     socket.on('disconnect', () => {
@@ -91,6 +91,21 @@ if (node_cluster_1.default.isPrimary) {
 else {
     server.listen(PORT);
 }
+/*
+let gcInterval: any;
+
+function init() {
+  gcInterval = setInterval(function () { gcDo(); }, 2000);
+}
+
+function gcDo() {
+  //@ts-ignore
+  global.gc();
+  clearInterval(gcInterval);
+  init();
+}
+
+init();*/
 /*connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", 42, (err, results, fields) => {
       if (err) return console.log(err);
       //console.log(results);
