@@ -14,10 +14,10 @@ const Dialogues = () => {
 
   const mapDialoguesUsers =
     state.list &&
-    state.list.map(({ id, user_id2, nickName, user_id1 }) => (
+    state.list.map(({ id_d, nickName, user_id1, user_id2 }, i) => (
       <Users
-        key={id}
-        id={id}
+        key={i}
+        id_d={id_d}
         nickName={nickName}
         user_id2={user_id2}
         user_id1={user_id1}

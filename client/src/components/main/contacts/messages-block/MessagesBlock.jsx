@@ -32,6 +32,7 @@ const MessagesBlock = (props) => {
 
   React.useEffect(() => {
     const dataD = JSON.parse(localStorage.getItem("dialogues"));
+
     const dataD1 = JSON.parse(localStorage.getItem("user")).userData;
     try {
       socket.emit(

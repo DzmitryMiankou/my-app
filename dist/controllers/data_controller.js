@@ -15,21 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mySql_1 = require("../MySQL/mySql");
 const token_service_1 = __importDefault(require("../services/token-service"));
 const $searchIdNickNameSQL = "SELECT id, nickName FROM `users`";
-const $searchDialoguesUserSQL = "SELECT * FROM `userDialogues` WHERE `user_id1` LIKE ? && `user_id2` LIKE ? \
+const $searchDialoguesUserSQL = "SELECT * FROM `dialogues` WHERE `user_id1` LIKE ? && `user_id2` LIKE ? \
 || `user_id1` LIKE ? && `user_id2` LIKE ?;";
-//const $searchDialoguesSQL = `SELECT userDialogues.id, user_id1, nickName, user_id2 FROM userDialogues \
-//JOIN createUsers ON (userDialogues.user_id1 = createUsers.id) WHERE user_id1 = ? || user_id2  = ?;`;
+//const $searchDialoguesSQL = `SELECT dialogues.id_d, user_id1, nickName, user_id2 FROM dialogues \
+//JOIN createUsers ON (dialogues.user_id1 = createUsers.id) WHERE user_id1 = ? || user_id2  = ?;`;
 const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
-const $createDialoguesSQL = "INSERT INTO `userDialogues` VALUES (?, ?, ?, ?);";
+const $createDialoguesSQL = "INSERT INTO `dialogues` VALUES (?, ?, ?, ?);";
 const $createMessegesSQL = "INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);";
-const $searchDialoguesSQL = `SELECT userDialogues.id, user_id1, nickName, user_id2
-     FROM userDialogues 
+const $searchDialoguesSQL = `SELECT dialogues.id_d, user_id1, nickName, user_id2
+     FROM dialogues 
      JOIN users
      ON users.id =
      CASE
      WHEN user_id1 = ?
-     THEN userDialogues.user_id2 
-     ELSE userDialogues.user_id1 
+     THEN dialogues.user_id2 
+     ELSE dialogues.user_id1 
      END
      WHERE user_id1 = ? || user_id2  = ?;`;
 class useController {
