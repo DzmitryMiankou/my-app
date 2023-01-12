@@ -46,10 +46,10 @@ io.on('connection', (socket: any) => {
     const ds = JSON.parse(data);
     const now = new Date().toJSON();
     const dateTime = new Date(now);
-    connection.query("INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);", [null, ds.dialogId, ds.id, ds.userId, ds.messegData, dateTime], (err, results, fields) => {
+    connection.query("INSERT INTO `messages` VALUES (?, ?, ?, ?, ?, ?);", [null, ds.dialogId, ds.id, ds.userId, ds.messegData, dateTime], (err, results, fields) => {
       if (err) return console.log(err);
     });
-    connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
+    connection.query("SELECT * FROM `messages` WHERE `dialog_id` = ?;", ds.dialogId, (err, results, fields) => {
       if (err) return console.log(err);
       io.emit('chat message',
         results
@@ -59,7 +59,7 @@ io.on('connection', (socket: any) => {
 
   socket.on('mess', (data: any) => {
     const ds = JSON.parse(data);
-    connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
+    connection.query("SELECT * FROM `messages` WHERE `dialog_id` = ?;", ds.dialogId, (err, results, fields) => {
       if (err) return console.log(err);
       io.emit('mess',
         results

@@ -55,8 +55,8 @@ const MessagesBlock = (props) => {
 
   const mapMesseg =
     get[0] &&
-    get[0].map(({ id, Source_Id, Message, Created_At }) => (
-      <Messeg key={id} id={Source_Id} text={Message} date={Created_At} />
+    get[0].map(({ id, source_id, text, Created_At }) => (
+      <Messeg key={id} id={source_id} text={text} date={Created_At} />
     ));
 
   return (

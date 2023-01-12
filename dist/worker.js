@@ -44,11 +44,11 @@ io.on('connection', (socket) => {
         const ds = JSON.parse(data);
         const now = new Date().toJSON();
         const dateTime = new Date(now);
-        mySql_1.connection.query("INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);", [null, ds.dialogId, ds.id, ds.userId, ds.messegData, dateTime], (err, results, fields) => {
+        mySql_1.connection.query("INSERT INTO `messages` VALUES (?, ?, ?, ?, ?, ?);", [null, ds.dialogId, ds.id, ds.userId, ds.messegData, dateTime], (err, results, fields) => {
             if (err)
                 return console.log(err);
         });
-        mySql_1.connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
+        mySql_1.connection.query("SELECT * FROM `messages` WHERE `dialog_id` = ?;", ds.dialogId, (err, results, fields) => {
             if (err)
                 return console.log(err);
             io.emit('chat message', results);
@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
     });
     socket.on('mess', (data) => {
         const ds = JSON.parse(data);
-        mySql_1.connection.query("SELECT * FROM`userMessage` WHERE`id_d` = ?;", ds.dialogId, (err, results, fields) => {
+        mySql_1.connection.query("SELECT * FROM `messages` WHERE `dialog_id` = ?;", ds.dialogId, (err, results, fields) => {
             if (err)
                 return console.log(err);
             io.emit('mess', results);

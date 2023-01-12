@@ -8,7 +8,7 @@ const mysql_1 = __importDefault(require("mysql"));
 exports.connection = mysql_1.default.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'miankou14121994a',
+    password: 'пеу',
     database: 'explore',
     insecureAuth: true,
     port: 3306

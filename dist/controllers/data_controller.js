@@ -19,9 +19,9 @@ const $searchDialoguesUserSQL = "SELECT * FROM `dialogues` WHERE `user_id1` LIKE
 || `user_id1` LIKE ? && `user_id2` LIKE ?;";
 //const $searchDialoguesSQL = `SELECT dialogues.id_d, user_id1, nickName, user_id2 FROM dialogues \
 //JOIN createUsers ON (dialogues.user_id1 = createUsers.id) WHERE user_id1 = ? || user_id2  = ?;`;
-const $searchMessegesSQL = "SELECT * FROM `userMessage` WHERE `id_d` = ?;";
+const $searchMessegesSQL = "SELECT * FROM `messages` WHERE `dialog_id` = ?;";
 const $createDialoguesSQL = "INSERT INTO `dialogues` VALUES (?, ?, ?, ?);";
-const $createMessegesSQL = "INSERT INTO `userMessage` VALUES (?, ?, ?, ?, ?, ?);";
+const $createMessegesSQL = "INSERT INTO `messages` VALUES (?, ?, ?, ?, ?, ?);";
 const $searchDialoguesSQL = `SELECT dialogues.id_d, user_id1, nickName, user_id2
      FROM dialogues 
      JOIN users
