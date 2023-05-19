@@ -1,0 +1,12 @@
+.mainTextContainer {
+  display: grid;
+  justify-items: center;
+  .mainText {
+    font-weight: 700;
+    font-size: 72px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--blue-main-color);
+    opacity: 0.39;
+  }
+}

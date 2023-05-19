@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import Header from "./components/header/Header";
+import Main from "./components/main/Main";
+import Footer from "./components/footer/Footer";
+import "@fontsource/poppins";
+import Vector1 from "./Vector1.svg";
+import Vector2 from "./Vector2.svg";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <img src={Vector1} className="vector1" alt="logo" />
+      <img src={Vector2} className="vector2" alt="logo" />
+      <Header />
+      <Main />
+      <Footer />
     </div>
   );
 }

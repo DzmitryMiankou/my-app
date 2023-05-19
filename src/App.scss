@@ -1,0 +1,23 @@
+.text {
+  font-size: 18px;
+  max-width: 423px;
+  text-align: center;
+}
+
+.App {
+  display: grid;
+  grid-template-rows: 10vh 50vh 20vh;
+  gap: 10vh;
+}
+
+.vector1 {
+  position: absolute;
+  left: -20vw;
+  top: -30vh;
+}
+
+.vector2 {
+  position: absolute;
+  right: -20vw;
+  top: -50vh;
+}

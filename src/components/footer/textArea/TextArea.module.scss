@@ -1,0 +1,17 @@
+.component {
+  background: var(--white-main-color);
+  width: min-content;
+  display: flex;
+  border-radius: 40px;
+  padding: 5px 10px;
+  width: 450px;
+  justify-content: space-between;
+  align-items: center;
+  .input {
+    width: 100%;
+    border-radius: 40px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+  }
+}

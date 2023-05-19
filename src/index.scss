@@ -1,0 +1,32 @@
+:root {
+  --blue-main-color: #162c4e;
+  --white-main-color: #ffffff;
+}
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  border: none;
+  text-align: center;
+  cursor: pointer;
+}
