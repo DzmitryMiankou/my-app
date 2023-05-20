@@ -9,7 +9,7 @@ const ButtonCard = ({ arr, oneElement }) => {
   return (
     <>
       {arr.map(({ name, img, date }, i) => (
-        <li key={i} className={ButtonCardStyle.block}>
+        <li key={i}>
           <div
             className={ButtonCardStyle.container}
             onClick={() => setActive(name)}

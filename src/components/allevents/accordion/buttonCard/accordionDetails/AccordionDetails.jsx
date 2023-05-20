@@ -6,9 +6,12 @@ const AccordionDetails = ({ active, name, img, listNumber, date }) => {
   return (
     <Box
       sx={{
+        transition: "width 1s ease",
         width: active === name ? "50vw" : "0px",
         backgroundImage: `url(${img})`,
-        transition: "1s ease",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "51vw",
+        backgroundPosition: "center",
       }}
     >
       <div
