@@ -1,0 +1,66 @@
+.outside {
+  border-left: 1px solid white;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(20px);
+  height: 100%;
+  width: 300px;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 1fr repeat(2, auto);
+  gap: 20px;
+  grid-template-areas:
+    "."
+    "text"
+    "times"
+    "bottom";
+  .morebutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    grid-area: bottom;
+    height: 62px;
+    width: 256px;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-left: 6px solid rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    font-size: 18px;
+    transition: 0.2s;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.037);
+    }
+  }
+  p {
+    grid-area: text;
+    color: white;
+    font-size: 22px;
+    width: 256px;
+  }
+  time {
+    grid-area: times;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .number {
+    font-weight: 600;
+    font-size: 320px;
+    letter-spacing: -0.03em;
+    color: rgba(255, 255, 255, 0.04);
+    position: absolute;
+    left: -100px;
+    top: -100px;
+    user-select: none;
+  }
+}
+
+.block {
+  display: none;
+  transition: 3s;
+}
+
+.blockActive {
+  display: block;
+}

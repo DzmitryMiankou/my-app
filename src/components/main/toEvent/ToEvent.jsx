@@ -6,9 +6,14 @@ const ToEvent = () => {
   return (
     <div className={ToEventStyle.component}>
       <p className="text">Check our event page when you wait:</p>
-      <button className={ToEventStyle.button}>
+      <a
+        href="https://developer.mozilla.org/ru/"
+        target="_blank"
+        className={ToEventStyle.button}
+        rel="noreferrer"
+      >
         <p>Go to the event</p> <img src={ArrowRight} alt="logo" />
-      </button>
+      </a>
     </div>
   );
 };

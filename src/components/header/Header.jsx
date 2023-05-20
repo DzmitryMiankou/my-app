@@ -5,7 +5,9 @@ import logo from "../../Logo.svg";
 const Header = () => {
   return (
     <header className={HeaderStyle.component}>
-      <img src={logo} className={HeaderStyle.logo} alt="logo" />
+      <a href="/">
+        <img src={logo} className={HeaderStyle.logo} alt="logo" />
+      </a>
     </header>
   );
 };
