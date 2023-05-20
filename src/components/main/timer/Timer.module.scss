@@ -1,5 +1,6 @@
 $fontSize: 72px;
 $fontWeight: 600;
+$size1600: 1600px;
 
 .component {
   display: flex;
@@ -14,6 +15,10 @@ $fontWeight: 600;
       font-weight: $fontWeight;
       font-size: $fontSize;
       color: var(--blue-main-color);
+      @media screen and (max-width: $size1600) {
+        font-size: 52px;
+        height: 70px;
+      }
     }
     .signature {
       width: 132px;
@@ -32,6 +37,9 @@ $fontWeight: 600;
     &::after {
       content: ":";
       color: var(--blue-main-color);
+    }
+    @media screen and (max-width: $size1600) {
+      font-size: 52px;
     }
   }
 }

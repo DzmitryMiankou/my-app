@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import AreaStyle from "./TextArea.module.scss";
 import Modal from "./modal/Modal";
 

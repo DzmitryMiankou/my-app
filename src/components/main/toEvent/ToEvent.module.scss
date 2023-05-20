@@ -1,22 +1,26 @@
+$size1600: 1600px;
+
 .component {
   display: grid;
   justify-items: center;
   gap: 12px;
   margin-top: 80px;
-}
-
-.button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #1d4169;
-  border-radius: 40px;
-  gap: 30px;
-  padding: 15px 30px;
-  font-size: 18px;
-  color: white;
-  transition: 0.2s;
-  &:hover {
-    background-color: var(--blue-main-color);
+  @media screen and (max-width: $size1600) {
+    margin-top: 20px;
+  }
+  .button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1d4169;
+    border-radius: 40px;
+    gap: 30px;
+    padding: 15px 30px;
+    font-size: 18px;
+    color: white;
+    transition: 0.2s;
+    &:hover {
+      background-color: var(--blue-main-color);
+    }
   }
 }

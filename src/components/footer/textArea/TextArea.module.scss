@@ -1,5 +1,7 @@
 .component {
   background: var(--white-main-color);
+  margin: auto;
+  grid-area: textarea;
   width: min-content;
   display: flex;
   border-radius: 40px;

@@ -1,0 +1,16 @@
+.toScroll {
+  grid-area: toScroll;
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  font-size: 18px;
+  color: white;
+  background: none;
+  .svg {
+    transform: rotate(90deg);
+  }
+  transition: 0.2s;
+  &:hover {
+    filter: invert(20%);
+  }
+}

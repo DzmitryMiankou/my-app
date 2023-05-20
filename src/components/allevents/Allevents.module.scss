@@ -1,0 +1,14 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-top: 60px;
+  .mainText {
+    font-size: 72px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #162c4e;
+    opacity: 0.39;
+  }
+}

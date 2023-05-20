@@ -1,0 +1,18 @@
+.component {
+  display: flex;
+  gap: 4px;
+  .container {
+    background-color: var(--blue-main-color);
+    display: flex;
+    text-align: start;
+    justify-content: flex-end;
+    .text {
+      writing-mode: sideways-lr;
+      font-weight: 600;
+      font-size: 32px;
+      color: white;
+      min-width: 80px;
+      padding-left: 13px;
+    }
+  }
+}

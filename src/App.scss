@@ -1,3 +1,5 @@
+$size1600: 1740px;
+
 .text {
   font-size: 18px;
   max-width: 423px;
@@ -8,16 +10,31 @@
   display: grid;
   grid-template-rows: 10vh 50vh 20vh;
   gap: 10vh;
-}
-
-.vector1 {
-  position: absolute;
-  left: -20vw;
-  top: -30vh;
-}
-
-.vector2 {
-  position: absolute;
-  right: -20vw;
-  top: -50vh;
+  @media screen and (max-width: $size1600) {
+    grid-template-rows: 10vh 60vh 20vh;
+    gap: 5vh;
+  }
+  .vector1 {
+    position: absolute;
+    left: -20vw;
+    pointer-events: none;
+    top: -30vh;
+    @media screen and (max-width: $size1600) {
+      left: -30vw;
+      top: -40vh;
+    }
+  }
+  .vector2 {
+    position: absolute;
+    right: -20vw;
+    pointer-events: none;
+    top: -50vh;
+    @media screen and (max-width: $size1600) {
+      right: -20vw;
+      top: -70vh;
+    }
+  }
+  .allevents {
+    height: 100vh;
+  }
 }

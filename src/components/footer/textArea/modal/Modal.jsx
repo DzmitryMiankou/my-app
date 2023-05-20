@@ -92,7 +92,7 @@ export default function Modal({ text }) {
   return (
     <>
       <IconButton sx={{ padding: "0" }} onClick={handleClickOpen}>
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="line" />
       </IconButton>
       <BootstrapDialog
         onClose={handleClose}
