@@ -10,21 +10,20 @@ const ButtonCard = ({ arr, oneElement }) => {
   return (
     <>
       {arr.map(({ name, img, date }, i) => (
-        <li key={i}>
-          <div
-            className={ButtonCardStyle.container}
-            onClick={() => setActive(name)}
-            ref={ref}
-          >
-            <ButtonEl name={name} id={i} active={active} img={img} />
-            <AccordionDetails
-              name={name}
-              img={img}
-              active={active}
-              listNumber={`0${i + 1}`}
-              date={date}
-            />
-          </div>
+        <li
+          key={i}
+          className={ButtonCardStyle.container}
+          onClick={() => setActive(name)}
+          ref={ref}
+        >
+          <ButtonEl name={name} id={i} active={active} img={img} />
+          <AccordionDetails
+            name={name}
+            img={img}
+            active={active}
+            listNumber={`0${i + 1}`}
+            date={date}
+          />
         </li>
       ))}
     </>

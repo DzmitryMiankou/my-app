@@ -6,9 +6,11 @@ const initStyle = {
   blockFilter: {
     display: "flex",
     width: "100%",
+    height: "100%",
     justifyContent: "center",
     "@media screen and (max-width: 1320px)": {
       display: "block",
+      height: "40px",
       paddingLeft: "20px",
     },
   },
@@ -32,7 +34,7 @@ const useStyles = createUseStyles({
   butt: {
     borderLeft: "white solid 4px",
     backgroundColor: "var(--blue-main-color)",
-    minWidth: "80px",
+    width: "80px",
     display: "flex",
     justifyContent: "center",
     backgroundImage: (img) => img,
@@ -43,9 +45,10 @@ const useStyles = createUseStyles({
       borderLeft: "none",
       borderBottom: "white solid 2px",
       minHeight: "40px",
-      backgroundSize: "100%",
+      backgroundSize: "100vw",
       ackgroundRepeat: "no-repeat",
-      backgroundPositionY: "30%",
+      backgroundPositionY: "0%",
+      width: "100%",
     },
   },
 });

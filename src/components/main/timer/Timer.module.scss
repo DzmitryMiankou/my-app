@@ -5,21 +5,13 @@ $size1600: 1600px;
 .component {
   display: flex;
   justify-content: center;
+
   .containerDate {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 132px;
-    .date {
-      height: 95px;
-      font-weight: $fontWeight;
-      font-size: $fontSize;
-      color: var(--blue-main-color);
-      @media screen and (max-width: $size1600) {
-        font-size: 52px;
-        height: 70px;
-      }
-    }
+
     .signature {
       width: 132px;
       height: 54px;
@@ -31,15 +23,19 @@ $size1600: 1600px;
       color: var(--white-main-color);
     }
   }
-  .dote:nth-child(-n + 6) {
-    font-weight: $fontWeight;
-    font-size: $fontSize;
-    &::after {
-      content: ":";
-      color: var(--blue-main-color);
-    }
-    @media screen and (max-width: $size1600) {
-      font-size: 52px;
-    }
+}
+
+.dote {
+  display: flex;
+}
+
+.date {
+  height: 95px;
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  color: var(--blue-main-color);
+  @media screen and (max-width: $size1600) {
+    font-size: 52px;
+    height: 70px;
   }
 }

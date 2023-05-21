@@ -4,7 +4,7 @@ $size1600: 1600px;
   display: grid;
   justify-items: center;
   gap: 12px;
-  margin-top: 80px;
+  margin: 40px 0px;
   @media screen and (max-width: $size1600) {
     margin-top: 20px;
   }

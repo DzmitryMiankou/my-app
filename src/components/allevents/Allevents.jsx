@@ -1,13 +1,35 @@
 import React from "react";
 import AlleventsStyle from "./Allevents.module.scss";
 import Accordion from "./accordion/Accordion";
+import { motion } from "framer-motion";
+
+const anim = {
+  hidden: {
+    y: -80,
+    opacity: 0,
+  },
+  visible: (custom) => ({
+    y: 0,
+    opacity: 0.36,
+  }),
+};
 
 const Allevents = () => {
   return (
-    <div className={AlleventsStyle.component}>
-      <h2 className={AlleventsStyle.mainText}>All Events</h2>
+    <motion.div
+      className={AlleventsStyle.component}
+      initial="hidden"
+      whileInView="visible"
+    >
+      <motion.h2
+        className={AlleventsStyle.mainText}
+        variants={anim}
+        transition={{ ease: "linear", duration: 0.7 }}
+      >
+        All Events
+      </motion.h2>
       <Accordion />
-    </div>
+    </motion.div>
   );
 };
 

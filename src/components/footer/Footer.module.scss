@@ -1,13 +1,12 @@
 .component {
   background: var(--blue-main-color);
-  display: grid;
-  align-items: center;
+  display: flex;
   .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-areas: ". textarea toScroll";
     align-items: center;
-    width: 90%;
     margin: auto;
+    width: 90vw;
   }
 }
