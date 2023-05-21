@@ -13,6 +13,17 @@
     "text"
     "times"
     "bottom";
+  @media screen and (max-width: 1320px) {
+    height: 150px;
+    width: 100%;
+    border-left: none;
+    gap: 10px;
+    justify-content: flex-start;
+    padding: 10px;
+    position: absolute;
+    bottom: 0%;
+    z-index: 0;
+  }
   .morebutton {
     display: flex;
     justify-content: center;
@@ -31,12 +42,21 @@
     &:hover {
       background-color: rgba(255, 255, 255, 0.037);
     }
+    @media screen and (max-width: 1320px) {
+      height: 42px;
+      font-size: 14px;
+      width: 156px;
+    }
   }
   p {
     grid-area: text;
     color: white;
     font-size: 22px;
     width: 256px;
+    @media screen and (max-width: 1320px) {
+      font-size: 16px;
+      width: auto;
+    }
   }
   time {
     grid-area: times;
@@ -53,6 +73,11 @@
     left: -100px;
     top: -100px;
     user-select: none;
+    @media screen and (max-width: 1320px) {
+      font-size: 70px;
+      left: 82%;
+      top: 0px;
+    }
   }
 }
 

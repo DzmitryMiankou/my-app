@@ -1,6 +1,7 @@
 import React from "react";
 import ButtonCardStyle from "./ButtonCard.module.scss";
 import AccordionDetails from "./accordionDetails/AccordionDetails";
+import ButtonEl from "./button/Button";
 
 const ButtonCard = ({ arr, oneElement }) => {
   const [active, setActive] = React.useState(oneElement);
@@ -15,12 +16,7 @@ const ButtonCard = ({ arr, oneElement }) => {
             onClick={() => setActive(name)}
             ref={ref}
           >
-            <button className={ButtonCardStyle.container_text}>
-              <h3 className={ButtonCardStyle.text}>
-                <span>{`0${i + 1} `}</span>
-                {name}
-              </h3>
-            </button>
+            <ButtonEl name={name} id={i} active={active} img={img} />
             <AccordionDetails
               name={name}
               img={img}

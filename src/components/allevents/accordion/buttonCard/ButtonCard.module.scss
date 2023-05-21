@@ -1,37 +1,16 @@
 .container {
   background-color: var(--blue-main-color);
   display: flex;
-  width: 100%;
   height: 70vh;
   @media screen and (max-width: 1600px) {
     height: 60vh;
   }
-  .container_text {
-    border-left: white solid 4px;
-    background-color: var(--blue-main-color);
-    min-width: 80px;
+  @media screen and (max-width: 1400px) {
+    height: 55vh;
+  }
+  @media screen and (max-width: 1320px) {
     display: flex;
-    justify-content: center;
-    z-index: 3;
-    text-align: start;
-    @media screen and (max-width: 1600px) {
-      min-width: 70px;
-    }
-    .text {
-      display: flex;
-      gap: 30px;
-      writing-mode: sideways-lr;
-      font-weight: 300;
-      font-size: 32px;
-      color: white;
-      @media screen and (max-width: 1600px) {
-        font-size: 18px;
-      }
-      span {
-        writing-mode: initial;
-        font-size: 40px;
-        margin-bottom: 20px;
-      }
-    }
+    flex-direction: column-reverse;
+    height: auto;
   }
 }

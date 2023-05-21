@@ -2,4 +2,8 @@
   display: flex;
   justify-content: center;
   overflow-x: hidden;
+  @media screen and (max-width: 1320px) {
+    display: block;
+    overflow-y: hidden;
+  }
 }
