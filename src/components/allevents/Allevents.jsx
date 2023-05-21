@@ -24,7 +24,7 @@ const Allevents = () => {
       <motion.h2
         className={AlleventsStyle.mainText}
         variants={anim}
-        transition={{ ease: "linear", duration: 0.7 }}
+        transition={{ ease: "linear", duration: 0.7, delay: 0.5 }}
       >
         All Events
       </motion.h2>

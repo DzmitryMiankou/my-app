@@ -24,7 +24,7 @@ const Header = () => {
       <motion.a
         href="/"
         variants={anim}
-        transition={{ ease: "linear", duration: 0.5 }}
+        transition={{ ease: "linear", duration: 0.4 }}
       >
         <img src={logo} className={HeaderStyle.logo} alt="logo" />
       </motion.a>

@@ -46,7 +46,7 @@ const Clock = () => {
           <motion.div
             className={ClockStyle.containerDate}
             variants={anim}
-            transition={{ ease: "linear", duration: 0.5, delay: 1.2 }}
+            transition={{ ease: "linear", duration: 0.4, delay: 1 }}
           >
             <p className={ClockStyle.date}>{`${date}`}</p>
             <div className={ClockStyle.signature}>
@@ -56,7 +56,7 @@ const Clock = () => {
           <motion.p
             className={ClockStyle.date}
             variants={anim}
-            transition={{ ease: "linear", duration: 0.5, delay: 1.2 }}
+            transition={{ ease: "linear", duration: 0.4, delay: 1 }}
           >
             {dots}
           </motion.p>

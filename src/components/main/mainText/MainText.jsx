@@ -32,13 +32,13 @@ const MainText = () => {
     >
       <motion.div
         variants={anim}
-        transition={{ ease: "linear", duration: 0.5, delay: 0.7 }}
+        transition={{ ease: "linear", duration: 0.4, delay: 0.6 }}
       >
         <h1 className={MainTextStyle.mainText}>Under Construction</h1>
       </motion.div>
       <motion.p
         variants={anim2}
-        transition={{ ease: "linear", duration: 0.5, delay: 0.7 }}
+        transition={{ ease: "linear", duration: 0.4, delay: 0.6 }}
       >
         We're making lots of improvements and will be back soon
       </motion.p>

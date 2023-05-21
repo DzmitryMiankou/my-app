@@ -44,14 +44,14 @@ function App() {
         className="vector1"
         alt="logo"
         variants={anim}
-        transition={{ ease: "linear", duration: 0.7 }}
+        transition={{ ease: "linear", duration: 0.5, delay: 0.3 }}
       />
       <motion.img
         src={Vector2}
         className="vector2"
         alt="logo"
         variants={anim2}
-        transition={{ ease: "linear", duration: 0.7 }}
+        transition={{ ease: "linear", duration: 0.5, delay: 0.3 }}
       />
       <Header />
       <Main />

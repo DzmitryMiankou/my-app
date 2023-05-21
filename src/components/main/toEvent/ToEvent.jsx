@@ -21,7 +21,7 @@ const ToEvent = () => {
       initial="hidden"
       whileInView="visible"
       variants={anim}
-      transition={{ ease: "linear", duration: 0.5, delay: 1.6 }}
+      transition={{ ease: "linear", duration: 0.4, delay: 1.3 }}
     >
       <p className="text">Check our event page when you wait:</p>
       <a
