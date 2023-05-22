@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import ClockStyle from "./Timer.module.scss";
 import { motion } from "framer-motion";
+import { useResize } from "../../../hook/resizeWindHook";
 
 const anim = {
   hidden: {
@@ -20,6 +21,8 @@ const Clock = () => {
   const [currentTime, setCurrentTime] = useState(moment());
   const timeBetween = moment.duration(targetTime.diff(currentTime));
 
+  const sizeWindiw = useResize();
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(moment());
@@ -29,10 +32,25 @@ const Clock = () => {
   }, []);
 
   const arr = [
-    { date: timeBetween.days(), text: "Days", dots: ":" },
-    { date: timeBetween.hours(), text: "Hours", dots: ":" },
-    { date: timeBetween.minutes(), text: "Minutes", dots: ":" },
-    { date: timeBetween.seconds(), text: "Seconds" },
+    {
+      date: timeBetween.days(),
+      text: sizeWindiw.width <= 600 ? "DD" : "Days",
+      dots: ":",
+    },
+    {
+      date: timeBetween.hours(),
+      text: sizeWindiw.width <= 600 ? "HH" : "Hours",
+      dots: ":",
+    },
+    {
+      date: timeBetween.minutes(),
+      text: sizeWindiw.width <= 600 ? "MM" : "Minutes",
+      dots: ":",
+    },
+    {
+      date: timeBetween.seconds(),
+      text: sizeWindiw.width <= 600 ? "SS" : "Seconds",
+    },
   ];
 
   return (
@@ -60,7 +78,6 @@ const Clock = () => {
           >
             {dots}
           </motion.p>
-          <div className={ClockStyle.dote}></div>
         </React.Fragment>
       ))}
     </motion.div>

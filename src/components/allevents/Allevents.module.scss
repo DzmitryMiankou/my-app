@@ -4,12 +4,19 @@
   align-items: center;
   gap: 30px;
   margin-top: 60px;
+  @media screen and (max-width: 1600px) {
+    gap: 20px;
+    margin-top: 30px;
+  }
   .mainText {
     font-size: 72px;
     font-weight: 700;
     text-transform: uppercase;
     color: #162c4e;
     opacity: 0.39;
+    @media screen and (max-width: 1600px) {
+      font-size: 52px;
+    }
     @media screen and (max-width: 1320px) {
       font-size: 32px;
     }

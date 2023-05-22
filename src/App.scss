@@ -6,11 +6,13 @@ $size1600: 1740px;
 }
 .App {
   display: grid;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
   grid-template-rows: 15vh 55vh 20vh;
   justify-content: center;
   gap: 5vh;
   @media screen and (max-width: $size1600) {
-    grid-template-rows: 10vh 60vh 20vh;
+    grid-template-rows: 15vh 55vh 20vh;
     gap: 5vh;
   }
   .vector1 {
@@ -34,6 +36,14 @@ $size1600: 1740px;
       left: -70vw;
       top: -45vh;
     }
+    @media screen and (max-width: 770px) {
+      left: -75vw;
+      top: -50vh;
+    }
+    @media screen and (max-width: 760px) {
+      left: -80vw;
+      top: -56vh;
+    }
   }
   .vector2 {
     position: absolute;
@@ -55,6 +65,14 @@ $size1600: 1740px;
     @media screen and (max-width: 1000px) {
       right: -47vw;
       top: -90vh;
+    }
+    @media screen and (max-width: 770px) {
+      right: -50vw;
+      top: -95vh;
+    }
+    @media screen and (max-width: 670px) {
+      right: -55vw;
+      top: -97vh;
     }
   }
   .allevents {
