@@ -11,12 +11,10 @@ import { motion } from "framer-motion";
 
 const anim = {
   hidden: {
-    y: -120,
     x: -40,
     opacity: 0,
   },
   visible: (custom) => ({
-    y: 0,
     x: 0,
     opacity: 1,
   }),
@@ -24,12 +22,10 @@ const anim = {
 
 const anim2 = {
   hidden: {
-    y: -120,
     x: 50,
     opacity: 0,
   },
   visible: (custom) => ({
-    y: 0,
     x: 0,
     opacity: 1,
   }),

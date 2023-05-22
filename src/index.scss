@@ -1,3 +1,12 @@
+@font-face {
+  // название шрифта(чтобы не запутаться лучше указать название папки со шрифтом)
+  font-family: "SFProDisplay";
+  // адрес шрифта и тип
+  src: url("./fonts/SFPRODISPLAYREGULAR.OTF") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
 :root {
   --blue-main-color: #162c4e;
   --white-main-color: #ffffff;
@@ -8,13 +17,19 @@
   margin: 0;
 }
 
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 body {
   margin: 0;
   font-family: "Poppins";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 code {

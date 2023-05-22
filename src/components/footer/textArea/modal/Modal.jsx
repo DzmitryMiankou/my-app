@@ -63,9 +63,14 @@ export default function Modal({ text }) {
     };
     const response = await fetch("https://reqres.in/api/posts", requestOptions);
     if (!response.ok) {
-      return console.log("ok");
+      set(["ERROR!", "Error fetching"]);
+      return setOpen(true);
     }
-    console.log("no");
+    set([
+      "SUCCESS!",
+      " You have successfully subscribed to the email newsletter",
+    ]);
+    return setOpen(true);
   };
 
   const handleClickOpen = () => {
@@ -79,11 +84,6 @@ export default function Modal({ text }) {
       return setOpen(true);
     }
     postEmail(text);
-    set([
-      "SUCCESS!",
-      " You have successfully subscribed to the email newsletter",
-    ]);
-    setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);

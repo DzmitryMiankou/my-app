@@ -6,8 +6,7 @@ $size1600: 1740px;
 }
 .App {
   display: grid;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
+  position: relative;
   grid-template-rows: 15vh 55vh 20vh;
   justify-content: center;
   gap: 5vh;
@@ -17,65 +16,31 @@ $size1600: 1740px;
   }
   .vector1 {
     position: absolute;
-    left: -22vw;
+    left: -200px;
     pointer-events: none;
-    top: -32vh;
-    @media screen and (max-width: $size1600) {
-      left: -30vw;
-      top: -40vh;
-    }
-    @media screen and (max-width: 1450px) {
-      left: -40vw;
-      top: -45vh;
-    }
-    @media screen and (max-width: 1200px) {
-      left: -55vw;
-      top: -45vh;
-    }
-    @media screen and (max-width: 1000px) {
-      left: -70vw;
-      top: -45vh;
-    }
-    @media screen and (max-width: 770px) {
-      left: -75vw;
-      top: -50vh;
-    }
-    @media screen and (max-width: 760px) {
-      left: -80vw;
-      top: -56vh;
+    top: -250px;
+    rotate: 120deg;
+    width: 550px;
+    @media screen and (max-width: 750px) {
+      width: 480px;
     }
   }
   .vector2 {
     position: absolute;
-    right: -20vw;
+    right: -280px;
     pointer-events: none;
-    top: -50vh;
-    @media screen and (max-width: $size1600) {
-      right: -20vw;
-      top: -70vh;
-    }
-    @media screen and (max-width: 1450px) {
-      right: -30vw;
-      top: -70vh;
-    }
-    @media screen and (max-width: 1200px) {
-      right: -35vw;
-      top: -90vh;
-    }
-    @media screen and (max-width: 1000px) {
-      right: -47vw;
-      top: -90vh;
-    }
-    @media screen and (max-width: 770px) {
-      right: -50vw;
-      top: -95vh;
-    }
-    @media screen and (max-width: 670px) {
-      right: -55vw;
-      top: -97vh;
+    top: -400px;
+    rotate: -10deg;
+    width: 550px;
+    @media screen and (max-width: 750px) {
+      width: 490px;
     }
   }
   .allevents {
     height: 100vh;
   }
+}
+
+.allevents * {
+  font-family: "SFProDisplay";
 }

@@ -3,6 +3,9 @@ $size1600: 1600px;
 .mainTextContainer {
   display: grid;
   justify-items: center;
+  p {
+    text-align: center;
+  }
   .mainText {
     font-weight: 700;
     font-size: 72px;
@@ -12,7 +15,7 @@ $size1600: 1600px;
     @media screen and (max-width: $size1600) {
       font-size: 52px;
     }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 800px) {
       font-size: 36px;
     }
   }

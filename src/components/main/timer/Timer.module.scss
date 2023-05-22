@@ -5,13 +5,14 @@ $size1600: 1600px;
 .component {
   display: flex;
   justify-content: center;
-
   .containerDate {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 132px;
-
+    @media screen and (max-width: 600px) {
+      width: 90px !important;
+    }
     .signature {
       width: 132px;
       height: 54px;

@@ -9,11 +9,15 @@
   width: 450px;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 600px) {
+    width: 360px;
+  }
   .input {
     width: 100%;
     border-radius: 40px;
     font-size: 18px;
     border: none;
     outline: none;
+    padding: 5px;
   }
 }
