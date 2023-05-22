@@ -1,23 +1,21 @@
-$size1600: 1600px;
-
 .component {
   display: grid;
   justify-items: center;
   gap: 12px;
   margin: 40px 0px;
-  @media screen and (max-width: $size1600) {
+  @media screen and (max-width: 1600px) {
     margin-top: 20px;
   }
   .button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #1d4169;
+    background: var(--blue-button-color);
     border-radius: 40px;
     gap: 30px;
     padding: 15px 30px;
     font-size: 18px;
-    color: white;
+    color: var(--white-main-color);
     text-decoration: none;
     cursor: pointer;
     transition: 0.2s;

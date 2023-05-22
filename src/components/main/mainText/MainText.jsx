@@ -30,13 +30,15 @@ const MainText = () => {
       initial="hidden"
       whileInView="visible"
     >
-      <motion.div
+      <motion.h1
+        className={MainTextStyle.mainText}
         variants={anim}
         transition={{ ease: "linear", duration: 0.4, delay: 0.6 }}
       >
-        <h1 className={MainTextStyle.mainText}>Under Construction</h1>
-      </motion.div>
+        Under Construction
+      </motion.h1>
       <motion.p
+        className={MainTextStyle.text}
         variants={anim2}
         transition={{ ease: "linear", duration: 0.4, delay: 0.6 }}
       >

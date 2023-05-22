@@ -1,18 +1,21 @@
-$size1600: 1600px;
-
 .mainTextContainer {
   display: grid;
   justify-items: center;
-  p {
+  align-items: center;
+  @media screen and (max-width: 450px) {
+    width: 80%;
+    text-align: center;
+    margin: auto;
+  }
+  .text {
     text-align: center;
   }
   .mainText {
-    font-weight: 700;
     font-size: 72px;
     text-transform: uppercase;
     text-align: center;
     color: var(--blue-main-color);
-    @media screen and (max-width: $size1600) {
+    @media screen and (max-width: 1600px) {
       font-size: 52px;
     }
     @media screen and (max-width: 800px) {

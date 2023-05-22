@@ -1,6 +1,6 @@
 .outside {
-  border-left: 1px solid white;
-  background: rgba(18, 18, 18, 0.8);
+  border-left: 1px solid var(--white-main-color);
+  background: var(--blue-opasity-color);
   backdrop-filter: blur(20px);
   height: 100%;
   width: 300px;
@@ -33,9 +33,9 @@
     height: 62px;
     width: 256px;
     text-decoration: none;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    border-left: 6px solid white;
-    color: rgba(255, 255, 255, 0.8);
+    border: 2px solid var(--white-opasity-color);
+    border-left: 6px solid var(--white-main-color);
+    color: var(--white-opasity-color);
     font-weight: 600;
     font-size: 18px;
     transition: 0.2s;
@@ -50,7 +50,7 @@
   }
   p {
     grid-area: text;
-    color: white;
+    color: var(--white-main-color);
     font-size: 22px;
     width: 256px;
     @media screen and (max-width: 1320px) {
@@ -61,7 +61,7 @@
   time {
     grid-area: times;
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--white-opasity-color);
   }
 
   .number {

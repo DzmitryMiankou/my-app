@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderStyle from "./Header.module.scss";
-import logo from "../../Logo.svg";
+import logo from "../../img/Logo.svg";
 import { motion } from "framer-motion";
 
 const anim = {
@@ -8,10 +8,10 @@ const anim = {
     y: -70,
     opacity: 0,
   },
-  visible: (custom) => ({
+  visible: {
     y: 0,
     opacity: 1,
-  }),
+  },
 };
 
 const Header = () => {

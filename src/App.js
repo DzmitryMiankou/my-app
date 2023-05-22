@@ -4,8 +4,8 @@ import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import Footer from "./components/footer/Footer";
 import "@fontsource/poppins";
-import Vector1 from "./Vector1.svg";
-import Vector2 from "./Vector2.svg";
+import Vector1 from "./img/Vector1.svg";
+import Vector2 from "./img/Vector2.svg";
 import Allevents from "./components/allevents/Allevents";
 import { motion } from "framer-motion";
 

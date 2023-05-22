@@ -6,7 +6,7 @@
   font-weight: 300;
   font-size: 32px;
   height: 100%;
-  color: white;
+  color: var(--white-main-color);
   @media screen and (max-width: 1600px) {
     font-size: 25px;
     gap: 10px;

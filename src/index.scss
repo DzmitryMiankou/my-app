@@ -1,7 +1,5 @@
 @font-face {
-  // название шрифта(чтобы не запутаться лучше указать название папки со шрифтом)
-  font-family: "SFProDisplay";
-  // адрес шрифта и тип
+  font-family: "SF Pro Display";
   src: url("./fonts/SFPRODISPLAYREGULAR.OTF") format("truetype");
   font-style: normal;
   font-weight: normal;
@@ -9,7 +7,11 @@
 
 :root {
   --blue-main-color: #162c4e;
+  --blue-button-color: #1d4169;
+  --blue-opasity-color: rgba(18, 18, 18, 0.8);
   --white-main-color: #ffffff;
+  --white-opasity-color: rgba(255, 255, 255, 0.8);
+  --indentation: 90vw;
 }
 * {
   padding: 0;

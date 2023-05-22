@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
-import logo from "../buttun.svg";
+import buttunSvg from "../../../../img/buttun.svg";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -92,7 +92,7 @@ export default function Modal({ text }) {
   return (
     <>
       <IconButton sx={{ padding: "0" }} onClick={handleClickOpen}>
-        <img src={logo} alt="line" />
+        <img src={buttunSvg} alt="line" />
       </IconButton>
       <BootstrapDialog
         onClose={handleClose}

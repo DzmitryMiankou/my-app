@@ -7,7 +7,7 @@
     grid-template-areas: ". textarea toScroll";
     align-items: center;
     margin: auto;
-    width: 90vw;
+    width: var(--indentation);
     @media screen and (max-width: 1200px) {
       grid-template-rows: repeat(2, 1fr);
       justify-content: center;

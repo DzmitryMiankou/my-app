@@ -11,8 +11,11 @@ const AccordionDetails = ({ active, name, img, listNumber, date }) => {
         backgroundImage: `url(${img})`,
         transition: "width 1s ease",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "52vw",
+        backgroundSize: "60vw",
         backgroundPosition: "center",
+        "@media screen and (max-width: 1600px)": {
+          backgroundSize: "52vw",
+        },
         "@media screen and (max-width: 1320px)": {
           transition: "height 1s ease",
           height: active === name ? "40vh" : "0px",

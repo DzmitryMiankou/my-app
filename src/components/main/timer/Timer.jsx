@@ -27,7 +27,6 @@ const Clock = () => {
     const interval = setInterval(() => {
       setCurrentTime(moment());
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -58,26 +57,18 @@ const Clock = () => {
       className={ClockStyle.component}
       initial="hidden"
       whileInView="visible"
+      variants={anim}
+      transition={{ ease: "linear", duration: 0.4, delay: 1 }}
     >
       {arr.map(({ date, text, dots }, i) => (
         <React.Fragment key={i}>
-          <motion.div
-            className={ClockStyle.containerDate}
-            variants={anim}
-            transition={{ ease: "linear", duration: 0.4, delay: 1 }}
-          >
+          <div className={ClockStyle.containerDate}>
             <p className={ClockStyle.date}>{`${date}`}</p>
             <div className={ClockStyle.signature}>
               <p>{text}</p>
             </div>
-          </motion.div>
-          <motion.p
-            className={ClockStyle.date}
-            variants={anim}
-            transition={{ ease: "linear", duration: 0.4, delay: 1 }}
-          >
-            {dots}
-          </motion.p>
+          </div>
+          <p className={ClockStyle.date}>{dots}</p>
         </React.Fragment>
       ))}
     </motion.div>
