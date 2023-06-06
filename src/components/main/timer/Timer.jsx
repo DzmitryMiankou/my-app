@@ -15,7 +15,7 @@ const anim = {
   },
 };
 
-const targetTime = moment("2023-05-31"); //31.05.2023
+const targetTime = moment("2023-08-31"); //31.05.2023
 
 const Clock = () => {
   const [currentTime, setCurrentTime] = useState(moment());

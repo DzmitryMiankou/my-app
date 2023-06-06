@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+
 .mainTextContainer {
   display: grid;
   justify-items: center;
@@ -9,9 +11,11 @@
   }
   .text {
     text-align: center;
+    font-size: 18px;
   }
   .mainText {
     font-size: 72px;
+    font-family: "Poppins", sans-serif;
     text-transform: uppercase;
     text-align: center;
     color: var(--blue-main-color);
