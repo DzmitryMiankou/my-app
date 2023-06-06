@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/my-app/static/css/main.d07d7709.css",
-    "main.js": "/my-app/static/js/main.cbc4696c.js",
+    "main.css": "/my-app/static/css/main.c51534dc.css",
+    "main.js": "/my-app/static/js/main.fc531d95.js",
     "static/js/787.28cb0dcd.chunk.js": "/my-app/static/js/787.28cb0dcd.chunk.js",
     "static/media/1.png": "/my-app/static/media/1.f9c02077c45e805115f8.png",
     "static/media/SFPRODISPLAYREGULAR.OTF": "/my-app/static/media/SFPRODISPLAYREGULAR.d1f5e6e16dd4f75c3950.OTF",
@@ -16,12 +16,12 @@
     "static/media/Vector.svg": "/my-app/static/media/Vector.881c965e4d9f6f59075e.svg",
     "static/media/buttun.svg": "/my-app/static/media/buttun.3d87566965f917bb272054289d48e074.svg",
     "static/media/arrow-right.svg": "/my-app/static/media/arrow-right.a6e75fccc7be500982e5a4f5250e1d55.svg",
-    "main.d07d7709.css.map": "/my-app/static/css/main.d07d7709.css.map",
-    "main.cbc4696c.js.map": "/my-app/static/js/main.cbc4696c.js.map",
+    "main.c51534dc.css.map": "/my-app/static/css/main.c51534dc.css.map",
+    "main.fc531d95.js.map": "/my-app/static/js/main.fc531d95.js.map",
     "787.28cb0dcd.chunk.js.map": "/my-app/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d07d7709.css",
-    "static/js/main.cbc4696c.js"
+    "static/css/main.c51534dc.css",
+    "static/js/main.fc531d95.js"
   ]
 }
